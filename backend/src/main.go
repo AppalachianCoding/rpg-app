@@ -19,8 +19,7 @@ import (
 
 var client *mongo.Client
 
-// I have no idea what this is. Change this
-const DATABASE = "5e-collection"
+const DATABASE = "5e-database"
 
 func apiHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
@@ -43,6 +42,36 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("Echoed %s from %s\n", name, table)
 }
 
+func allHander(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	table := vars["table"]
+
+	collection := client.Database(DATABASE).Collection(table)
+
+	cursor, err := collection.Find(context.Background(),
+		bson.D{},
+		options.Find().SetProjection(bson.D{{"name", 1}}),
+	)
+	if err != nil {
+		log.Fatalf("Failed to find: %s\n", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	var results []bson.M
+	if err = cursor.All(context.Background(), &results); err != nil {
+		log.Fatalf("Failed to decode: %s\n", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(results)
+
+	fmt.Printf("Echoed all from %s\n", table)
+}
+
 func connectMongo() {
 	var err error
 	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
@@ -62,6 +91,7 @@ func main() {
 	connectMongo()
 
 	r := mux.NewRouter()
+	r.HandleFunc("/api/all/{table}", allHander).Methods("GET")
 	r.HandleFunc("/api/{table}/{name}", apiHandler).Methods("POST")
 
 	srv := &http.Server{
