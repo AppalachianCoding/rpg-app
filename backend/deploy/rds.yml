@@ -1,0 +1,60 @@
+Parameters:
+  StackName:
+    Type: String
+
+Resources:
+  RdsVpcEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.rds"
+      VpcEndpointType: Interface
+      VpcId: !Ref Vpc
+      VpcId: !ImportValue
+        Fn::Sub: ${StackName}-vpc-id
+      PrivateDnsEnabled: true
+      SubnetIds:
+        - !ImportValue
+          Fn::Sub: ${StackName}-private-subnet-1
+        - !ImportValue
+          Fn::Sub: ${StackName}-private-subnet-2
+      SecurityGroupIds:
+        - !ImportValue
+          Fn::Sub: ${StackName}-interface-sg
+  RdsDataVpcEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.rds-data"
+      VpcEndpointType: Interface
+      VpcId: !ImportValue
+        Fn::Sub: ${StackName}-vpc-id
+      PrivateDnsEnabled: true
+      SubnetIds:
+        - !ImportValue
+          Fn::Sub: ${StackName}-private-subnet-1
+        - !ImportValue
+          Fn::Sub: ${StackName}-private-subnet-2
+      SecurityGroupIds:
+        - !ImportValue
+          Fn::Sub: ${StackName}-interface-sg
+
+  DbInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceClass: db.t4g.micro
+      Engine: postgres
+      AllocatedStorage: 20
+      AvailabilityZone: !Select [ 0, !GetAZs "" ]
+      EnableIAMDatabaseAuthentication: true
+      MultiAZ: false
+      MasterUsername: masteruser
+      ManageMasterUserPassword: true
+
+Outputs:
+  DbInstance:
+    Value: !GetAtt DbInstance.DBInstanceArn
+    Export:
+      Name: !Sub "${StackName}-rds-arn"
+  DbSecret:
+    Value: !GetAtt DbInstance.MasterUserSecret.SecretArn
+    Export:
+      Name: !Sub "${StackName}-rds-secret"

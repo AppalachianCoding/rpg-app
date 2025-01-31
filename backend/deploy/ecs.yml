@@ -1,0 +1,124 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "ECS Fargate Auto Scaling Web Server with RDS"
+
+Parameters:
+  StackName:
+    Type: String
+
+Resources:
+  # Endpoints
+  EcrDkrVpcEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcEndpointType: Interface
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.ecr.dkr"
+      VpcId: !ImportValue
+        Fn::Sub: ${StackName}-vpc-id
+      PrivateDnsEnabled: true
+      SubnetIds:
+        - !ImportValue
+          Fn::Sub: ${StackName}-private-subnet-1
+        - !ImportValue
+          Fn::Sub: ${StackName}-private-subnet-2
+      SecurityGroupIds:
+        - !ImportValue
+          Fn::Sub: ${StackName}-interface-sg
+  EcrApiVpcEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcEndpointType: Interface
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.ecr.api"
+      VpcId: !ImportValue
+        Fn::Sub: ${StackName}-vpc-id
+      PrivateDnsEnabled: true
+      SubnetIds:
+        - !ImportValue
+          Fn::Sub: ${StackName}-private-subnet-1
+        - !ImportValue
+          Fn::Sub: ${StackName}-private-subnet-2
+      SecurityGroupIds:
+        - !ImportValue
+          Fn::Sub: ${StackName}-interface-sg
+
+  ECRRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: !Ref StackName
+
+  ECSCluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: !Ref AWS::StackName
+  TaskExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+      Policies:
+        - PolicyName: RdsAccess
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - rds-data:*
+                Resource: !Sub
+                  - ${RdsArn}*
+                  - RdsArn: !ImportValue
+                      Fn::Sub: ${StackName}-rds-arn
+
+  EcsSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: ECS Security Group
+      VpcId: !ImportValue
+          Fn::Sub: ${StackName}-vpc-id
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+  ECSTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Cpu: 256
+      Memory: 512
+      Family: ECSWebApp
+      RequiresCompatibilities:
+        - FARGATE
+      RuntimePlatform:
+        CpuArchitecture: ARM64
+      NetworkMode: awsvpc
+      ExecutionRoleArn: !GetAtt TaskExecutionRole.Arn
+      ContainerDefinitions:
+        - Name: webserver
+          Image: !Sub ${ECRRepository.RepositoryUri}:latest
+          PortMappings:
+            - ContainerPort: 80
+  ECSService:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: !Ref ECSCluster
+      TaskDefinition: !Ref ECSTaskDefinition
+      LaunchType: FARGATE
+      PropagateTags: SERVICE
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          Subnets:
+            - !ImportValue
+                Fn::Sub: ${StackName}-private-subnet-1
+            - !ImportValue
+                Fn::Sub: ${StackName}-private-subnet-2
+          SecurityGroups:
+            - !Ref EcsSecurityGroup
+          AssignPublicIp: DISABLED
+      LoadBalancers:
+        - TargetGroupArn: !ImportValue
+            Fn::Sub: ${StackName}-alb-tg-arn
+          ContainerName: webserver
+          ContainerPort: 80
