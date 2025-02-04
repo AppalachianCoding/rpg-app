@@ -11,6 +11,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -72,23 +73,17 @@ func allHander(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("Echoed all from %s\n", table)
 }
 
-func connectMongo() {
-	var err error
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
-	client, err = mongo.Connect(context.TODO(), clientOptions)
-	if err != nil {
-		log.Fatalf("Failed to connect to MongoDB: %s\n", err)
-	}
-
-	err = client.Ping(context.TODO(), nil)
-	if err != nil {
-		log.Fatalf("MongoDB ping failed: %s\n", err)
-	}
-	log.Println("Connected to MongoDB")
-}
-
 func main() {
-	connectMongo()
+	ctx := context.Background()
+	cfg := aws.NewConfig()
+	dbClient, err := connectToDb(ctx, *cfg, os.Getenv("DB_SECRET"))
+	if err != nil {
+		log.Fatalf("Failed to connect to db: %s\n", err)
+	}
+	if err = populate(dbClient); err != nil {
+		log.Fatalf("Failed to populate db: %s\n", err)
+	}
+	return
 
 	r := mux.NewRouter()
 	r.HandleFunc("/api/all/{table}", allHander).Methods("GET")
