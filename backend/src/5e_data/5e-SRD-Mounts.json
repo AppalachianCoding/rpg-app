@@ -1,0 +1,744 @@
+[
+  {
+    "index": "camel",
+    "name": "Camel",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Mounts and Other Animals",
+    "cost": {
+      "quantity": 50,
+      "unit": "gp"
+    },
+    "speed": {
+      "quantity": 50,
+      "unit": "ft/round"
+    },
+    "capacity": "480 lb.",
+    "url": "/api/equipment/camel"
+  },
+  {
+    "index": "donkey",
+    "name": "Donkey",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Mounts and Other Animals",
+    "cost": {
+      "quantity": 8,
+      "unit": "gp"
+    },
+    "speed": {
+      "quantity": 40,
+      "unit": "ft/round"
+    },
+    "capacity": "420 lb.",
+    "url": "/api/equipment/donkey"
+  },
+  {
+    "index": "mule",
+    "name": "Mule",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Mounts and Other Animals",
+    "cost": {
+      "quantity": 8,
+      "unit": "gp"
+    },
+    "speed": {
+      "quantity": 40,
+      "unit": "ft/round"
+    },
+    "capacity": "420 lb.",
+    "url": "/api/equipment/mule"
+  },
+  {
+    "index": "elephant",
+    "name": "Elephant",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Mounts and Other Animals",
+    "cost": {
+      "quantity": 200,
+      "unit": "gp"
+    },
+    "speed": {
+      "quantity": 40,
+      "unit": "ft/round"
+    },
+    "capacity": "1,320 lb.",
+    "url": "/api/equipment/elephant"
+  },
+  {
+    "index": "horse-draft",
+    "name": "Horse, draft",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Mounts and Other Animals",
+    "cost": {
+      "quantity": 50,
+      "unit": "gp"
+    },
+    "speed": {
+      "quantity": 40,
+      "unit": "ft/round"
+    },
+    "capacity": "540 lb.",
+    "url": "/api/equipment/horse-draft"
+  },
+  {
+    "index": "horse-riding",
+    "name": "Horse, riding",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Mounts and Other Animals",
+    "cost": {
+      "quantity": 75,
+      "unit": "gp"
+    },
+    "speed": {
+      "quantity": 60,
+      "unit": "ft/round"
+    },
+    "capacity": "480 lb.",
+    "url": "/api/equipment/horse-riding"
+  },
+  {
+    "index": "mastiff",
+    "name": "Mastiff",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Mounts and Other Animals",
+    "cost": {
+      "quantity": 25,
+      "unit": "gp"
+    },
+    "speed": {
+      "quantity": 40,
+      "unit": "ft/round"
+    },
+    "capacity": "195 lb.",
+    "url": "/api/equipment/mastiff"
+  },
+  {
+    "index": "pony",
+    "name": "Pony",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Mounts and Other Animals",
+    "cost": {
+      "quantity": 30,
+      "unit": "gp"
+    },
+    "speed": {
+      "quantity": 40,
+      "unit": "ft/round"
+    },
+    "capacity": "225 lb.",
+    "url": "/api/equipment/pony"
+  },
+  {
+    "index": "warhorse",
+    "name": "Warhorse",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Mounts and Other Animals",
+    "cost": {
+      "quantity": 400,
+      "unit": "gp"
+    },
+    "speed": {
+      "quantity": 60,
+      "unit": "ft/round"
+    },
+    "capacity": "540 lb.",
+    "url": "/api/equipment/warhorse"
+  },
+  {
+    "index": "barding-padded",
+    "name": "Barding: Padded",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 20,
+      "unit": "gp"
+    },
+    "weight": 16,
+    "desc": [
+      "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much."
+    ],
+    "url": "/api/equipment/barding-padded"
+  },
+  {
+    "index": "barding-leather",
+    "name": "Barding: Leather",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 40,
+      "unit": "gp"
+    },
+    "weight": 20,
+    "desc": [
+      "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much."
+    ],
+    "url": "/api/equipment/barding-leather"
+  },
+  {
+    "index": "barding-studded-leather",
+    "name": "Barding: Studded Leather",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 180,
+      "unit": "gp"
+    },
+    "weight": 26,
+    "desc": [
+      "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much."
+    ],
+    "url": "/api/equipment/barding-studded-leather"
+  },
+  {
+    "index": "barding-hide",
+    "name": "Barding: Hide",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 40,
+      "unit": "gp"
+    },
+    "weight": 24,
+    "desc": [
+      "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much."
+    ],
+    "url": "/api/equipment/barding-hide"
+  },
+  {
+    "index": "barding-chain-shirt",
+    "name": "Barding: Chain shirt",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 200,
+      "unit": "gp"
+    },
+    "weight": 40,
+    "desc": [
+      "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much."
+    ],
+    "url": "/api/equipment/barding-chain-shirt"
+  },
+  {
+    "index": "barding-scale-mail",
+    "name": "Barding: Scale mail",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 200,
+      "unit": "gp"
+    },
+    "weight": 90,
+    "desc": [
+      "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much."
+    ],
+    "url": "/api/equipment/barding-scale-mail"
+  },
+  {
+    "index": "barding-breastplate",
+    "name": "Barding: Breastplate",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 1600,
+      "unit": "gp"
+    },
+    "weight": 40,
+    "desc": [
+      "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much."
+    ],
+    "url": "/api/equipment/barding-breastplate"
+  },
+  {
+    "index": "barding-half-plate",
+    "name": "Barding: Half plate",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 3000,
+      "unit": "gp"
+    },
+    "weight": 80,
+    "desc": [
+      "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much."
+    ],
+    "url": "/api/equipment/barding-half-plate"
+  },
+  {
+    "index": "barding-ring-mail",
+    "name": "Barding: Ring mail",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 12,
+      "unit": "gp"
+    },
+    "weight": 80,
+    "desc": [
+      "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much."
+    ],
+    "url": "/api/equipment/barding-ring-mail"
+  },
+  {
+    "index": "barding-chain-mail",
+    "name": "Barding: Chain mail",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 300,
+      "unit": "gp"
+    },
+    "weight": 110,
+    "desc": [
+      "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much."
+    ],
+    "url": "/api/equipment/barding-chain-mail"
+  },
+  {
+    "index": "barding-splint",
+    "name": "Barding: Splint",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 800,
+      "unit": "gp"
+    },
+    "weight": 120,
+    "desc": [
+      "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much."
+    ],
+    "url": "/api/equipment/barding-splint"
+  },
+  {
+    "index": "barding-plate",
+    "name": "Barding: Plate",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 6000,
+      "unit": "gp"
+    },
+    "weight": 130,
+    "desc": [
+      "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much."
+    ],
+    "url": "/api/equipment/barding-plate"
+  },
+  {
+    "index": "bit-and-bridle",
+    "name": "Bit and bridle",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 2,
+      "unit": "gp"
+    },
+    "weight": 1,
+    "url": "/api/equipment/bit-and-bridle"
+  },
+  {
+    "index": "carriage",
+    "name": "Carriage",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 100,
+      "unit": "gp"
+    },
+    "weight": 600,
+    "url": "/api/equipment/carriage"
+  },
+  {
+    "index": "cart",
+    "name": "Cart",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 15,
+      "unit": "gp"
+    },
+    "weight": 200,
+    "url": "/api/equipment/cart"
+  },
+  {
+    "index": "chariot",
+    "name": "Chariot",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 250,
+      "unit": "gp"
+    },
+    "weight": 100,
+    "url": "/api/equipment/chariot"
+  },
+  {
+    "index": "animal-feed-1-day",
+    "name": "Animal Feed (1 day)",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 5,
+      "unit": "cp"
+    },
+    "weight": 10,
+    "url": "/api/equipment/animal-feed-1-day"
+  },
+  {
+    "index": "saddle-exotic",
+    "name": "Saddle, Exotic",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 60,
+      "unit": "gp"
+    },
+    "weight": 50,
+    "desc": [
+      "An exotic saddle is required for riding any aquatic or flying mount."
+    ],
+    "url": "/api/equipment/saddle-exotic"
+  },
+  {
+    "index": "saddle-military",
+    "name": "Saddle, Military",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 20,
+      "unit": "gp"
+    },
+    "weight": 30,
+    "desc": [
+      "A military saddle braces the rider, helping you keep your seat on an active mount in battle. It gives you advantage on any check you make to remain mounted."
+    ],
+    "url": "/api/equipment/saddle-military"
+  },
+  {
+    "index": "saddle-pack",
+    "name": "Saddle, Pack",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 5,
+      "unit": "gp"
+    },
+    "weight": 15,
+    "url": "/api/equipment/saddle-pack"
+  },
+  {
+    "index": "saddle-riding",
+    "name": "Saddle, Riding",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 10,
+      "unit": "gp"
+    },
+    "weight": 25,
+    "url": "/api/equipment/saddle-riding"
+  },
+  {
+    "index": "saddlebags",
+    "name": "Saddlebags",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 4,
+      "unit": "gp"
+    },
+    "weight": 8,
+    "url": "/api/equipment/saddlebags"
+  },
+  {
+    "index": "sled",
+    "name": "Sled",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 20,
+      "unit": "gp"
+    },
+    "weight": 300,
+    "url": "/api/equipment/sled"
+  },
+  {
+    "index": "stabling-1-day",
+    "name": "Stabling (1 day)",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 5,
+      "unit": "sp"
+    },
+    "weight": 0,
+    "url": "/api/equipment/stabling-1-day"
+  },
+  {
+    "index": "wagon",
+    "name": "Wagon",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Tack, Harness, and Drawn Vehicles",
+    "cost": {
+      "quantity": 35,
+      "unit": "gp"
+    },
+    "weight": 400,
+    "url": "/api/equipment/wagon"
+  },
+  {
+    "index": "galley",
+    "name": "Galley",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Waterborne Vehicles",
+    "cost": {
+      "quantity": 30000,
+      "unit": "gp"
+    },
+    "speed": {
+      "quantity": 4,
+      "unit": "mph"
+    },
+    "url": "/api/equipment/galley"
+  },
+  {
+    "index": "keelboat",
+    "name": "Keelboat",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Waterborne Vehicles",
+    "cost": {
+      "quantity": 3000,
+      "unit": "gp"
+    },
+    "speed": {
+      "quantity": 1,
+      "unit": "mph"
+    },
+    "desc": [
+      "Keelboats and rowboats are used on lakes and rivers. If going downstream, add the speed of the current (typically 3 miles per hour) to the speed of the vehicle. These vehicles can't be rowed against any significant current, but they can be pulled upstream by draft animals on the shores. A rowboat weighs 100 pounds, in case adventurers carry it over land."
+    ],
+    "url": "/api/equipment/keelboat"
+  },
+  {
+    "index": "longship",
+    "name": "Longship",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Waterborne Vehicles",
+    "cost": {
+      "quantity": 10000,
+      "unit": "gp"
+    },
+    "speed": {
+      "quantity": 3,
+      "unit": "mph"
+    },
+    "url": "/api/equipment/longship"
+  },
+  {
+    "index": "rowboat",
+    "name": "Rowboat",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Waterborne Vehicles",
+    "cost": {
+      "quantity": 50,
+      "unit": "gp"
+    },
+    "speed": {
+      "quantity": 1.5,
+      "unit": "mph"
+    },
+    "desc": [
+      "Keelboats and rowboats are used on lakes and rivers. If going downstream, add the speed of the current (typically 3 miles per hour) to the speed of the vehicle. These vehicles can't be rowed against any significant current, but they can be pulled upstream by draft animals on the shores. A rowboat weighs 100 pounds, in case adventurers carry it over land."
+    ],
+    "url": "/api/equipment/rowboat"
+  },
+  {
+    "index": "sailing-ship",
+    "name": "Sailing ship",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Waterborne Vehicles",
+    "cost": {
+      "quantity": 10000,
+      "unit": "gp"
+    },
+    "speed": {
+      "quantity": 2,
+      "unit": "mph"
+    },
+    "url": "/api/equipment/sailing-ship"
+  },
+  {
+    "index": "warship",
+    "name": "Warship",
+    "equipment_category": {
+      "index": "mounts-and-vehicles",
+      "name": "Mounts and Vehicles",
+      "url": "/api/equipment-categories/mounts-and-vehicles"
+    },
+    "vehicle_category": "Waterborne Vehicles",
+    "cost": {
+      "quantity": 25000,
+      "unit": "gp"
+    },
+    "speed": {
+      "quantity": 2.5,
+      "unit": "mph"
+    },
+    "url": "/api/equipment/warship"
+  }
+]
