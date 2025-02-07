@@ -579,6 +579,7 @@ func insert(table *FiveETable, db *sql.DB, data []map[string]interface{}) error 
 }
 
 func populate(db *sql.DB) error {
+	log.Info("Populating database")
 	dir := "5e_data"
 
 	for _, table := range tables {

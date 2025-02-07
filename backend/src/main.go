@@ -11,8 +11,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/gorilla/mux"
+	"github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -20,14 +21,12 @@ import (
 
 var client *mongo.Client
 
-const DATABASE = "5e-database"
-
 func apiHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	table := vars["table"]
 	name := vars["name"]
 
-	collection := client.Database(DATABASE).Collection(table)
+	collection := client.Database(DND_DATABASE).Collection(table)
 	filter := bson.D{{"name", name}}
 	var result bson.M
 	err := collection.FindOne(context.Background(), filter).Decode(&result)
@@ -47,7 +46,7 @@ func allHander(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	table := vars["table"]
 
-	collection := client.Database(DATABASE).Collection(table)
+	collection := client.Database(DND_DATABASE).Collection(table)
 
 	cursor, err := collection.Find(context.Background(),
 		bson.D{},
@@ -74,16 +73,20 @@ func allHander(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	logrus.SetLevel(logrus.TraceLevel)
 	ctx := context.Background()
-	cfg := aws.NewConfig()
-	dbClient, err := connectToDb(ctx, *cfg, os.Getenv("DB_SECRET"))
+	cfg, err := config.LoadDefaultConfig(ctx)
+	if err != nil {
+		log.Fatalf("Failed to load config: %s\n", err)
+		return
+	}
+	dbClient, err := connectToDb(ctx, cfg, os.Getenv("DB_SECRET"), DND_DATABASE)
 	if err != nil {
 		log.Fatalf("Failed to connect to db: %s\n", err)
 	}
 	if err = populate(dbClient); err != nil {
 		log.Fatalf("Failed to populate db: %s\n", err)
 	}
-	return
 
 	r := mux.NewRouter()
 	r.HandleFunc("/api/all/{table}", allHander).Methods("GET")
