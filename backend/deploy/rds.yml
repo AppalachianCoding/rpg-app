@@ -37,13 +37,36 @@ Resources:
         - !ImportValue
           Fn::Sub: ${StackName}-interface-sg
 
+  DBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: "Subnet group for the RDS instance in the VPC"
+      SubnetIds:
+        - !ImportValue 
+            Fn::Sub: "${StackName}-private-subnet-1"
+        - !ImportValue 
+            Fn::Sub: "${StackName}-private-subnet-2"
+  DBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Security group for RDS DB instance"
+      VpcId: !ImportValue 
+              Fn::Sub: "${StackName}-vpc-id"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          CidrIp: 10.0.0.0/16
   DbInstance:
     Type: AWS::RDS::DBInstance
     Properties:
       DBInstanceClass: db.t4g.micro
       Engine: postgres
       AllocatedStorage: 20
-      AvailabilityZone: !Select [ 0, !GetAZs "" ]
+      DBSubnetGroupName: !Ref DBSubnetGroup
+      VPCSecurityGroups:
+        - !Ref DBSecurityGroup
+      AvailabilityZone: !Select [0, !GetAZs ""]
       EnableIAMDatabaseAuthentication: true
       MultiAZ: false
       MasterUsername: masteruser
@@ -58,3 +81,7 @@ Outputs:
     Value: !GetAtt DbInstance.MasterUserSecret.SecretArn
     Export:
       Name: !Sub "${StackName}-rds-secret"
+  RdsEndpoint:
+    Value: !GetAtt DbInstance.Endpoint.Address
+    Export:
+      Name: !Sub "${StackName}-rds-endpoint"

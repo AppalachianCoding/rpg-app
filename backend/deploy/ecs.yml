@@ -58,19 +58,34 @@ Resources:
             Principal:
               Service: ecs-tasks.amazonaws.com
             Action: sts:AssumeRole
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
       Policies:
-        - PolicyName: RdsAccess
+        - PolicyName: CloudWatchLogsPolicy
           PolicyDocument:
             Statement:
               - Effect: Allow
                 Action:
-                  - rds-data:*
-                Resource: !Sub
-                  - ${RdsArn}*
-                  - RdsArn: !ImportValue
-                      Fn::Sub: ${StackName}-rds-arn
+                  - logs:CreateLogGroup
+                Resource: "*"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: SecretsAccess
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - secretsmanager:GetSecretValue
+                Resource: !ImportValue
+                  Fn::Sub: ${StackName}-rds-secret
 
   EcsSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -92,14 +107,32 @@ Resources:
       RequiresCompatibilities:
         - FARGATE
       RuntimePlatform:
-        CpuArchitecture: ARM64
+        CpuArchitecture: X86_64
+      TaskRoleArn: !GetAtt TaskRole.Arn
       NetworkMode: awsvpc
       ExecutionRoleArn: !GetAtt TaskExecutionRole.Arn
       ContainerDefinitions:
         - Name: webserver
           Image: !Sub ${ECRRepository.RepositoryUri}:latest
+          Environment:
+            - Name: DB_SECRET
+              Value: !ImportValue
+                Fn::Sub: ${StackName}-rds-secret
+            - Name: DB_ENDPOINT
+              Value: !ImportValue
+                Fn::Sub: ${StackName}-rds-endpoint
           PortMappings:
             - ContainerPort: 80
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Sub ${StackName}/ecs-webapp
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: ecs
+              awslogs-create-group: true
+              mode: non-blocking
+              max-buffer-size: "25m"
+
   ECSService:
     Type: AWS::ECS::Service
     Properties:

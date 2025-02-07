@@ -102,7 +102,6 @@ Resources:
       VpcId: !ImportValue
         Fn::Sub: "${StackName}-vpc-id"
 
-  # Certifciate
   Certificate:
     Type: AWS::CertificateManager::Certificate
     Properties:
