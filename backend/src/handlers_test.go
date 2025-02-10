@@ -24,11 +24,11 @@ func TestApiHandler(t *testing.T) {
 
 	dbClient := DbClient{db}
 
-	srv := startServer(dbClient, ":8080")
+	srv := startServer(dbClient, ":8082")
 
 	for _, table := range TABLES {
 		res, err := http.Post(
-			fmt.Sprintf("http://localhost:8080/api/weapon_properties/%s", table.Name),
+			fmt.Sprintf("http://localhost:8082/api/weapon_properties/%s", table.Name),
 			"application/json",
 			nil,
 		)
@@ -84,9 +84,9 @@ func TestAllHandler(t *testing.T) {
 
 	dbClient := DbClient{db}
 
-	srv := startServer(dbClient, ":8080")
+	srv := startServer(dbClient, ":8081")
 
-	res, err := http.Get("http://localhost:8080/api/all/weapon_properties")
+	res, err := http.Get("http://localhost:8081/api/all/weapon_properties")
 	if err != nil {
 		t.Fatalf("Failed to make request: %v", err)
 	}
