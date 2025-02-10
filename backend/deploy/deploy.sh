@@ -43,9 +43,9 @@ then
 
   aws cloudformation wait stack-update-complete --stack-name "$STACK_NAME" 
 
-  ECS_STACK_NAME=$(aws cloudformation describe-stack-resources --stack-name "rpg-app" \
+  ECS_STACK_NAME=$(aws cloudformation describe-stack-resources --stack-name "$STACK_NAME" \
     --logical-resource-id Ecs \
-    --query \"StackResources[].PhysicalResourceId\" \
+    --query "StackResources[].PhysicalResourceId" \
     --output text |
     cut -d/ -f2)
 
@@ -82,10 +82,10 @@ then
       --cluster "${ECS_CLUSTER}" \
       --tasks "${TASK_ARN}" \
       --query 'tasks[0].containers[0].imageDigest' \
-      --output text \
-      --profile "${AWS_PROFILE}")
+      --output text)
 
     if [[ "${NEW_IMAGE_DIGEST}" != "${ECS_IMAGE_DIGEST}" ]]; then
+      echo "Updating ECS service ${ECS_SERVICE} in cluster ${ECS_CLUSTER}..."
       aws ecs update-service \
         --cluster "$ECS_CLUSTER" \
         --service "$ECS_SERVICE" \
@@ -93,7 +93,6 @@ then
       break
     fi
   done
-
 
 else
   aws cloudformation create-stack \
