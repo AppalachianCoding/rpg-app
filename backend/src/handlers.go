@@ -13,9 +13,9 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func verifyTable(db *sql.DB, table string) bool {
-	for _, table := range TABLE_NAMES {
-		if table == table {
+func verifyTable(table string) bool {
+	for _, t := range TABLE_NAMES {
+		if t == table {
 			return true
 		}
 	}
@@ -122,7 +122,7 @@ func (dbc DbClient) apiHandler(w http.ResponseWriter, r *http.Request) {
 	})
 	log.Debugf("Received request for %s from %s\n", name, table)
 
-	if !verifyTable(db, table) {
+	if !verifyTable(table) {
 		log.Warnf("Invalid table %s\n", table)
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte("Invalid table"))
@@ -159,6 +159,10 @@ type APICapability struct {
 }
 
 func capabilitiesHandler(w http.ResponseWriter, r *http.Request) {
+	logrus.WithFields(logrus.Fields{
+		"method": "capabilities",
+		"ip":     r.RemoteAddr,
+	}).Info("Received request for capabilities")
 	capabilities := []APICapability{
 		{
 			Path:    "/api/{table}/{name}",
@@ -171,10 +175,58 @@ func capabilitiesHandler(w http.ResponseWriter, r *http.Request) {
 			Methods:     []string{"GET"},
 			Description: "Retrieves all records from a specified table.",
 		},
+		{
+			Path:    "/api/capabilities",
+			Methods: []string{"GET"},
+			Description: "Returns a list of all available API endpoints and their " +
+				"methods and descriptions.",
+		},
+		{
+			Path:        "/api/capabilities/{table}",
+			Methods:     []string{"GET"},
+			Description: "Returns the feilds of a table",
+		},
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(capabilities)
+}
+
+func tablesHandler(w http.ResponseWriter, r *http.Request) {
+	logrus.WithFields(logrus.Fields{
+		"method": "tables",
+		"ip":     r.RemoteAddr,
+	}).Info("Received request for tables")
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(TABLE_NAMES)
+}
+
+func describeTable(w http.ResponseWriter, r *http.Request) {
+	log := logrus.WithFields(logrus.Fields{
+		"method": "describe",
+		"ip":     r.RemoteAddr,
+	})
+	vars := mux.Vars(r)
+	t, ok := vars["table"]
+	if !ok {
+		log.Warn("No table specified")
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("No table specified"))
+		return
+	}
+	log = log.WithField("table", t)
+	log.Debugf("Received request for table %s", t)
+
+	w.Header().Set("Content-Type", "application/json")
+	table, ok := TABLES[t]
+	if !ok {
+		log.Warnf("Table %s not found", t)
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("Table not found"))
+		return
+	}
+	log.Debugf("Returning table %s", table)
+	json.NewEncoder(w).Encode(table)
 }
 
 func healthCheckHandler(w http.ResponseWriter, r *http.Request) {

@@ -13,8 +13,8 @@ import (
 )
 
 type FiveETable struct {
-	name    string
-	mapping []string
+	Name    string   `json:"name"`
+	Mapping []string `json:"mapping"`
 	file    string
 }
 
@@ -46,10 +46,10 @@ func safeSQLValue(value interface{}) string {
 }
 
 func createTable(table *FiveETable, db *sql.DB) error {
-	log := log.WithField("table", table.name)
+	log := log.WithField("table", table.Name)
 
-	query := "CREATE TABLE " + table.name + " ("
-	for i, key := range table.mapping {
+	query := "CREATE TABLE " + table.Name + " ("
+	for i, key := range table.Mapping {
 		key = convert_key(key)
 		if i != 0 {
 			query += ", "
@@ -81,7 +81,7 @@ func insert(table *FiveETable, db *sql.DB, data []map[string]interface{}) error 
 
 		for key := range row {
 			found := false
-			for _, k := range table.mapping {
+			for _, k := range table.Mapping {
 				if key == k {
 					found = true
 				}
@@ -93,9 +93,9 @@ func insert(table *FiveETable, db *sql.DB, data []map[string]interface{}) error 
 			}
 		}
 
-		query := "INSERT INTO " + table.name + " ("
+		query := "INSERT INTO " + table.Name + " ("
 		values := "VALUES ("
-		for i, key := range table.mapping {
+		for i, key := range table.Mapping {
 			if i != 0 {
 				query += ", "
 				values += ", "
@@ -147,12 +147,12 @@ func populate(db *sql.DB) error {
 	}
 
 	for _, table := range TABLES {
-		if already_populated[table.name] {
-			log.WithField("table", table.name).Debugf("Table already populated")
+		if already_populated[table.Name] {
+			log.WithField("table", table.Name).Debugf("Table already populated")
 			continue
 		}
 
-		log := log.WithField("table", table.name)
+		log := log.WithField("table", table.Name)
 		file := filepath.Join(dir, table.file)
 
 		jsonFile, err := os.Open(file)

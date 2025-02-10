@@ -32,8 +32,8 @@ var TABLE_NAMES = []string{
 	"weapon_properties",
 }
 
-var TABLES = []FiveETable{
-	{
+var TABLES = map[string]FiveETable{
+	"ability_scores": {
 		"ability_scores",
 		[]string{
 			"index",
@@ -45,7 +45,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Ability-Scores.json",
 	},
-	{
+	"alignments": {
 		"alignments",
 		[]string{
 			"index",
@@ -56,7 +56,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Alignments.json",
 	},
-	{
+	"backgrounds": {
 		"backgrounds",
 		[]string{
 			"index",
@@ -74,7 +74,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Backgrounds.json",
 	},
-	{
+	"classes": {
 		"classes",
 		[]string{
 			"index",
@@ -94,7 +94,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Classes.json",
 	},
-	{
+	"conditions": {
 		"conditions",
 		[]string{
 			"index",
@@ -104,7 +104,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Conditions.json",
 	},
-	{
+	"damage_types": {
 		"damage_types",
 		[]string{
 			"index",
@@ -114,7 +114,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Damage-Types.json",
 	},
-	{
+	"equipment_categories": {
 		"equipment_categories",
 		[]string{
 			"index",
@@ -124,7 +124,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Equipment-Categories.json",
 	},
-	{
+	"rpg_gear": {
 		"rpg_gear",
 		[]string{
 			"index",
@@ -139,7 +139,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Rpg-Gear.json",
 	},
-	{
+	"gear": {
 		"gear",
 		[]string{
 			"index",
@@ -155,7 +155,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Gear.json",
 	},
-	{
+	"tools": {
 		"tools",
 		[]string{
 			"index",
@@ -169,7 +169,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Tools.json",
 	},
-	{
+	"mounts": {
 		"mounts",
 		[]string{
 			"index",
@@ -185,7 +185,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Mounts.json",
 	},
-	{
+	"weapons": {
 		"weapons",
 		[]string{
 			"two_handed_damage",
@@ -206,7 +206,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Weapons.json",
 	},
-	{
+	"feats": {
 		"feats",
 		[]string{
 			"index",
@@ -217,7 +217,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Feats.json",
 	},
-	{
+	"features": {
 		"features",
 		[]string{
 			"index",
@@ -234,7 +234,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Features.json",
 	},
-	{
+	"languages": {
 		"languages",
 		[]string{
 			"index",
@@ -247,7 +247,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Languages.json",
 	},
-	{
+	"levels": {
 		"levels",
 		[]string{
 			"level",
@@ -264,7 +264,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Levels.json",
 	},
-	{
+	"magic_items": {
 		"magic_items",
 		[]string{
 			"index",
@@ -279,7 +279,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Magic-Items.json",
 	},
-	{
+	"magic_schools": {
 		"magic_schools",
 		[]string{
 			"index",
@@ -289,7 +289,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Magic-Schools.json",
 	},
-	{
+	"monsters": {
 		"monsters",
 		[]string{
 			"index",
@@ -330,7 +330,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Monsters.json",
 	},
-	{
+	"proficiencies": {
 		"proficiencies",
 		[]string{
 			"index",
@@ -343,7 +343,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Proficiencies.json",
 	},
-	{
+	"races": {
 		"races",
 		[]string{
 			"language_options",
@@ -366,7 +366,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Races.json",
 	},
-	{
+	"rule_sections": {
 		"rule_sections",
 		[]string{
 			"name",
@@ -376,7 +376,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Rule-Sections.json",
 	},
-	{
+	"rules": {
 		"rules",
 		[]string{
 			"name",
@@ -387,7 +387,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Rules.json",
 	},
-	{
+	"skills": {
 		"skills",
 		[]string{
 			"index",
@@ -398,7 +398,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Skills.json",
 	},
-	{
+	"spells": {
 		"spells",
 		[]string{
 			"dc",
@@ -425,7 +425,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Spells.json",
 	},
-	{
+	"subclasses": {
 		"subclasses",
 		[]string{
 			"spells",
@@ -439,7 +439,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Subclasses.json",
 	},
-	{
+	"subraces": {
 		"subraces",
 		[]string{
 			"language_options",
@@ -456,7 +456,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Subraces.json",
 	},
-	{
+	"traits": {
 		"traits",
 		[]string{
 			"proficiency_choices",
@@ -473,7 +473,7 @@ var TABLES = []FiveETable{
 		},
 		"5e-SRD-Traits.json",
 	},
-	{
+	"weapon_properties": {
 		"weapon_properties",
 		[]string{
 			"index",

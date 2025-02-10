@@ -47,7 +47,9 @@ func startServer(dbClient DbClient, port string) *http.Server {
 	r.HandleFunc("/api/{table}/{name}", dbClient.apiHandler).Methods("POST")
 	r.HandleFunc("/api/all/{table}", dbClient.allHandler).Methods("GET")
 	r.HandleFunc("/", capabilitiesHandler).Methods("GET")
-	r.HandleFunc("/capabiltiies", capabilitiesHandler).Methods("GET")
+	r.HandleFunc("/api/capabilities", capabilitiesHandler).Methods("GET")
+	r.HandleFunc("/api/tables", tablesHandler).Methods("GET")
+	r.HandleFunc("/api/capabilities/{table}", describeTable).Methods("GET")
 	r.HandleFunc("/health", healthCheckHandler).Methods("GET")
 
 	srv := &http.Server{

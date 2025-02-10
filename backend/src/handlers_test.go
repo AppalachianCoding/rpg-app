@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"testing"
@@ -24,19 +26,46 @@ func TestApiHandler(t *testing.T) {
 
 	srv := startServer(dbClient, ":8080")
 
-	res, err := http.Post("http://localhost:8080/api/weapon_properties/Versatile", "application/json", nil)
-	if err != nil {
-		t.Fatalf("Failed to make request: %v", err)
-	}
-	if res.StatusCode != http.StatusOK {
-		t.Fatalf("Expected status 200, got %d", res.StatusCode)
-	}
+	for _, table := range TABLES {
+		res, err := http.Post(
+			fmt.Sprintf("http://localhost:8080/api/weapon_properties/%s", table.Name),
+			"application/json",
+			nil,
+		)
 
-	body, err := io.ReadAll(res.Body)
-	if err != nil {
-		t.Fatalf("Failed to read response body: %v", err)
+		if err != nil {
+			t.Fatalf("Failed to make request: %v", err)
+		}
+		if res.StatusCode != http.StatusOK {
+			t.Fatalf("Expected status 200, got %d", res.StatusCode)
+		}
+
+		dec := json.NewDecoder(res.Body)
+		var body map[string]interface{}
+		if err := dec.Decode(&body); err != nil {
+			t.Fatalf("Failed to decode response body: %v", err)
+		}
+
+		var mapping = make(map[string]bool)
+		for _, col := range table.Mapping {
+			mapping[col] = false
+		}
+
+		for k, _ := range body {
+			if _, ok := mapping[k]; !ok {
+				t.Fatalf("Unexpected key in response: %s", k)
+			}
+			mapping[k] = true
+		}
+
+		for k, v := range mapping {
+			if !v {
+				t.Fatalf("Expected key not found in response: %s", k)
+			}
+		}
+
+		logrus.Infof("Response: %s", body)
 	}
-	logrus.Infof("Response: %s", body)
 
 	srv.Shutdown(nil)
 }
