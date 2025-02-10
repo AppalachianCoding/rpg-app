@@ -125,3 +125,7 @@ Outputs:
     Value: !Ref TargetGroup
     Export:
       Name: !Sub "${StackName}-alb-tg-arn"
+  Endpoint:
+    Value: !Sub "https://${StackName}.${BaseDomainName}"
+    Export:
+      Name: !Sub "${StackName}-alb-dns-name"

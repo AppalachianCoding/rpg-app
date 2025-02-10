@@ -21,37 +21,6 @@ Resources:
       CidrBlock: !Ref CidrBlock
       EnableDnsSupport: true
       EnableDnsHostnames: true
-
-  PrivateRouteTable:
-    Type: AWS::EC2::RouteTable
-    Properties:
-      VpcId: !Ref Vpc
-
-  PrivateSubnet1:
-    Type: AWS::EC2::Subnet
-    Properties:
-      VpcId: !Ref Vpc
-      CidrBlock: !Ref PrivateSubnet1Cidr
-      MapPublicIpOnLaunch: false
-      AvailabilityZone: !Select [0, !GetAZs ""]
-  PrivateSubnet1Rta:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      SubnetId: !Ref PrivateSubnet1
-      RouteTableId: !Ref PrivateRouteTable
-  PrivateSubnet2:
-    Type: AWS::EC2::Subnet
-    Properties:
-      VpcId: !Ref Vpc
-      CidrBlock: !Ref PrivateSubnet2Cidr
-      MapPublicIpOnLaunch: false
-      AvailabilityZone: !Select [1, !GetAZs ""]
-  PrivateSubnet2Rta:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      SubnetId: !Ref PrivateSubnet2
-      RouteTableId: !Ref PrivateRouteTable
-
   InternetGateway:
     Type: AWS::EC2::InternetGateway
   VPCGatewayAttachment:
@@ -66,77 +35,50 @@ Resources:
       VpcId: !Ref Vpc
   PublicRoute:
     Type: AWS::EC2::Route
+    DependsOn: VPCGatewayAttachment
     Properties:
       RouteTableId: !Ref PublicRouteTable
       DestinationCidrBlock: 0.0.0.0/0
-      GatewayId: !Ref InternetGateway
-    DependsOn: VPCGatewayAttachment
 
-  # VPC Endpoints
-  InterfaceSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
+  Subnet1:
+    Type: AWS::EC2::Subnet
     Properties:
-      GroupDescription: "Security group for interface endpoints"
       VpcId: !Ref Vpc
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 443
-          ToPort: 443
-          CidrIp: 0.0.0.0/0
-
-  # Vpc Endpoints
-  SecretsManagerVpcEndpoint:
-    Type: AWS::EC2::VPCEndpoint
+      CidrBlock: !Ref PrivateSubnet1Cidr
+      MapPublicIpOnLaunch: false
+      AvailabilityZone: !Select [0, !GetAZs ""]
+  Subnet1RTA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      ServiceName: !Sub "com.amazonaws.${AWS::Region}.secretsmanager"
-      VpcEndpointType: Interface
-      VpcId: !Ref Vpc
-      PrivateDnsEnabled: true
-      SubnetIds:
-        - !Ref PrivateSubnet1
-        - !Ref PrivateSubnet2
-      SecurityGroupIds:
-        - !Ref InterfaceSecurityGroup
-  S3VpcEndpoint:
-    Type: AWS::EC2::VPCEndpoint
+      SubnetId: !Ref Subnet1
+      RouteTableId: !Ref PublicRouteTable
+  Subnet2:
+    Type: AWS::EC2::Subnet
     Properties:
-      ServiceName: !Sub "com.amazonaws.${AWS::Region}.s3"
-      VpcEndpointType: Gateway
       VpcId: !Ref Vpc
-      RouteTableIds:
-        - !Ref PrivateRouteTable
-  CloudwatchVpcEndpoint:
-    Type: AWS::EC2::VPCEndpoint
+      CidrBlock: !Ref PrivateSubnet2Cidr
+      MapPublicIpOnLaunch: false
+      AvailabilityZone: !Select [1, !GetAZs ""]
+  Subnet2RTA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      VpcEndpointType: Interface
-      ServiceName: !Sub "com.amazonaws.${AWS::Region}.logs"
-      VpcId: !Ref Vpc
-      PrivateDnsEnabled: true
-      SubnetIds:
-        - !Ref PrivateSubnet1
-        - !Ref PrivateSubnet2
-      SecurityGroupIds:
-        - !Ref InterfaceSecurityGroup
-
+      SubnetId: !Ref Subnet2
+      RouteTableId: !Ref PublicRouteTable
 
 Outputs:
-  InterfaceSecurityGroup:
-    Value: !Ref InterfaceSecurityGroup
-    Export:
-      Name: !Sub ${StackName}-interface-sg
   VpcId:
     Value: !Ref Vpc
     Export:
       Name: !Sub ${StackName}-vpc-id
+  Subnet1:
+    Value: !Ref Subnet1
+    Export:
+      Name: !Sub ${StackName}-subnet-1
+  Subnet2:
+    Value: !Ref Subnet2
+    Export:
+      Name: !Sub ${StackName}-subnet-2
   PublicRouteTable:
     Value: !Ref PublicRouteTable
     Export:
       Name: !Sub ${StackName}-public-route-table
-  PrivateSubnet1:
-    Value: !Ref PrivateSubnet1
-    Export:
-      Name: !Sub ${StackName}-private-subnet-1
-  PrivateSubnet2:
-    Value: !Ref PrivateSubnet2
-    Export:
-      Name: !Sub ${StackName}-private-subnet-2

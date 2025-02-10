@@ -6,40 +6,6 @@ Parameters:
     Type: String
 
 Resources:
-  # Endpoints
-  EcrDkrVpcEndpoint:
-    Type: AWS::EC2::VPCEndpoint
-    Properties:
-      VpcEndpointType: Interface
-      ServiceName: !Sub "com.amazonaws.${AWS::Region}.ecr.dkr"
-      VpcId: !ImportValue
-        Fn::Sub: ${StackName}-vpc-id
-      PrivateDnsEnabled: true
-      SubnetIds:
-        - !ImportValue
-          Fn::Sub: ${StackName}-private-subnet-1
-        - !ImportValue
-          Fn::Sub: ${StackName}-private-subnet-2
-      SecurityGroupIds:
-        - !ImportValue
-          Fn::Sub: ${StackName}-interface-sg
-  EcrApiVpcEndpoint:
-    Type: AWS::EC2::VPCEndpoint
-    Properties:
-      VpcEndpointType: Interface
-      ServiceName: !Sub "com.amazonaws.${AWS::Region}.ecr.api"
-      VpcId: !ImportValue
-        Fn::Sub: ${StackName}-vpc-id
-      PrivateDnsEnabled: true
-      SubnetIds:
-        - !ImportValue
-          Fn::Sub: ${StackName}-private-subnet-1
-        - !ImportValue
-          Fn::Sub: ${StackName}-private-subnet-2
-      SecurityGroupIds:
-        - !ImportValue
-          Fn::Sub: ${StackName}-interface-sg
-
   ECRRepository:
     Type: AWS::ECR::Repository
     Properties:
@@ -131,7 +97,7 @@ Resources:
               awslogs-stream-prefix: ecs
               awslogs-create-group: true
               mode: non-blocking
-              max-buffer-size: "25m"
+              max-buffer-size: "1m"
 
   ECSService:
     Type: AWS::ECS::Service
