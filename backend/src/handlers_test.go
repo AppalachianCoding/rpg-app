@@ -12,7 +12,7 @@ import (
 )
 
 func TestApiHandler(t *testing.T) {
-	logrus.SetLevel(logrus.TraceLevel)
+	logrus.SetLevel(logrus.InfoLevel)
 	log := logrus.WithField("test", "TestApiHandler")
 
 	db, pg, err := getTestDb()
@@ -120,19 +120,22 @@ func TestAllHandler(t *testing.T) {
 
 	srv := startServer(dbClient, ":8081")
 
-	res, err := http.Get("http://localhost:8081/api/all/weapon_properties")
-	if err != nil {
-		t.Fatalf("Failed to make request: %v", err)
-	}
-	if res.StatusCode != http.StatusOK {
-		t.Fatalf("Expected status 200, got %d", res.StatusCode)
-	}
+	for table := range TABLES {
+		url := fmt.Sprintf("http://localhost:8081/api/all/%s", table)
+		res, err := http.Get(url)
+		if err != nil {
+			t.Fatalf("Failed to make request: %v", err)
+		}
+		if res.StatusCode != http.StatusOK {
+			t.Fatalf("Expected status 200, got %d", res.StatusCode)
+		}
 
-	body, err := io.ReadAll(res.Body)
-	if err != nil {
-		t.Fatalf("Failed to read response body: %v", err)
+		body, err := io.ReadAll(res.Body)
+		if err != nil {
+			t.Fatalf("Failed to read response body: %v", err)
+		}
+		_, err = json.MarshalIndent(body, "", "  ")
 	}
-	logrus.Infof("Response: %s", body)
 
 	srv.Shutdown(nil)
 }
