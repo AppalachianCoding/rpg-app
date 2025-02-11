@@ -44,9 +44,11 @@ func startServer(dbClient DbClient, port string) *http.Server {
 	logrus.Info("Starting server...")
 
 	r := mux.NewRouter()
+	r.UseEncodedPath()
 	r.HandleFunc("/api/{table}/{name}", dbClient.apiHandler).Methods("POST")
 	r.HandleFunc("/api/all/{table}", dbClient.allHandler).Methods("GET")
 	r.HandleFunc("/", capabilitiesHandler).Methods("GET")
+	r.HandleFunc("/api/{table}", dbClient.getAllNamesHandler).Methods("GET")
 	r.HandleFunc("/api/capabilities", capabilitiesHandler).Methods("GET")
 	r.HandleFunc("/api/tables", tablesHandler).Methods("GET")
 	r.HandleFunc("/api/capabilities/{table}", describeTable).Methods("GET")
@@ -60,7 +62,7 @@ func startServer(dbClient DbClient, port string) *http.Server {
 	}
 
 	go func() {
-		log.Println("Starting server on :80")
+		log.Println("Starting server on", port)
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			logrus.Fatalf("Server failed: %s\n", err)
 		}

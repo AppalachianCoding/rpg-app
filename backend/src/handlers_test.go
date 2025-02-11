@@ -5,16 +5,19 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"testing"
 
 	"github.com/sirupsen/logrus"
 )
 
 func TestApiHandler(t *testing.T) {
-	logrus.SetLevel(logrus.InfoLevel)
+	logrus.SetLevel(logrus.TraceLevel)
+	log := logrus.WithField("test", "TestApiHandler")
 
 	db, pg, err := getTestDb()
 	if err != nil {
+		log.Errorf("Failed to get test database: %v", err)
 		t.Fatalf("Failed to get test database: %v", err)
 	}
 	defer pg.Stop()
@@ -23,48 +26,78 @@ func TestApiHandler(t *testing.T) {
 	populate(db)
 
 	dbClient := DbClient{db}
+	defer dbClient.Close()
 
 	srv := startServer(dbClient, ":8082")
 
 	for _, table := range TABLES {
-		res, err := http.Post(
-			fmt.Sprintf("http://localhost:8082/api/weapon_properties/%s", table.Name),
-			"application/json",
-			nil,
-		)
-
+		log = log.WithField("table", table.Name)
+		namesRes, err := http.Get(fmt.Sprintf("http://localhost:8082/api/%s",
+			url.PathEscape(table.Name)))
 		if err != nil {
+			log.Errorf("Failed to make request: %v", err)
 			t.Fatalf("Failed to make request: %v", err)
 		}
-		if res.StatusCode != http.StatusOK {
-			t.Fatalf("Expected status 200, got %d", res.StatusCode)
+		if namesRes.StatusCode != http.StatusOK {
+			log.Errorf("Expected status 200, got %d", namesRes.StatusCode)
+			t.Fatalf("Expected status 200, got %d", namesRes.StatusCode)
 		}
 
-		dec := json.NewDecoder(res.Body)
-		var body map[string]interface{}
-		if err := dec.Decode(&body); err != nil {
-			t.Fatalf("Failed to decode response body: %v", err)
-		}
+		dec := json.NewDecoder(namesRes.Body)
 
-		var mapping = make(map[string]bool)
-		for _, col := range table.Mapping {
-			mapping[col] = false
-		}
-
-		for k, _ := range body {
-			if _, ok := mapping[k]; !ok {
-				t.Fatalf("Unexpected key in response: %s", k)
+		for dec.More() {
+			var line map[string]string
+			if err := dec.Decode(&line); err != nil {
+				log.Errorf("Failed to decode response body: %v", err)
+				t.Fatalf("Failed to decode response body: %v", err)
 			}
-			mapping[k] = true
-		}
-
-		for k, v := range mapping {
-			if !v {
-				t.Fatalf("Expected key not found in response: %s", k)
+			name := line["name"]
+			log = log.WithField("name", name)
+			name = convertKey(name)
+			log.Debugf("Getting data for %s/%s", url.PathEscape(table.Name), url.PathEscape(name))
+			res, err := http.Post(fmt.Sprintf("http://localhost:8082/api/%s/%s",
+				url.PathEscape(table.Name),
+				url.PathEscape(name),
+			), "application/json", nil)
+			if err != nil {
+				log.Errorf("Failed to make request: %v", err)
+				t.Fatalf("Failed to make request: %v", err)
 			}
-		}
 
-		logrus.Infof("Response: %s", body)
+			if res.StatusCode != http.StatusOK {
+				log.Errorf("Expected status 200, got %d", res.StatusCode)
+				t.Fatalf("Expected status 200, got %d", res.StatusCode)
+			}
+
+			dec := json.NewDecoder(res.Body)
+			var body map[string]interface{}
+			if err := dec.Decode(&body); err != nil {
+				log.Errorf("Failed to decode response body: %v", err)
+				t.Fatalf("Failed to decode response body: %v", err)
+			}
+
+			var mapping = make(map[string]bool)
+			for _, col := range table.Mapping {
+				mapping[col] = false
+			}
+
+			for k := range body {
+				if _, ok := mapping[k]; !ok {
+					log.Errorf("Unexpected key in response: %s", k)
+					t.Fatalf("Unexpected key in response: %s", k)
+				}
+				mapping[k] = true
+			}
+
+			for k, v := range mapping {
+				if !v {
+					log.Errorf("Expected key not found in response: %s", k)
+					t.Fatalf("Expected key not found in response: %s", k)
+				}
+			}
+
+			log.Debugf("Response: %s", body)
+		}
 	}
 
 	srv.Shutdown(nil)
@@ -83,6 +116,7 @@ func TestAllHandler(t *testing.T) {
 	populate(db)
 
 	dbClient := DbClient{db}
+	defer dbClient.Close()
 
 	srv := startServer(dbClient, ":8081")
 

@@ -18,17 +18,6 @@ type FiveETable struct {
 	file    string
 }
 
-func convert_key(key string) string {
-	switch key {
-	case "index":
-		return "_index"
-	case "desc":
-		return "_desc"
-	default:
-		return key
-	}
-}
-
 func safeSQLValue(value interface{}) string {
 	switch v := value.(type) {
 	case string:
@@ -48,9 +37,9 @@ func safeSQLValue(value interface{}) string {
 func createTable(table *FiveETable, db *sql.DB) error {
 	log := log.WithField("table", table.Name)
 
-	query := "CREATE TABLE " + table.Name + " ("
+	query := "CREATE TABLE " + convertKey(table.Name) + " ("
 	for i, key := range table.Mapping {
-		key = convert_key(key)
+		key = convertKey(key)
 		if i != 0 {
 			query += ", "
 		}
@@ -93,14 +82,14 @@ func insert(table *FiveETable, db *sql.DB, data []map[string]interface{}) error 
 			}
 		}
 
-		query := "INSERT INTO " + table.Name + " ("
+		query := "INSERT INTO " + convertKey(table.Name) + " ("
 		values := "VALUES ("
 		for i, key := range table.Mapping {
 			if i != 0 {
 				query += ", "
 				values += ", "
 			}
-			query += convert_key(key)
+			query += convertKey(key)
 			if row[key] == nil {
 				log.WithFields(logrus.Fields{
 					"key":   key,

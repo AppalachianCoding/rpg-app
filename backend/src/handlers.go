@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -34,6 +35,12 @@ func QueryDb(
 	query string,
 	params ...interface{},
 ) error {
+	log = log.WithFields(logrus.Fields{
+		"method": r.Method,
+		"ip":     r.RemoteAddr,
+		"query":  query,
+		"params": params,
+	})
 	rows, err := db.Query(query, params...)
 	if err != nil {
 		log.WithError(err).Warn("Failed to query database")
@@ -61,6 +68,7 @@ func QueryDb(
 		valuePtrs[i] = &values[i]
 	}
 
+	anyResults := false
 	for rows.Next() {
 		result := make(map[string]interface{})
 
@@ -72,12 +80,20 @@ func QueryDb(
 		}
 
 		for i, col := range columns {
+			col = convertToKey(col)
 			val := values[i]
 			if b, ok := val.([]byte); ok {
 				result[col] = string(b)
 			} else {
 				result[col] = val
 			}
+		}
+
+		if len(result) == 0 {
+			log.Warn("No results")
+			w.WriteHeader(http.StatusNotFound)
+			w.Write([]byte("No results"))
+			continue
 		}
 
 		if err := enc.Encode(result); err != nil {
@@ -88,6 +104,13 @@ func QueryDb(
 		}
 
 		log.Tracef("Wrote %s", result)
+		anyResults = true
+	}
+
+	if !anyResults {
+		log.Warn("No results")
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("No results"))
 	}
 
 	log.Info("Finished query")
@@ -112,8 +135,8 @@ func newDbClient(ctx context.Context, cfg aws.Config, database string) (DbClient
 func (dbc DbClient) apiHandler(w http.ResponseWriter, r *http.Request) {
 	db := dbc.DB
 	vars := mux.Vars(r)
-	table := vars["table"]
-	name := vars["name"]
+	table, _ := url.PathUnescape(vars["table"])
+	name, _ := url.PathUnescape(vars["name"])
 	log := logrus.WithFields(logrus.Fields{
 		"table":  table,
 		"name":   name,
@@ -129,6 +152,7 @@ func (dbc DbClient) apiHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	query := fmt.Sprintf("SELECT * FROM %s WHERE name = $1", table)
+	log = log.WithField("query", query)
 	if err := QueryDb(w, r, db, log, query, name); err != nil {
 		log.WithError(err).Warn("Failed to get data")
 	}
@@ -137,7 +161,7 @@ func (dbc DbClient) apiHandler(w http.ResponseWriter, r *http.Request) {
 func (dbc DbClient) allHandler(w http.ResponseWriter, r *http.Request) {
 	db := dbc.DB
 	vars := mux.Vars(r)
-	table := vars["table"]
+	table, _ := url.PathUnescape(vars["table"])
 	log := logrus.WithFields(logrus.Fields{
 		"table":  table,
 		"method": "all",
@@ -149,6 +173,24 @@ func (dbc DbClient) allHandler(w http.ResponseWriter, r *http.Request) {
 
 	if err := QueryDb(w, r, db, log, query); err != nil {
 		log.WithError(err).Warn("Failed to get all data")
+	}
+}
+
+func (dbc DbClient) getAllNamesHandler(w http.ResponseWriter, r *http.Request) {
+	db := dbc.DB
+	vars := mux.Vars(r)
+	table, _ := url.PathUnescape(vars["table"])
+	log := logrus.WithFields(logrus.Fields{
+		"table":  table,
+		"method": "allNames",
+		"ip":     r.RemoteAddr,
+	})
+	log.Debugf("Received request for all names from %s\n", table)
+
+	query := fmt.Sprintf("SELECT name FROM %s", table)
+
+	if err := QueryDb(w, r, db, log, query); err != nil {
+		log.WithError(err).Warn("Failed to get all names")
 	}
 }
 
@@ -169,6 +211,11 @@ func capabilitiesHandler(w http.ResponseWriter, r *http.Request) {
 			Methods: []string{"POST"},
 			Description: "Handles API requests for a specific table and name. " +
 				"Used to insert or update data.",
+		},
+		{
+			Path:        "/api/{table}",
+			Methods:     []string{"GET"},
+			Description: "Retrieves all names for all records in a specified table.",
 		},
 		{
 			Path:        "/api/all/{table}",
@@ -207,13 +254,7 @@ func describeTable(w http.ResponseWriter, r *http.Request) {
 		"ip":     r.RemoteAddr,
 	})
 	vars := mux.Vars(r)
-	t, ok := vars["table"]
-	if !ok {
-		log.Warn("No table specified")
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("No table specified"))
-		return
-	}
+	t, _ := url.PathUnescape(vars["table"])
 	log = log.WithField("table", t)
 	log.Debugf("Received request for table %s", t)
 

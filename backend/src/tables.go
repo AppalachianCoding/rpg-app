@@ -250,6 +250,7 @@ var TABLES = map[string]FiveETable{
 	"levels": {
 		"levels",
 		[]string{
+			"name",
 			"level",
 			"ability_score_bonuses",
 			"prof_bonus",
@@ -483,4 +484,26 @@ var TABLES = map[string]FiveETable{
 		},
 		"5e-SRD-Weapon-Properties.json",
 	},
+}
+
+func convertKey(key string) string {
+	switch key {
+	case "index":
+		return "_index"
+	case "desc":
+		return "_desc"
+	default:
+		return key
+	}
+}
+
+func convertToKey(key string) string {
+	switch key {
+	case "_index":
+		return "index"
+	case "_desc":
+		return "desc"
+	default:
+		return key
+	}
 }
