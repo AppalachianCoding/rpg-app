@@ -3,40 +3,6 @@ Parameters:
     Type: String
 
 Resources:
-  RdsVpcEndpoint:
-    Type: AWS::EC2::VPCEndpoint
-    Properties:
-      ServiceName: !Sub "com.amazonaws.${AWS::Region}.rds"
-      VpcEndpointType: Interface
-      VpcId: !Ref Vpc
-      VpcId: !ImportValue
-        Fn::Sub: ${StackName}-vpc-id
-      PrivateDnsEnabled: true
-      SubnetIds:
-        - !ImportValue
-          Fn::Sub: ${StackName}-private-subnet-1
-        - !ImportValue
-          Fn::Sub: ${StackName}-private-subnet-2
-      SecurityGroupIds:
-        - !ImportValue
-          Fn::Sub: ${StackName}-interface-sg
-  RdsDataVpcEndpoint:
-    Type: AWS::EC2::VPCEndpoint
-    Properties:
-      ServiceName: !Sub "com.amazonaws.${AWS::Region}.rds-data"
-      VpcEndpointType: Interface
-      VpcId: !ImportValue
-        Fn::Sub: ${StackName}-vpc-id
-      PrivateDnsEnabled: true
-      SubnetIds:
-        - !ImportValue
-          Fn::Sub: ${StackName}-private-subnet-1
-        - !ImportValue
-          Fn::Sub: ${StackName}-private-subnet-2
-      SecurityGroupIds:
-        - !ImportValue
-          Fn::Sub: ${StackName}-interface-sg
-
   DBSubnetGroup:
     Type: AWS::RDS::DBSubnetGroup
     Properties:
