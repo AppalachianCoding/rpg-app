@@ -2,15 +2,23 @@
 
 filedir="$(dirname "$0")"
 ACCT_ID="$(aws sts get-caller-identity --query Account --output text)"
-AWS_REGION="$(aws configure get region)"
+if [[ -z "$AWS_REGION" ]]; then
+  AWS_REGION="$(aws configure get region)"
+fi
 CF_BUCKET="$ACCT_ID-$AWS_REGION-cfbucket"
 STACK_NAME="$1"
 DOCKER_IMAGE="$STACK_NAME:latest"
 DOCKER_ENDPOINT="$ACCT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
 DOCKER_REPO="$DOCKER_ENDPOINT/$STACK_NAME"
 
-if [ -z "$STACK_NAME" ]; then
-  echo "Usage: $0 <stack-name>"
+FAIL=false
+for envvar in ACCT_ID AWS_REGION STACK_NAME; do
+  if [ -z "${!envvar}" ]; then
+    echo "Error: $envvar is not set."
+    FAIL=true
+  fi
+done
+if $FAIL; then
   exit 1
 fi
 
@@ -114,5 +122,5 @@ else
 
   docker push "$DOCKER_REPO"
 
-  aws cloudformation wait stack-update-complete --stack-name "$STACK_NAME"
+  aws cloudformation wait stack-create-complete --stack-name "$STACK_NAME"
 fi
