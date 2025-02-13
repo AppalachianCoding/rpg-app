@@ -27,6 +27,10 @@ if ! aws s3 ls "s3://$CF_BUCKET" > /dev/null; then
 fi
 
 for file in "$filedir"/*.yml; do
+  if ! aws cloudformation validate-template --template-body "file://$file"; then
+    echo "Error: Invalid CloudFormation template $file"
+    exit 1
+  fi
   aws s3 cp "$file" "s3://$CF_BUCKET/$STACK_NAME/$(basename "$file")"
 done
 
@@ -84,7 +88,7 @@ then
     exit 1
   fi
 
-  NEW_IMAGE_DIGEST=$(docker build --quiet .)
+  NEW_IMAGE_DIGEST=$(docker build --quiet "$filedir"/..)
   for TASK_ARN in $TASK_ARNS; do
     ECS_IMAGE_DIGEST=$(aws ecs describe-tasks \
       --cluster "${ECS_CLUSTER}" \
