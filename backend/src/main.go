@@ -45,14 +45,17 @@ func startServer(dbClient DbClient, port string) *http.Server {
 
 	r := mux.NewRouter()
 	r.UseEncodedPath()
-	r.HandleFunc("/api/{table}/{name}", dbClient.apiHandler).Methods("POST")
-	r.HandleFunc("/api/all/{table}", dbClient.allHandler).Methods("GET")
-	r.HandleFunc("/", capabilitiesHandler).Methods("GET")
-	r.HandleFunc("/api/{table}", dbClient.getAllNamesHandler).Methods("GET")
-	r.HandleFunc("/api/capabilities", capabilitiesHandler).Methods("GET")
+
+	r.HandleFunc("/api/health", healthCheckHandler).Methods("GET")
 	r.HandleFunc("/api/tables", tablesHandler).Methods("GET")
+	r.HandleFunc("/api/capabilities", capabilitiesHandler).Methods("GET")
+
+	r.HandleFunc("/api/all/{table}", dbClient.allHandler).Methods("GET")
 	r.HandleFunc("/api/capabilities/{table}", describeTable).Methods("GET")
-	r.HandleFunc("/health", healthCheckHandler).Methods("GET")
+
+	r.HandleFunc("/api", healthCheckHandler).Methods("GET")
+	r.HandleFunc("/api/{table}/{name}", dbClient.apiHandler).Methods("POST")
+	r.HandleFunc("/api/{table}", dbClient.getAllNamesHandler).Methods("GET")
 
 	srv := &http.Server{
 		Addr:         port,
