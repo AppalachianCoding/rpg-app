@@ -10,6 +10,8 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    env:
+      AWS_REGION: us-east-1
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -40,8 +42,6 @@ jobs:
           aws-region: us-east-1
 
       - name: Run Deploy Script
-        env:
-          AWS_REGION: us-east-1
         run: |
           chmod +x ./backend/deploy/deploy.sh
           ./backend/deploy/deploy.sh dnd-unsecured-stage

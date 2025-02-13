@@ -2,6 +2,9 @@
 
 filedir="$(dirname "$0")"
 ACCT_ID="$(aws sts get-caller-identity --query Account --output text)"
+if [[ -z "$AWS_REGION" ]]; then
+  AWS_REGION="$(aws configure get region)"
+fi
 AWS_REGION="$(aws configure get region)"
 CF_BUCKET="$ACCT_ID-$AWS_REGION-cfbucket"
 STACK_NAME="$1"
