@@ -36,8 +36,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::123456789012:role/CodeBuildRole
-          id-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          role-to-assume: arn:aws:iam::864899846218:role/GitHubActionsOIDCRole
           aws-region: us-east-1
 
       - name: Run Deploy Script
