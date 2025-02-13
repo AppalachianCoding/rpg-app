@@ -122,5 +122,5 @@ else
 
   docker push "$DOCKER_REPO"
 
-  aws cloudformation wait stack-update-complete --stack-name "$STACK_NAME"
+  aws cloudformation wait stack-create-complete --stack-name "$STACK_NAME"
 fi
