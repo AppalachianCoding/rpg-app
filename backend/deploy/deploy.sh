@@ -2,15 +2,23 @@
 
 filedir="$(dirname "$0")"
 ACCT_ID="$(aws sts get-caller-identity --query Account --output text)"
-AWS_REGION="$(aws configure get region)"
+if [[ -z "$AWS_REGION" ]]; then
+  AWS_REGION="$(aws configure get region)"
+fi
 CF_BUCKET="$ACCT_ID-$AWS_REGION-cfbucket"
 STACK_NAME="$1"
 DOCKER_IMAGE="$STACK_NAME:latest"
 DOCKER_ENDPOINT="$ACCT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
 DOCKER_REPO="$DOCKER_ENDPOINT/$STACK_NAME"
 
-if [ -z "$STACK_NAME" ]; then
-  echo "Usage: $0 <stack-name>"
+FAIL=false
+for envvar in ACCT_ID AWS_REGION STACK_NAME; do
+  if [ -z "${!envvar}" ]; then
+    echo "Error: $envvar is not set."
+    FAIL=true
+  fi
+done
+if $FAIL; then
   exit 1
 fi
 
@@ -19,6 +27,10 @@ if ! aws s3 ls "s3://$CF_BUCKET" > /dev/null; then
 fi
 
 for file in "$filedir"/*.yml; do
+  if ! aws cloudformation validate-template --template-body "file://$file"; then
+    echo "Error: Invalid CloudFormation template $file"
+    exit 1
+  fi
   aws s3 cp "$file" "s3://$CF_BUCKET/$STACK_NAME/$(basename "$file")"
 done
 
@@ -26,12 +38,11 @@ aws ecr get-login-password |
   docker login --username AWS --password-stdin "$DOCKER_ENDPOINT"
 docker build -t "$STACK_NAME" "$filedir"/..
 docker tag "$DOCKER_IMAGE" "$DOCKER_REPO"
+docker push "$DOCKER_REPO"
 
 if aws cloudformation describe-stacks \
   --stack-name "$STACK_NAME"
 then
-  docker push "$DOCKER_REPO"
-
   aws cloudformation update-stack \
     --stack-name "$STACK_NAME" \
     --template-body "file://$filedir/deploy.yml" \
@@ -76,7 +87,7 @@ then
     exit 1
   fi
 
-  NEW_IMAGE_DIGEST=$(docker build --quiet .)
+  NEW_IMAGE_DIGEST=$(docker build --quiet "$filedir"/..)
   for TASK_ARN in $TASK_ARNS; do
     ECS_IMAGE_DIGEST=$(aws ecs describe-tasks \
       --cluster "${ECS_CLUSTER}" \
@@ -90,9 +101,13 @@ then
         --cluster "$ECS_CLUSTER" \
         --service "$ECS_SERVICE" \
         --force-new-deployment
-      break
+      echo "Waiting for ECS service to stabilize..."
+      aws ecs wait services-stable --cluster "$ECS_CLUSTER" --services "$ECS_SERVICE"
     fi
   done
+
+  echo "Waiting for stack update to complete..."
+  aws cloudformation wait stack-update-complete --stack-name "$STACK_NAME"
 
 else
   aws cloudformation create-stack \
@@ -112,7 +127,5 @@ else
     echo -n "."
   done
 
-  docker push "$DOCKER_REPO"
-
-  aws cloudformation wait stack-update-complete --stack-name "$STACK_NAME"
+  aws cloudformation wait stack-create-complete --stack-name "$STACK_NAME"
 fi
