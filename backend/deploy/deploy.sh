@@ -99,8 +99,13 @@ then
         --service "$ECS_SERVICE" \
         --force-new-deployment
       break
+      echo "Waiting for ECS service to stabilize..."
+      aws ecs wait services-stable --cluster "$ECS_CLUSTER" --services "$ECS_SERVICE"
     fi
   done
+
+  echo "Waiting for stack update to complete..."
+  aws cloudformation wait stack-update-complete --stack-name "$STACK_NAME"
 
 else
   aws cloudformation create-stack \
