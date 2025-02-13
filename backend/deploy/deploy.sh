@@ -9,8 +9,14 @@ DOCKER_IMAGE="$STACK_NAME:latest"
 DOCKER_ENDPOINT="$ACCT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
 DOCKER_REPO="$DOCKER_ENDPOINT/$STACK_NAME"
 
-if [ -z "$STACK_NAME" ]; then
-  echo "Usage: $0 <stack-name>"
+FAIL=false
+for envvar in ACCT_ID AWS_REGION STACK_NAME; do
+  if [ -z "${!envvar}" ]; then
+    echo "Error: $envvar is not set."
+    FAIL=true
+  fi
+done
+if $FAIL; then
   exit 1
 fi
 
