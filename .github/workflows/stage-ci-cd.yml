@@ -1,0 +1,50 @@
+name: Deploy to Stage on PR
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.23'
+
+      - name: Cache Go modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('backend/src/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Download dependencies
+        working-directory: backend/src
+        run: go mod download
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::864899846218:role/GitHubActionsOIDCRole
+          aws-region: us-east-1
+
+      - name: Run Deploy Script
+        run: |
+          chmod +x ./backend/deploy/deploy.sh
+          ./backend/deploy/deploy.sh dnd-unsecured-stage
+
+      - name: Check Deployment Health
+        run: |
+          sleep 10
+          curl --fail https://dnd-stage.appalachiancoding.org/api/health/
