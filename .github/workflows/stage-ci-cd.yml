@@ -41,7 +41,7 @@ jobs:
 
       - name: Run Deploy Script
         run: |
-          chmod +x ./deploy/deploy.sh
+          chmod +x ./backend/deploy/deploy.sh
           ./deploy/deploy.sh dnd-unsecured-stage
 
       - name: Check Deployment Health
