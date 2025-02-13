@@ -9,9 +9,9 @@ Resources:
       DBSubnetGroupDescription: "Subnet group for the RDS instance in the VPC"
       SubnetIds:
         - !ImportValue 
-            Fn::Sub: "${StackName}-private-subnet-1"
+            Fn::Sub: ${StackName}-subnet-1
         - !ImportValue 
-            Fn::Sub: "${StackName}-private-subnet-2"
+            Fn::Sub: ${StackName}-subnet-2
   DBSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
