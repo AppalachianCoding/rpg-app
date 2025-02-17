@@ -114,9 +114,9 @@ Resources:
         AwsvpcConfiguration:
           Subnets:
             - !ImportValue
-                Fn::Sub: ${StackName}-private-subnet-1
+                Fn::Sub: ${StackName}-subnet-1
             - !ImportValue
-                Fn::Sub: ${StackName}-private-subnet-2
+                Fn::Sub: ${StackName}-subnet-2
           SecurityGroups:
             - !Ref EcsSecurityGroup
           AssignPublicIp: DISABLED
@@ -172,9 +172,9 @@ Resources:
         AwsvpcConfiguration:
           Subnets:
             - !ImportValue
-                Fn::Sub: ${StackName}-private-subnet-1
+                Fn::Sub: ${StackName}-subnet-1
             - !ImportValue
-                Fn::Sub: ${StackName}-private-subnet-2
+                Fn::Sub: ${StackName}-subnet-2
           SecurityGroups:
             - !Ref EcsSecurityGroup
           AssignPublicIp: DISABLED
