@@ -169,6 +169,12 @@ func (dbc DbClient) allHandler(w http.ResponseWriter, r *http.Request) {
 	})
 	log.Debugf("Received request for all from %s\n", table)
 
+	if !verifyTable(table) {
+		log.Warnf("Invalid table %s\n", table)
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Invalid table"))
+	}
+
 	query := fmt.Sprintf("SELECT * FROM %s", table)
 
 	if err := QueryDb(w, r, db, log, query); err != nil {
@@ -186,6 +192,12 @@ func (dbc DbClient) getAllNamesHandler(w http.ResponseWriter, r *http.Request) {
 		"ip":     r.RemoteAddr,
 	})
 	log.Debugf("Received request for all names from %s\n", table)
+
+	if !verifyTable(table) {
+		log.Warnf("Invalid table %s\n", table)
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Invalid table"))
+	}
 
 	query := fmt.Sprintf("SELECT name FROM %s", table)
 
