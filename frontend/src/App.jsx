@@ -13,10 +13,11 @@ function App() {
           </div>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/charactersheet" element={<CharactersHome />} />
           </Routes>
         </Router>
 
   )
 }
 
-export default App
+export default App;
