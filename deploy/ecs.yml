@@ -6,10 +6,14 @@ Parameters:
     Type: String
 
 Resources:
-  ECRRepository:
+  BackendRepository:
     Type: AWS::ECR::Repository
     Properties:
-      RepositoryName: !Ref StackName
+      RepositoryName: !Sub ${StackName}-backend
+  FrontendRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: !Sub ${StackName}-frontend 
 
   ECSCluster:
     Type: AWS::ECS::Cluster
@@ -64,7 +68,7 @@ Resources:
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0
-  ECSTaskDefinition:
+  BackendTask:
     Type: AWS::ECS::TaskDefinition
     Properties:
       Cpu: 256
@@ -79,7 +83,7 @@ Resources:
       ExecutionRoleArn: !GetAtt TaskExecutionRole.Arn
       ContainerDefinitions:
         - Name: webserver
-          Image: !Sub ${ECRRepository.RepositoryUri}:latest
+          Image: !Sub ${BackendRepository.RepositoryUri}:latest
           Environment:
             - Name: DB_SECRET
               Value: !ImportValue
@@ -99,11 +103,11 @@ Resources:
               mode: non-blocking
               max-buffer-size: "1m"
 
-  ECSService:
+  BackendService:
     Type: AWS::ECS::Service
     Properties:
       Cluster: !Ref ECSCluster
-      TaskDefinition: !Ref ECSTaskDefinition
+      TaskDefinition: !Ref BackendTask
       LaunchType: FARGATE
       PropagateTags: SERVICE
       NetworkConfiguration:
@@ -118,6 +122,64 @@ Resources:
           AssignPublicIp: DISABLED
       LoadBalancers:
         - TargetGroupArn: !ImportValue
-            Fn::Sub: ${StackName}-alb-tg-arn
+            Fn::Sub: "${StackName}-backend-alb-tg-arn"
+          ContainerName: webserver
+          ContainerPort: 80
+
+  FrontendTask:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Cpu: 256
+      Memory: 512
+      Family: ECSWebApp
+      RequiresCompatibilities:
+        - FARGATE
+      RuntimePlatform:
+        CpuArchitecture: X86_64
+      TaskRoleArn: !GetAtt TaskRole.Arn
+      NetworkMode: awsvpc
+      ExecutionRoleArn: !GetAtt TaskExecutionRole.Arn
+      ContainerDefinitions:
+        - Name: webserver
+          Image: !Sub ${FrontendRepository.RepositoryUri}:latest
+          Environment:
+            - Name: DB_SECRET
+              Value: !ImportValue
+                Fn::Sub: ${StackName}-rds-secret
+            - Name: DB_ENDPOINT
+              Value: !ImportValue
+                Fn::Sub: ${StackName}-rds-endpoint
+          PortMappings:
+            - ContainerPort: 80
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Sub ${StackName}/ecs-webapp
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: ecs
+              awslogs-create-group: true
+              mode: non-blocking
+              max-buffer-size: "1m"
+
+  FrontendService:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: !Ref ECSCluster
+      TaskDefinition: !Ref FrontendTask
+      LaunchType: FARGATE
+      PropagateTags: SERVICE
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          Subnets:
+            - !ImportValue
+                Fn::Sub: ${StackName}-private-subnet-1
+            - !ImportValue
+                Fn::Sub: ${StackName}-private-subnet-2
+          SecurityGroups:
+            - !Ref EcsSecurityGroup
+          AssignPublicIp: DISABLED
+      LoadBalancers:
+        - TargetGroupArn: !ImportValue
+            Fn::Sub: "${StackName}-frontend-alb-tg-arn"
           ContainerName: webserver
           ContainerPort: 80
