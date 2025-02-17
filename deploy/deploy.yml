@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "ECS Fargate Auto Scaling Web Server with RDS"
+
+Parameters:
+  CloudformationBucket:
+    Type: String
+
+Resources:
+  Networking:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub https://s3.amazonaws.com/${CloudformationBucket}/network.yml
+      Parameters:
+        StackName: !Ref AWS::StackName
+
+  Alb:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub https://s3.amazonaws.com/${CloudformationBucket}/alb.yml
+      Parameters:
+        StackName: !Ref AWS::StackName
+    DependsOn:
+      - Networking
+
+  Rds:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub https://s3.amazonaws.com/${CloudformationBucket}/rds.yml
+      Parameters:
+      Parameters:
+        StackName: !Ref AWS::StackName
+    DependsOn:
+      - Networking
+
+  Ecs:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub https://s3.amazonaws.com/${CloudformationBucket}/ecs.yml
+      Parameters:
+        StackName: !Ref AWS::StackName
+    DependsOn:
+      - Networking
+      - Rds
+      - Alb
