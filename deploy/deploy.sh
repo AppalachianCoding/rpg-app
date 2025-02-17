@@ -5,9 +5,11 @@ ACCT_ID="$(aws sts get-caller-identity --query Account --output text)"
 AWS_REGION="$(aws configure get region)"
 CF_BUCKET="$ACCT_ID-$AWS_REGION-cfbucket"
 STACK_NAME="$1"
-DOCKER_IMAGE="$STACK_NAME:latest"
+BACKEND_IMAGE="$STACK_NAME-backend:latest"
+FRONTEND_IMAGE="$STACK_NAME-frontend:lastest"
 DOCKER_ENDPOINT="$ACCT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
-DOCKER_REPO="$DOCKER_ENDPOINT/$STACK_NAME"
+BACKEND_REPO="$DOCKER_ENDPOINT/$STACK_NAME-backend"
+FRONTEND_REPO="$DOCKER_ENDPOINT/$STACK_NAME-frontend"
 BACKENDIR="$filedir/../backend"
 FRONTENDIR="$filedir/../frontend"
 
@@ -26,13 +28,17 @@ done
 
 aws ecr get-login-password |
   docker login --username AWS --password-stdin "$DOCKER_ENDPOINT"
-docker build -t "$STACK_NAME" "$BACKENDIR"
-docker tag "$DOCKER_IMAGE" "$DOCKER_REPO"
+docker build -t "$STACK_NAME-backend" "$BACKENDIR"
+docker tag "$BACKEND_IMAGE" "$BACKEND_REPO"
+docker build -t "$STACK_NAME-frontend" "$FRONTENDIR"
+docker tag "$FRONTEND_IMAGE" "$FRONTEND_REPO"
+
 
 if aws cloudformation describe-stacks \
   --stack-name "$STACK_NAME"
 then
-  docker push "$DOCKER_REPO"
+  docker push "$BACKEND_REPO"
+  docker push "$FRONTEND_REPO"
 
   aws cloudformation update-stack \
     --stack-name "$STACK_NAME" \
@@ -114,7 +120,8 @@ else
     echo -n "."
   done
 
-  docker push "$DOCKER_REPO"
+  docker push "$BACKEND_REPO"
+  docker push "$FRONTEND_REPO"
 
   aws cloudformation wait stack-update-complete --stack-name "$STACK_NAME"
 fi
