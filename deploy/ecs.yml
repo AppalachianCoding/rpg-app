@@ -73,7 +73,7 @@ Resources:
     Properties:
       Cpu: 256
       Memory: 512
-      Family: ECSWebApp
+      Family: BackendAPI
       RequiresCompatibilities:
         - FARGATE
       RuntimePlatform:
@@ -82,7 +82,7 @@ Resources:
       NetworkMode: awsvpc
       ExecutionRoleArn: !GetAtt TaskExecutionRole.Arn
       ContainerDefinitions:
-        - Name: webserver
+        - Name: backend-server
           Image: !Sub ${BackendRepository.RepositoryUri}:latest
           Environment:
             - Name: DB_SECRET
@@ -123,7 +123,7 @@ Resources:
       LoadBalancers:
         - TargetGroupArn: !ImportValue
             Fn::Sub: "${StackName}-backend-alb-tg-arn"
-          ContainerName: webserver
+          ContainerName: backend-server
           ContainerPort: 80
 
   FrontendTask:
@@ -131,7 +131,7 @@ Resources:
     Properties:
       Cpu: 256
       Memory: 512
-      Family: ECSWebApp
+      Family: FrontendWebApp
       RequiresCompatibilities:
         - FARGATE
       RuntimePlatform:
@@ -140,7 +140,7 @@ Resources:
       NetworkMode: awsvpc
       ExecutionRoleArn: !GetAtt TaskExecutionRole.Arn
       ContainerDefinitions:
-        - Name: webserver
+        - Name: frontend-server
           Image: !Sub ${FrontendRepository.RepositoryUri}:latest
           Environment:
             - Name: DB_SECRET
@@ -181,5 +181,5 @@ Resources:
       LoadBalancers:
         - TargetGroupArn: !ImportValue
             Fn::Sub: "${StackName}-frontend-alb-tg-arn"
-          ContainerName: webserver
+          ContainerName: frontend-server
           ContainerPort: 80
