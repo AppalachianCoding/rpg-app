@@ -52,6 +52,15 @@ Resources:
       SubnetId: !Ref PublicSubnet2
 
   # ALB
+  Certificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Sub "${StackName}.${BaseDomainName}"
+      ValidationMethod: DNS
+      DomainValidationOptions:
+        - DomainName: !Sub "${StackName}.${BaseDomainName}"
+          HostedZoneId: !Ref HostedZoneId
+
   LoadBalancerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -66,7 +75,7 @@ Resources:
   BackendLoadBalancer:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
-      Name: !Ref StackName
+      Name: !Sub "${StackName}-backend"
       Subnets:
         - !Ref PublicSubnet1
         - !Ref PublicSubnet2
@@ -102,14 +111,6 @@ Resources:
       VpcId: !ImportValue
         Fn::Sub: "${StackName}-vpc-id"
 
-  Certificate:
-    Type: AWS::CertificateManager::Certificate
-    Properties:
-      DomainName: !Sub "${StackName}.${BaseDomainName}"
-      ValidationMethod: DNS
-      DomainValidationOptions:
-        - DomainName: !Sub "${StackName}.${BaseDomainName}"
-          HostedZoneId: !Ref HostedZoneId
   BackendRoute:
     Type: AWS::Route53::RecordSet
     Properties:
@@ -123,7 +124,7 @@ Resources:
   FrontendLoadBalancer:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
-      Name: !Ref StackName
+      Name: !Sub "${StackName}-frontend"
       Subnets:
         - !Ref PublicSubnet1
         - !Ref PublicSubnet2
@@ -148,7 +149,7 @@ Resources:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
       HealthCheckIntervalSeconds: 30
-      HealthCheckPath: "/health"
+      HealthCheckPath: "/"
       HealthCheckProtocol: HTTP
       HealthCheckTimeoutSeconds: 5
       HealthyThresholdCount: 2
