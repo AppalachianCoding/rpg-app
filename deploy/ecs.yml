@@ -119,7 +119,7 @@ Resources:
                 Fn::Sub: ${StackName}-subnet-2
           SecurityGroups:
             - !Ref EcsSecurityGroup
-          AssignPublicIp: DISABLED
+          AssignPublicIp: ENABLED
       LoadBalancers:
         - TargetGroupArn: !ImportValue
             Fn::Sub: "${StackName}-backend-alb-tg-arn"
@@ -177,7 +177,7 @@ Resources:
                 Fn::Sub: ${StackName}-subnet-2
           SecurityGroups:
             - !Ref EcsSecurityGroup
-          AssignPublicIp: DISABLED
+          AssignPublicIp: ENABLED
       LoadBalancers:
         - TargetGroupArn: !ImportValue
             Fn::Sub: "${StackName}-frontend-alb-tg-arn"

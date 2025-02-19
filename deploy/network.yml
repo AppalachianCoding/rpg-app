@@ -9,10 +9,16 @@ Parameters:
     Default: 10.0.0.0/16
   PrivateSubnet1Cidr:
     Type: String
-    Default: 10.0.1.0/24
+    Default: 10.0.1.0/27
   PrivateSubnet2Cidr:
     Type: String
-    Default: 10.0.2.0/24
+    Default: 10.0.1.64/27
+  ECSSubnet1Cidr:
+    Type: String
+    Default: 10.0.2.0/27
+  ECSSubnet2Cidr:
+    Type: String
+    Default: 10.0.2.64/27
 
 Resources:
   Vpc:
