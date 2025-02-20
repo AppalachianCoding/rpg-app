@@ -52,15 +52,6 @@ Resources:
       SubnetId: !Ref PublicSubnet2
 
   # ALB
-  Certificate:
-    Type: AWS::CertificateManager::Certificate
-    Properties:
-      DomainName: !Sub "${StackName}.${BaseDomainName}"
-      ValidationMethod: DNS
-      DomainValidationOptions:
-        - DomainName: !Sub "${StackName}.${BaseDomainName}"
-          HostedZoneId: !Ref HostedZoneId
-
   LoadBalancerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -85,6 +76,14 @@ Resources:
       LoadBalancerAttributes:
         - Key: idle_timeout.timeout_seconds
           Value: "60"
+  BackendCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Sub "api.${StackName}.${BaseDomainName}"
+      ValidationMethod: DNS
+      DomainValidationOptions:
+        - DomainName: !Sub "${StackName}.${BaseDomainName}"
+          HostedZoneId: !Ref HostedZoneId
   BackendListner:
     Type: AWS::ElasticLoadBalancingV2::Listener
     Properties:
@@ -95,7 +94,7 @@ Resources:
       Port: 443
       Protocol: HTTPS
       Certificates:
-        - CertificateArn: !Ref Certificate
+        - CertificateArn: !Ref BackendCertificate
   BackendTarget:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
@@ -110,7 +109,6 @@ Resources:
       Protocol: HTTP
       VpcId: !ImportValue
         Fn::Sub: "${StackName}-vpc-id"
-
   BackendRoute:
     Type: AWS::Route53::RecordSet
     Properties:
@@ -121,6 +119,14 @@ Resources:
         HostedZoneId: !GetAtt BackendLoadBalancer.CanonicalHostedZoneID
         DNSName: !GetAtt BackendLoadBalancer.DNSName
 
+  FrontendCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Sub "${StackName}.${BaseDomainName}"
+      ValidationMethod: DNS
+      DomainValidationOptions:
+        - DomainName: !Sub "${StackName}.${BaseDomainName}"
+          HostedZoneId: !Ref HostedZoneId
   FrontendLoadBalancer:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
@@ -144,7 +150,7 @@ Resources:
       Port: 443
       Protocol: HTTPS
       Certificates:
-        - CertificateArn: !Ref Certificate
+        - CertificateArn: !Ref FrontendCertificate
   FrontendTarget:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
