@@ -29,6 +29,9 @@ func getTestDb() (*sql.DB, *embeddedpostgres.EmbeddedPostgres, error) {
 
 	err = postgres.Start()
 	if err != nil {
+		if err.Error() == fmt.Sprintf("process already listening on port %d", randomPort) {
+			return getTestDb()
+		}
 		logrus.Errorf("Failed to start embedded postgres: %v", err)
 		return nil, nil, err
 	}
