@@ -6,12 +6,12 @@
       {
         "index": "skill-insight",
         "name": "Skill: Insight",
-        "url": "/api/proficiencies/skill-insight"
+        "url": "/proficiencies/skill-insight"
       },
       {
         "index": "skill-religion",
         "name": "Skill: Religion",
-        "url": "/api/proficiencies/skill-religion"
+        "url": "/proficiencies/skill-religion"
       }
     ],
     "language_options": {
@@ -19,7 +19,7 @@
       "type": "languages",
       "from": {
         "option_set_type": "resource_list",
-        "resource_list_url": "/api/languages"
+        "resource_list_url": "/languages"
       }
     },
     "starting_equipment": [
@@ -27,7 +27,7 @@
         "equipment": {
           "index": "clothes-common",
           "name": "Clothes, common",
-          "url": "/api/equipment/clothes-common"
+          "url": "/equipment/clothes-common"
         },
         "quantity": 1
       },
@@ -35,7 +35,7 @@
         "equipment": {
           "index": "pouch",
           "name": "Pouch",
-          "url": "/api/equipment/pouch"
+          "url": "/equipment/pouch"
         },
         "quantity": 1
       }
@@ -49,7 +49,7 @@
           "equipment_category": {
             "index": "holy-symbols",
             "name": "Holy Symbols",
-            "url": "/api/equipment-categories/holy-symbols"
+            "url": "/equipment-categories/holy-symbols"
           }
         }
       }
@@ -115,17 +115,17 @@
               {
                 "index": "lawful-good",
                 "name": "Lawful Good",
-                "url": "/api/alignments/lawful-good"
+                "url": "/alignments/lawful-good"
               },
               {
                 "index": "lawful-neutral",
                 "name": "Lawful Neutral",
-                "url": "/api/alignments/lawful-neutral"
+                "url": "/alignments/lawful-neutral"
               },
               {
                 "index": "lawful-evil",
                 "name": "Lawful Evil",
-                "url": "/api/alignments/lawful-evil"
+                "url": "/alignments/lawful-evil"
               }
             ]
           },
@@ -136,17 +136,17 @@
               {
                 "index": "lawful-good",
                 "name": "Lawful Good",
-                "url": "/api/alignments/lawful-good"
+                "url": "/alignments/lawful-good"
               },
               {
                 "index": "neutral-good",
                 "name": "Neutral Good",
-                "url": "/api/alignments/neutral-good"
+                "url": "/alignments/neutral-good"
               },
               {
                 "index": "chaotic-good",
                 "name": "Chaotic Good",
-                "url": "/api/alignments/chaotic-good"
+                "url": "/alignments/chaotic-good"
               }
             ]
           },
@@ -157,17 +157,17 @@
               {
                 "index": "chaotic-good",
                 "name": "Chaotic Good",
-                "url": "/api/alignments/chaotic-good"
+                "url": "/alignments/chaotic-good"
               },
               {
                 "index": "chaotic-neutral",
                 "name": "Chaotic Neutral",
-                "url": "/api/alignments/chaotic-neutral"
+                "url": "/alignments/chaotic-neutral"
               },
               {
                 "index": "chaotic-evil",
                 "name": "Chaotic Evil",
-                "url": "/api/alignments/chaotic-evil"
+                "url": "/alignments/chaotic-evil"
               }
             ]
           },
@@ -178,17 +178,17 @@
               {
                 "index": "lawful-good",
                 "name": "Lawful Good",
-                "url": "/api/alignments/lawful-good"
+                "url": "/alignments/lawful-good"
               },
               {
                 "index": "lawful-neutral",
                 "name": "Lawful Neutral",
-                "url": "/api/alignments/lawful-neutral"
+                "url": "/alignments/lawful-neutral"
               },
               {
                 "index": "lawful-evil",
                 "name": "Lawful Evil",
-                "url": "/api/alignments/lawful-evil"
+                "url": "/alignments/lawful-evil"
               }
             ]
           },
@@ -199,17 +199,17 @@
               {
                 "index": "lawful-good",
                 "name": "Lawful Good",
-                "url": "/api/alignments/lawful-good"
+                "url": "/alignments/lawful-good"
               },
               {
                 "index": "lawful-neutral",
                 "name": "Lawful Neutral",
-                "url": "/api/alignments/lawful-neutral"
+                "url": "/alignments/lawful-neutral"
               },
               {
                 "index": "lawful-evil",
                 "name": "Lawful Evil",
-                "url": "/api/alignments/lawful-evil"
+                "url": "/alignments/lawful-evil"
               }
             ]
           },
@@ -220,47 +220,47 @@
               {
                 "index": "lawful-good",
                 "name": "Lawful Good",
-                "url": "/api/alignments/lawful-good"
+                "url": "/alignments/lawful-good"
               },
               {
                 "index": "neutral-good",
                 "name": "Neutral Good",
-                "url": "/api/alignments/neutral-good"
+                "url": "/alignments/neutral-good"
               },
               {
                 "index": "chaotic-good",
                 "name": "Chaotic Good",
-                "url": "/api/alignments/chaotic-good"
+                "url": "/alignments/chaotic-good"
               },
               {
                 "index": "lawful-neutral",
                 "name": "Lawful Neutral",
-                "url": "/api/alignments/lawful-neutral"
+                "url": "/alignments/lawful-neutral"
               },
               {
                 "index": "neutral",
                 "name": "Neutral",
-                "url": "/api/alignments/neutral"
+                "url": "/alignments/neutral"
               },
               {
                 "index": "chaotic-neutral",
                 "name": "Chaotic Neutral",
-                "url": "/api/alignments/chaotic-neutral"
+                "url": "/alignments/chaotic-neutral"
               },
               {
                 "index": "lawful-evil",
                 "name": "Lawful Evil",
-                "url": "/api/alignments/lawful-evil"
+                "url": "/alignments/lawful-evil"
               },
               {
                 "index": "neutral-evil",
                 "name": "Neutral Evil",
-                "url": "/api/alignments/neutral-evil"
+                "url": "/alignments/neutral-evil"
               },
               {
                 "index": "chaotic-evil",
                 "name": "Chaotic Evil",
-                "url": "/api/alignments/chaotic-evil"
+                "url": "/alignments/chaotic-evil"
               }
             ]
           }
@@ -333,6 +333,6 @@
         ]
       }
     },
-    "url": "/api/backgrounds/acolyte"
+    "url": "/backgrounds/acolyte"
   }
 ]
