@@ -5,7 +5,7 @@
     "equipment_category": {
       "index": "armor",
       "name": "Armor",
-      "url": "/api/equipment-categories/armor"
+      "url": "/equipment-categories/armor"
     },
     "armor_category": "Light",
     "armor_class": {
@@ -19,7 +19,7 @@
       "quantity": 5,
       "unit": "gp"
     },
-    "url": "/api/equipment/padded-armor"
+    "url": "/equipment/padded-armor"
   },
   {
     "index": "leather-armor",
@@ -27,7 +27,7 @@
     "equipment_category": {
       "index": "armor",
       "name": "Armor",
-      "url": "/api/equipment-categories/armor"
+      "url": "/equipment-categories/armor"
     },
     "armor_category": "Light",
     "armor_class": {
@@ -41,7 +41,7 @@
       "quantity": 10,
       "unit": "gp"
     },
-    "url": "/api/equipment/leather-armor"
+    "url": "/equipment/leather-armor"
   },
   {
     "index": "studded-leather-armor",
@@ -49,7 +49,7 @@
     "equipment_category": {
       "index": "armor",
       "name": "Armor",
-      "url": "/api/equipment-categories/armor"
+      "url": "/equipment-categories/armor"
     },
     "armor_category": "Light",
     "armor_class": {
@@ -63,7 +63,7 @@
       "quantity": 45,
       "unit": "gp"
     },
-    "url": "/api/equipment/studded-leather-armor"
+    "url": "/equipment/studded-leather-armor"
   },
   {
     "index": "hide-armor",
@@ -71,7 +71,7 @@
     "equipment_category": {
       "index": "armor",
       "name": "Armor",
-      "url": "/api/equipment-categories/armor"
+      "url": "/equipment-categories/armor"
     },
     "armor_category": "Medium",
     "armor_class": {
@@ -86,7 +86,7 @@
       "quantity": 10,
       "unit": "gp"
     },
-    "url": "/api/equipment/hide-armor"
+    "url": "/equipment/hide-armor"
   },
   {
     "index": "chain-shirt",
@@ -94,7 +94,7 @@
     "equipment_category": {
       "index": "armor",
       "name": "Armor",
-      "url": "/api/equipment-categories/armor"
+      "url": "/equipment-categories/armor"
     },
     "armor_category": "Medium",
     "armor_class": {
@@ -109,7 +109,7 @@
       "quantity": 50,
       "unit": "gp"
     },
-    "url": "/api/equipment/chain-shirt"
+    "url": "/equipment/chain-shirt"
   },
   {
     "index": "scale-mail",
@@ -117,7 +117,7 @@
     "equipment_category": {
       "index": "armor",
       "name": "Armor",
-      "url": "/api/equipment-categories/armor"
+      "url": "/equipment-categories/armor"
     },
     "armor_category": "Medium",
     "armor_class": {
@@ -132,7 +132,7 @@
       "quantity": 50,
       "unit": "gp"
     },
-    "url": "/api/equipment/scale-mail"
+    "url": "/equipment/scale-mail"
   },
   {
     "index": "breastplate",
@@ -140,7 +140,7 @@
     "equipment_category": {
       "index": "armor",
       "name": "Armor",
-      "url": "/api/equipment-categories/armor"
+      "url": "/equipment-categories/armor"
     },
     "armor_category": "Medium",
     "armor_class": {
@@ -155,7 +155,7 @@
       "quantity": 400,
       "unit": "gp"
     },
-    "url": "/api/equipment/breastplate"
+    "url": "/equipment/breastplate"
   },
   {
     "index": "half-plate-armor",
@@ -163,7 +163,7 @@
     "equipment_category": {
       "index": "armor",
       "name": "Armor",
-      "url": "/api/equipment-categories/armor"
+      "url": "/equipment-categories/armor"
     },
     "armor_category": "Medium",
     "armor_class": {
@@ -178,7 +178,7 @@
       "quantity": 750,
       "unit": "gp"
     },
-    "url": "/api/equipment/half-plate-armor"
+    "url": "/equipment/half-plate-armor"
   },
   {
     "index": "ring-mail",
@@ -186,7 +186,7 @@
     "equipment_category": {
       "index": "armor",
       "name": "Armor",
-      "url": "/api/equipment-categories/armor"
+      "url": "/equipment-categories/armor"
     },
     "armor_category": "Heavy",
     "armor_class": {
@@ -200,7 +200,7 @@
       "quantity": 30,
       "unit": "gp"
     },
-    "url": "/api/equipment/ring-mail"
+    "url": "/equipment/ring-mail"
   },
   {
     "index": "chain-mail",
@@ -208,7 +208,7 @@
     "equipment_category": {
       "index": "armor",
       "name": "Armor",
-      "url": "/api/equipment-categories/armor"
+      "url": "/equipment-categories/armor"
     },
     "armor_category": "Heavy",
     "armor_class": {
@@ -222,7 +222,7 @@
       "quantity": 75,
       "unit": "gp"
     },
-    "url": "/api/equipment/chain-mail"
+    "url": "/equipment/chain-mail"
   },
   {
     "index": "splint-armor",
@@ -230,7 +230,7 @@
     "equipment_category": {
       "index": "armor",
       "name": "Armor",
-      "url": "/api/equipment-categories/armor"
+      "url": "/equipment-categories/armor"
     },
     "armor_category": "Heavy",
     "armor_class": {
@@ -244,7 +244,7 @@
       "quantity": 200,
       "unit": "gp"
     },
-    "url": "/api/equipment/splint-armor"
+    "url": "/equipment/splint-armor"
   },
   {
     "index": "plate-armor",
@@ -252,7 +252,7 @@
     "equipment_category": {
       "index": "armor",
       "name": "Armor",
-      "url": "/api/equipment-categories/armor"
+      "url": "/equipment-categories/armor"
     },
     "armor_category": "Heavy",
     "armor_class": {
@@ -266,7 +266,7 @@
       "quantity": 1500,
       "unit": "gp"
     },
-    "url": "/api/equipment/plate-armor"
+    "url": "/equipment/plate-armor"
   },
   {
     "index": "shield",
@@ -274,7 +274,7 @@
     "equipment_category": {
       "index": "armor",
       "name": "Armor",
-      "url": "/api/equipment-categories/armor"
+      "url": "/equipment-categories/armor"
     },
     "armor_category": "Shield",
     "armor_class": {
@@ -288,6 +288,6 @@
       "quantity": 10,
       "unit": "gp"
     },
-    "url": "/api/equipment/shield"
+    "url": "/equipment/shield"
   }
 ]

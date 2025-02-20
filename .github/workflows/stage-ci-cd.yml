@@ -30,4 +30,4 @@ jobs:
       - name: Check Deployment Health
         run: |
           sleep 10
-          curl --fail https://api.dnd-unsecured-stage.appalachiancoding.org/api/health
+          curl --fail https://api.dnd-unsecured-stage.appalachiancoding.org/health

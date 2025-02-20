@@ -7,45 +7,45 @@
       {
         "name": "The Order of Combat",
         "index": "the-order-of-combat",
-        "url": "/api/rule-sections/the-order-of-combat"
+        "url": "/rule-sections/the-order-of-combat"
       },
       {
         "name": "Movement and Position",
         "index": "movement-and-position",
-        "url": "/api/rule-sections/movement-and-position"
+        "url": "/rule-sections/movement-and-position"
       },
       {
         "name": "Actions in Combat",
         "index": "actions-in-combat",
-        "url": "/api/rule-sections/actions-in-combat"
+        "url": "/rule-sections/actions-in-combat"
       },
       {
         "name": "Making an Attack",
         "index": "making-an-attack",
-        "url": "/api/rule-sections/making-an-attack"
+        "url": "/rule-sections/making-an-attack"
       },
       {
         "name": "Cover",
         "index": "cover",
-        "url": "/api/rule-sections/cover"
+        "url": "/rule-sections/cover"
       },
       {
         "name": "Damage and Healing",
         "index": "damage-and-healing",
-        "url": "/api/rule-sections/damage-and-healing"
+        "url": "/rule-sections/damage-and-healing"
       },
       {
         "name": "Mounted Combat",
         "index": "mounted-combat",
-        "url": "/api/rule-sections/mounted-combat"
+        "url": "/rule-sections/mounted-combat"
       },
       {
         "name": "Underwater Combat",
         "index": "underwater-combat",
-        "url": "/api/rule-sections/underwater-combat"
+        "url": "/rule-sections/underwater-combat"
       }
     ],
-    "url": "/api/rules/combat"
+    "url": "/rules/combat"
   },
   {
     "name": "Using Ability Scores",
@@ -55,35 +55,35 @@
       {
         "name": "Ability Scores and Modifiers",
         "index": "ability-scores-and-modifiers",
-        "url": "/api/rule-sections/ability-scores-and-modifiers"
+        "url": "/rule-sections/ability-scores-and-modifiers"
       },
       {
         "name": "Advantage and Disadvantage",
         "index": "advantage-and-disadvantage",
-        "url": "/api/rule-sections/advantage-and-disadvantage"
+        "url": "/rule-sections/advantage-and-disadvantage"
       },
       {
         "name": "Proficiency Bonus",
         "index": "proficiency-bonus",
-        "url": "/api/rule-sections/proficiency-bonus"
+        "url": "/rule-sections/proficiency-bonus"
       },
       {
         "name": "Ability Checks",
         "index": "ability-checks",
-        "url": "/api/rule-sections/ability-checks"
+        "url": "/rule-sections/ability-checks"
       },
       {
         "name": "Using Each Ability",
         "index": "using-each-ability",
-        "url": "/api/rule-sections/using-each-ability"
+        "url": "/rule-sections/using-each-ability"
       },
       {
         "name": "Saving Throws",
         "index": "saving-throws",
-        "url": "/api/rule-sections/saving-throws"
+        "url": "/rule-sections/saving-throws"
       }
     ],
-    "url": "/api/rules/using-ability-scores"
+    "url": "/rules/using-ability-scores"
   },
   {
     "name": "Adventuring",
@@ -93,45 +93,45 @@
       {
         "name": "Time",
         "index": "time",
-        "url": "/api/rule-sections/time"
+        "url": "/rule-sections/time"
       },
       {
         "name": "Movement",
         "index": "movement",
-        "url": "/api/rule-sections/movement"
+        "url": "/rule-sections/movement"
       },
       {
         "name": "The Environment",
         "index": "the-environment",
-        "url": "/api/rule-sections/the-environment"
+        "url": "/rule-sections/the-environment"
       },
       {
         "name": "Traps",
         "index": "traps",
-        "url": "/api/rule-sections/traps"
+        "url": "/rule-sections/traps"
       },
       {
         "name": "Diseases",
         "index": "diseases",
-        "url": "/api/rule-sections/diseases"
+        "url": "/rule-sections/diseases"
       },
       {
         "name": "Madness",
         "index": "madness",
-        "url": "/api/rule-sections/madness"
+        "url": "/rule-sections/madness"
       },
       {
         "name": "Resting",
         "index": "resting",
-        "url": "/api/rule-sections/resting"
+        "url": "/rule-sections/resting"
       },
       {
         "name": "Between Adventures",
         "index": "between-adventures",
-        "url": "/api/rule-sections/between-adventures"
+        "url": "/rule-sections/between-adventures"
       }
     ],
-    "url": "/api/rules/adventuring"
+    "url": "/rules/adventuring"
   },
   {
     "name": "Spellcasting",
@@ -141,15 +141,15 @@
       {
         "name": "What Is a Spell?",
         "index": "what-is-a-spell",
-        "url": "/api/rule-sections/what-is-a-spell"
+        "url": "/rule-sections/what-is-a-spell"
       },
       {
         "name": "Casting a Spell",
         "index": "casting-a-spell",
-        "url": "/api/rule-sections/casting-a-spell"
+        "url": "/rule-sections/casting-a-spell"
       }
     ],
-    "url": "/api/rules/spellcasting"
+    "url": "/rules/spellcasting"
   },
   {
     "name": "Equipment",
@@ -159,40 +159,40 @@
       {
         "name": "Standard Exchange Rates",
         "index": "standard-exchange-rates",
-        "url": "/api/rule-sections/standard-exchange-rates"
+        "url": "/rule-sections/standard-exchange-rates"
       },
       {
         "name": "Objects",
         "index": "objects",
-        "url": "/api/rule-sections/objects"
+        "url": "/rule-sections/objects"
       },
       {
         "name": "Poisons",
         "index": "poisons",
-        "url": "/api/rule-sections/poisons"
+        "url": "/rule-sections/poisons"
       },
       {
         "name": "Attunement",
         "index": "attunement",
-        "url": "/api/rule-sections/attunement"
+        "url": "/rule-sections/attunement"
       },
       {
         "name": "Wearing and Wielding Items",
         "index": "wearing-and-wielding-items",
-        "url": "/api/rule-sections/wearing-and-wielding-items"
+        "url": "/rule-sections/wearing-and-wielding-items"
       },
       {
         "name": "Activating an Item",
         "index": "activating-an-item",
-        "url": "/api/rule-sections/activating-an-item"
+        "url": "/rule-sections/activating-an-item"
       },
       {
         "name": "Sentient Magic Items",
         "index": "sentient-magic-items",
-        "url": "/api/rule-sections/sentient-magic-items"
+        "url": "/rule-sections/sentient-magic-items"
       }
     ],
-    "url": "/api/rules/equipment"
+    "url": "/rules/equipment"
   },
   {
     "name": "Appendix",
@@ -202,14 +202,14 @@
       {
         "name": "Fantasy-Historical Pantheons",
         "index": "fantasy-historical-pantheons",
-        "url": "/api/rule-sections/fantasy-historical-pantheons"
+        "url": "/rule-sections/fantasy-historical-pantheons"
       },
       {
         "name": "The Planes of Existence",
         "index": "the-planes-of-existence",
-        "url": "/api/rule-sections/the-planes-of-existence"
+        "url": "/rule-sections/the-planes-of-existence"
       }
     ],
-    "url": "/api/rules/appendix"
+    "url": "/rules/appendix"
   }
 ]
