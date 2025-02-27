@@ -77,7 +77,7 @@ func startServer(dbClient DbClient, port string) *http.Server {
 		<-quit
 
 		log.Println("Shutting down server...")
-		srv.Shutdown(nil)
+		srv.Shutdown(context.TODO())
 	}()
 
 	return srv
