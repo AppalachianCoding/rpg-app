@@ -5,7 +5,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Simple",
     "weapon_range": "Melee",
@@ -19,7 +19,7 @@
       "damage_type": {
         "index": "bludgeoning",
         "name": "Bludgeoning",
-        "url": "/api/damage-types/bludgeoning"
+        "url": "/damage-types/bludgeoning"
       }
     },
     "range": {
@@ -30,15 +30,15 @@
       {
         "index": "light",
         "name": "Light",
-        "url": "/api/weapon-properties/light"
+        "url": "/weapon-properties/light"
       },
       {
         "index": "monk",
         "name": "Monk",
-        "url": "/api/weapon-properties/monk"
+        "url": "/weapon-properties/monk"
       }
     ],
-    "url": "/api/equipment/club"
+    "url": "/equipment/club"
   },
   {
     "index": "dagger",
@@ -46,7 +46,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Simple",
     "weapon_range": "Melee",
@@ -60,7 +60,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -71,29 +71,29 @@
       {
         "index": "finesse",
         "name": "Finesse",
-        "url": "/api/weapon-properties/finesse"
+        "url": "/weapon-properties/finesse"
       },
       {
         "index": "light",
         "name": "Light",
-        "url": "/api/weapon-properties/light"
+        "url": "/weapon-properties/light"
       },
       {
         "index": "thrown",
         "name": "Thrown",
-        "url": "/api/weapon-properties/thrown"
+        "url": "/weapon-properties/thrown"
       },
       {
         "index": "monk",
         "name": "Monk",
-        "url": "/api/weapon-properties/monk"
+        "url": "/weapon-properties/monk"
       }
     ],
     "throw_range": {
       "normal": 20,
       "long": 60
     },
-    "url": "/api/equipment/dagger"
+    "url": "/equipment/dagger"
   },
   {
     "index": "greatclub",
@@ -101,7 +101,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Simple",
     "weapon_range": "Melee",
@@ -115,7 +115,7 @@
       "damage_type": {
         "index": "bludgeoning",
         "name": "Bludgeoning",
-        "url": "/api/damage-types/bludgeoning"
+        "url": "/damage-types/bludgeoning"
       }
     },
     "range": {
@@ -126,10 +126,10 @@
       {
         "index": "two-handed",
         "name": "Two-Handed",
-        "url": "/api/weapon-properties/two-handed"
+        "url": "/weapon-properties/two-handed"
       }
     ],
-    "url": "/api/equipment/greatclub"
+    "url": "/equipment/greatclub"
   },
   {
     "index": "handaxe",
@@ -137,7 +137,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Simple",
     "weapon_range": "Melee",
@@ -151,7 +151,7 @@
       "damage_type": {
         "index": "slashing",
         "name": "Slashing",
-        "url": "/api/damage-types/slashing"
+        "url": "/damage-types/slashing"
       }
     },
     "range": {
@@ -162,24 +162,24 @@
       {
         "index": "light",
         "name": "Light",
-        "url": "/api/weapon-properties/light"
+        "url": "/weapon-properties/light"
       },
       {
         "index": "thrown",
         "name": "Thrown",
-        "url": "/api/weapon-properties/thrown"
+        "url": "/weapon-properties/thrown"
       },
       {
         "index": "monk",
         "name": "Monk",
-        "url": "/api/weapon-properties/monk"
+        "url": "/weapon-properties/monk"
       }
     ],
     "throw_range": {
       "normal": 20,
       "long": 60
     },
-    "url": "/api/equipment/handaxe"
+    "url": "/equipment/handaxe"
   },
   {
     "index": "javelin",
@@ -187,7 +187,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Simple",
     "weapon_range": "Melee",
@@ -201,7 +201,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -212,19 +212,19 @@
       {
         "index": "thrown",
         "name": "Thrown",
-        "url": "/api/weapon-properties/thrown"
+        "url": "/weapon-properties/thrown"
       },
       {
         "index": "monk",
         "name": "Monk",
-        "url": "/api/weapon-properties/monk"
+        "url": "/weapon-properties/monk"
       }
     ],
     "throw_range": {
       "normal": 30,
       "long": 120
     },
-    "url": "/api/equipment/javelin"
+    "url": "/equipment/javelin"
   },
   {
     "index": "light-hammer",
@@ -232,7 +232,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Simple",
     "weapon_range": "Melee",
@@ -246,7 +246,7 @@
       "damage_type": {
         "index": "bludgeoning",
         "name": "Bludgeoning",
-        "url": "/api/damage-types/bludgeoning"
+        "url": "/damage-types/bludgeoning"
       }
     },
     "range": {
@@ -257,24 +257,24 @@
       {
         "index": "light",
         "name": "Light",
-        "url": "/api/weapon-properties/light"
+        "url": "/weapon-properties/light"
       },
       {
         "index": "thrown",
         "name": "Thrown",
-        "url": "/api/weapon-properties/thrown"
+        "url": "/weapon-properties/thrown"
       },
       {
         "index": "monk",
         "name": "Monk",
-        "url": "/api/weapon-properties/monk"
+        "url": "/weapon-properties/monk"
       }
     ],
     "throw_range": {
       "normal": 20,
       "long": 60
     },
-    "url": "/api/equipment/light-hammer"
+    "url": "/equipment/light-hammer"
   },
   {
     "index": "mace",
@@ -282,7 +282,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Simple",
     "weapon_range": "Melee",
@@ -296,7 +296,7 @@
       "damage_type": {
         "index": "bludgeoning",
         "name": "Bludgeoning",
-        "url": "/api/damage-types/bludgeoning"
+        "url": "/damage-types/bludgeoning"
       }
     },
     "range": {
@@ -307,10 +307,10 @@
       {
         "index": "monk",
         "name": "Monk",
-        "url": "/api/weapon-properties/monk"
+        "url": "/weapon-properties/monk"
       }
     ],
-    "url": "/api/equipment/mace"
+    "url": "/equipment/mace"
   },
   {
     "index": "quarterstaff",
@@ -318,7 +318,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Simple",
     "weapon_range": "Melee",
@@ -332,7 +332,7 @@
       "damage_type": {
         "index": "bludgeoning",
         "name": "Bludgeoning",
-        "url": "/api/damage-types/bludgeoning"
+        "url": "/damage-types/bludgeoning"
       }
     },
     "range": {
@@ -343,12 +343,12 @@
       {
         "index": "versatile",
         "name": "Versatile",
-        "url": "/api/weapon-properties/versatile"
+        "url": "/weapon-properties/versatile"
       },
       {
         "index": "monk",
         "name": "Monk",
-        "url": "/api/weapon-properties/monk"
+        "url": "/weapon-properties/monk"
       }
     ],
     "two_handed_damage": {
@@ -356,10 +356,10 @@
       "damage_type": {
         "index": "bludgeoning",
         "name": "Bludgeoning",
-        "url": "/api/damage-types/bludgeoning"
+        "url": "/damage-types/bludgeoning"
       }
     },
-    "url": "/api/equipment/quarterstaff"
+    "url": "/equipment/quarterstaff"
   },
   {
     "index": "sickle",
@@ -367,7 +367,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Simple",
     "weapon_range": "Melee",
@@ -381,7 +381,7 @@
       "damage_type": {
         "index": "slashing",
         "name": "Slashing",
-        "url": "/api/damage-types/slashing"
+        "url": "/damage-types/slashing"
       }
     },
     "range": {
@@ -392,15 +392,15 @@
       {
         "index": "light",
         "name": "Light",
-        "url": "/api/weapon-properties/light"
+        "url": "/weapon-properties/light"
       },
       {
         "index": "monk",
         "name": "Monk",
-        "url": "/api/weapon-properties/monk"
+        "url": "/weapon-properties/monk"
       }
     ],
-    "url": "/api/equipment/sickle"
+    "url": "/equipment/sickle"
   },
   {
     "index": "spear",
@@ -408,7 +408,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Simple",
     "weapon_range": "Melee",
@@ -422,7 +422,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -433,17 +433,17 @@
       {
         "index": "thrown",
         "name": "Thrown",
-        "url": "/api/weapon-properties/thrown"
+        "url": "/weapon-properties/thrown"
       },
       {
         "index": "versatile",
         "name": "Versatile",
-        "url": "/api/weapon-properties/versatile"
+        "url": "/weapon-properties/versatile"
       },
       {
         "index": "monk",
         "name": "Monk",
-        "url": "/api/weapon-properties/monk"
+        "url": "/weapon-properties/monk"
       }
     ],
     "throw_range": {
@@ -455,10 +455,10 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
-    "url": "/api/equipment/spear"
+    "url": "/equipment/spear"
   },
   {
     "index": "crossbow-light",
@@ -466,7 +466,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Simple",
     "weapon_range": "Ranged",
@@ -480,7 +480,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -492,20 +492,20 @@
       {
         "index": "ammunition",
         "name": "Ammunition",
-        "url": "/api/weapon-properties/ammunition"
+        "url": "/weapon-properties/ammunition"
       },
       {
         "index": "loading",
         "name": "Loading",
-        "url": "/api/weapon-properties/loading"
+        "url": "/weapon-properties/loading"
       },
       {
         "index": "two-handed",
         "name": "Two-Handed",
-        "url": "/api/weapon-properties/two-handed"
+        "url": "/weapon-properties/two-handed"
       }
     ],
-    "url": "/api/equipment/crossbow-light"
+    "url": "/equipment/crossbow-light"
   },
   {
     "index": "dart",
@@ -513,7 +513,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Simple",
     "weapon_range": "Ranged",
@@ -527,7 +527,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -539,19 +539,19 @@
       {
         "index": "finesse",
         "name": "Finesse",
-        "url": "/api/weapon-properties/finesse"
+        "url": "/weapon-properties/finesse"
       },
       {
         "index": "thrown",
         "name": "Thrown",
-        "url": "/api/weapon-properties/thrown"
+        "url": "/weapon-properties/thrown"
       }
     ],
     "throw_range": {
       "normal": 20,
       "long": 60
     },
-    "url": "/api/equipment/dart"
+    "url": "/equipment/dart"
   },
   {
     "index": "shortbow",
@@ -559,7 +559,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Simple",
     "weapon_range": "Ranged",
@@ -573,7 +573,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -585,15 +585,15 @@
       {
         "index": "ammunition",
         "name": "Ammunition",
-        "url": "/api/weapon-properties/ammunition"
+        "url": "/weapon-properties/ammunition"
       },
       {
         "index": "two-handed",
         "name": "Two-Handed",
-        "url": "/api/weapon-properties/two-handed"
+        "url": "/weapon-properties/two-handed"
       }
     ],
-    "url": "/api/equipment/shortbow"
+    "url": "/equipment/shortbow"
   },
   {
     "index": "sling",
@@ -601,7 +601,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Simple",
     "weapon_range": "Ranged",
@@ -615,7 +615,7 @@
       "damage_type": {
         "index": "bludgeoning",
         "name": "Bludgeoning",
-        "url": "/api/damage-types/bludgeoning"
+        "url": "/damage-types/bludgeoning"
       }
     },
     "range": {
@@ -627,10 +627,10 @@
       {
         "index": "ammunition",
         "name": "Ammunition",
-        "url": "/api/weapon-properties/ammunition"
+        "url": "/weapon-properties/ammunition"
       }
     ],
-    "url": "/api/equipment/sling"
+    "url": "/equipment/sling"
   },
   {
     "index": "battleaxe",
@@ -638,7 +638,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -652,7 +652,7 @@
       "damage_type": {
         "index": "slashing",
         "name": "Slashing",
-        "url": "/api/damage-types/slashing"
+        "url": "/damage-types/slashing"
       }
     },
     "range": {
@@ -663,7 +663,7 @@
       {
         "index": "versatile",
         "name": "Versatile",
-        "url": "/api/weapon-properties/versatile"
+        "url": "/weapon-properties/versatile"
       }
     ],
     "two_handed_damage": {
@@ -671,10 +671,10 @@
       "damage_type": {
         "index": "slashing",
         "name": "Slashing",
-        "url": "/api/damage-types/slashing"
+        "url": "/damage-types/slashing"
       }
     },
-    "url": "/api/equipment/battleaxe"
+    "url": "/equipment/battleaxe"
   },
   {
     "index": "flail",
@@ -682,7 +682,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -696,7 +696,7 @@
       "damage_type": {
         "index": "bludgeoning",
         "name": "Bludgeoning",
-        "url": "/api/damage-types/bludgeoning"
+        "url": "/damage-types/bludgeoning"
       }
     },
     "range": {
@@ -704,7 +704,7 @@
     },
     "weight": 2,
     "properties": [],
-    "url": "/api/equipment/flail"
+    "url": "/equipment/flail"
   },
   {
     "index": "glaive",
@@ -712,7 +712,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -726,7 +726,7 @@
       "damage_type": {
         "index": "slashing",
         "name": "Slashing",
-        "url": "/api/damage-types/slashing"
+        "url": "/damage-types/slashing"
       }
     },
     "range": {
@@ -737,20 +737,20 @@
       {
         "index": "heavy",
         "name": "Heavy",
-        "url": "/api/weapon-properties/heavy"
+        "url": "/weapon-properties/heavy"
       },
       {
         "index": "reach",
         "name": "Reach",
-        "url": "/api/weapon-properties/reach"
+        "url": "/weapon-properties/reach"
       },
       {
         "index": "two-handed",
         "name": "Two-Handed",
-        "url": "/api/weapon-properties/two-handed"
+        "url": "/weapon-properties/two-handed"
       }
     ],
-    "url": "/api/equipment/glaive"
+    "url": "/equipment/glaive"
   },
   {
     "index": "greataxe",
@@ -758,7 +758,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -772,7 +772,7 @@
       "damage_type": {
         "index": "slashing",
         "name": "Slashing",
-        "url": "/api/damage-types/slashing"
+        "url": "/damage-types/slashing"
       }
     },
     "range": {
@@ -783,15 +783,15 @@
       {
         "index": "heavy",
         "name": "Heavy",
-        "url": "/api/weapon-properties/heavy"
+        "url": "/weapon-properties/heavy"
       },
       {
         "index": "two-handed",
         "name": "Two-Handed",
-        "url": "/api/weapon-properties/two-handed"
+        "url": "/weapon-properties/two-handed"
       }
     ],
-    "url": "/api/equipment/greataxe"
+    "url": "/equipment/greataxe"
   },
   {
     "index": "greatsword",
@@ -799,7 +799,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -813,7 +813,7 @@
       "damage_type": {
         "index": "slashing",
         "name": "Slashing",
-        "url": "/api/damage-types/slashing"
+        "url": "/damage-types/slashing"
       }
     },
     "range": {
@@ -824,15 +824,15 @@
       {
         "index": "heavy",
         "name": "Heavy",
-        "url": "/api/weapon-properties/heavy"
+        "url": "/weapon-properties/heavy"
       },
       {
         "index": "two-handed",
         "name": "Two-Handed",
-        "url": "/api/weapon-properties/two-handed"
+        "url": "/weapon-properties/two-handed"
       }
     ],
-    "url": "/api/equipment/greatsword"
+    "url": "/equipment/greatsword"
   },
   {
     "index": "halberd",
@@ -840,7 +840,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -854,7 +854,7 @@
       "damage_type": {
         "index": "slashing",
         "name": "Slashing",
-        "url": "/api/damage-types/slashing"
+        "url": "/damage-types/slashing"
       }
     },
     "range": {
@@ -865,20 +865,20 @@
       {
         "index": "heavy",
         "name": "Heavy",
-        "url": "/api/weapon-properties/heavy"
+        "url": "/weapon-properties/heavy"
       },
       {
         "index": "reach",
         "name": "Reach",
-        "url": "/api/weapon-properties/reach"
+        "url": "/weapon-properties/reach"
       },
       {
         "index": "two-handed",
         "name": "Two-Handed",
-        "url": "/api/weapon-properties/two-handed"
+        "url": "/weapon-properties/two-handed"
       }
     ],
-    "url": "/api/equipment/halberd"
+    "url": "/equipment/halberd"
   },
   {
     "index": "lance",
@@ -886,7 +886,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -900,7 +900,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -911,18 +911,18 @@
       {
         "index": "reach",
         "name": "Reach",
-        "url": "/api/weapon-properties/reach"
+        "url": "/weapon-properties/reach"
       },
       {
         "index": "special",
         "name": "Special",
-        "url": "/api/weapon-properties/special"
+        "url": "/weapon-properties/special"
       }
     ],
     "special": [
       "You have disadvantage when you use a lance to attack a target within 5 feet of you. Also, a lance requires two hands to wield when you aren't mounted."
     ],
-    "url": "/api/equipment/lance"
+    "url": "/equipment/lance"
   },
   {
     "index": "longsword",
@@ -930,7 +930,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -944,7 +944,7 @@
       "damage_type": {
         "index": "slashing",
         "name": "Slashing",
-        "url": "/api/damage-types/slashing"
+        "url": "/damage-types/slashing"
       }
     },
     "range": {
@@ -955,7 +955,7 @@
       {
         "index": "versatile",
         "name": "Versatile",
-        "url": "/api/weapon-properties/versatile"
+        "url": "/weapon-properties/versatile"
       }
     ],
     "two_handed_damage": {
@@ -963,10 +963,10 @@
       "damage_type": {
         "index": "slashing",
         "name": "Slashing",
-        "url": "/api/damage-types/slashing"
+        "url": "/damage-types/slashing"
       }
     },
-    "url": "/api/equipment/longsword"
+    "url": "/equipment/longsword"
   },
   {
     "index": "maul",
@@ -974,7 +974,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -988,7 +988,7 @@
       "damage_type": {
         "index": "bludgeoning",
         "name": "Bludgeoning",
-        "url": "/api/damage-types/bludgeoning"
+        "url": "/damage-types/bludgeoning"
       }
     },
     "range": {
@@ -999,15 +999,15 @@
       {
         "index": "heavy",
         "name": "Heavy",
-        "url": "/api/weapon-properties/heavy"
+        "url": "/weapon-properties/heavy"
       },
       {
         "index": "two-handed",
         "name": "Two-Handed",
-        "url": "/api/weapon-properties/two-handed"
+        "url": "/weapon-properties/two-handed"
       }
     ],
-    "url": "/api/equipment/maul"
+    "url": "/equipment/maul"
   },
   {
     "index": "morningstar",
@@ -1015,7 +1015,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -1029,7 +1029,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -1037,7 +1037,7 @@
     },
     "weight": 4,
     "properties": [],
-    "url": "/api/equipment/morningstar"
+    "url": "/equipment/morningstar"
   },
   {
     "index": "pike",
@@ -1045,7 +1045,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -1059,7 +1059,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -1070,20 +1070,20 @@
       {
         "index": "heavy",
         "name": "Heavy",
-        "url": "/api/weapon-properties/heavy"
+        "url": "/weapon-properties/heavy"
       },
       {
         "index": "reach",
         "name": "Reach",
-        "url": "/api/weapon-properties/reach"
+        "url": "/weapon-properties/reach"
       },
       {
         "index": "two-handed",
         "name": "Two-Handed",
-        "url": "/api/weapon-properties/two-handed"
+        "url": "/weapon-properties/two-handed"
       }
     ],
-    "url": "/api/equipment/pike"
+    "url": "/equipment/pike"
   },
   {
     "index": "rapier",
@@ -1091,7 +1091,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -1105,7 +1105,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -1116,10 +1116,10 @@
       {
         "index": "finesse",
         "name": "Finesse",
-        "url": "/api/weapon-properties/finesse"
+        "url": "/weapon-properties/finesse"
       }
     ],
-    "url": "/api/equipment/rapier"
+    "url": "/equipment/rapier"
   },
   {
     "index": "scimitar",
@@ -1127,7 +1127,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -1141,7 +1141,7 @@
       "damage_type": {
         "index": "slashing",
         "name": "Slashing",
-        "url": "/api/damage-types/slashing"
+        "url": "/damage-types/slashing"
       }
     },
     "range": {
@@ -1152,15 +1152,15 @@
       {
         "index": "finesse",
         "name": "Finesse",
-        "url": "/api/weapon-properties/finesse"
+        "url": "/weapon-properties/finesse"
       },
       {
         "index": "light",
         "name": "Light",
-        "url": "/api/weapon-properties/light"
+        "url": "/weapon-properties/light"
       }
     ],
-    "url": "/api/equipment/scimitar"
+    "url": "/equipment/scimitar"
   },
   {
     "index": "shortsword",
@@ -1168,7 +1168,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -1182,7 +1182,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -1193,20 +1193,20 @@
       {
         "index": "finesse",
         "name": "Finesse",
-        "url": "/api/weapon-properties/finesse"
+        "url": "/weapon-properties/finesse"
       },
       {
         "index": "light",
         "name": "Light",
-        "url": "/api/weapon-properties/light"
+        "url": "/weapon-properties/light"
       },
       {
         "index": "monk",
         "name": "Monk",
-        "url": "/api/weapon-properties/monk"
+        "url": "/weapon-properties/monk"
       }
     ],
-    "url": "/api/equipment/shortsword"
+    "url": "/equipment/shortsword"
   },
   {
     "index": "trident",
@@ -1214,7 +1214,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -1228,7 +1228,7 @@
       "damage_type": {
         "index": "slashing",
         "name": "Slashing",
-        "url": "/api/damage-types/slashing"
+        "url": "/damage-types/slashing"
       }
     },
     "range": {
@@ -1239,12 +1239,12 @@
       {
         "index": "thrown",
         "name": "Thrown",
-        "url": "/api/weapon-properties/thrown"
+        "url": "/weapon-properties/thrown"
       },
       {
         "index": "versatile",
         "name": "Versatile",
-        "url": "/api/weapon-properties/versatile"
+        "url": "/weapon-properties/versatile"
       }
     ],
     "throw_range": {
@@ -1256,10 +1256,10 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
-    "url": "/api/equipment/trident"
+    "url": "/equipment/trident"
   },
   {
     "index": "war-pick",
@@ -1267,7 +1267,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -1281,7 +1281,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -1289,7 +1289,7 @@
     },
     "weight": 2,
     "properties": [],
-    "url": "/api/equipment/war-pick"
+    "url": "/equipment/war-pick"
   },
   {
     "index": "warhammer",
@@ -1297,7 +1297,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -1311,7 +1311,7 @@
       "damage_type": {
         "index": "bludgeoning",
         "name": "Bludgeoning",
-        "url": "/api/damage-types/bludgeoning"
+        "url": "/damage-types/bludgeoning"
       }
     },
     "range": {
@@ -1322,7 +1322,7 @@
       {
         "index": "versatile",
         "name": "Versatile",
-        "url": "/api/weapon-properties/versatile"
+        "url": "/weapon-properties/versatile"
       }
     ],
     "two_handed_damage": {
@@ -1330,10 +1330,10 @@
       "damage_type": {
         "index": "bludgeoning",
         "name": "Bludgeoning",
-        "url": "/api/damage-types/bludgeoning"
+        "url": "/damage-types/bludgeoning"
       }
     },
-    "url": "/api/equipment/warhammer"
+    "url": "/equipment/warhammer"
   },
   {
     "index": "whip",
@@ -1341,7 +1341,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Melee",
@@ -1355,7 +1355,7 @@
       "damage_type": {
         "index": "slashing",
         "name": "Slashing",
-        "url": "/api/damage-types/slashing"
+        "url": "/damage-types/slashing"
       }
     },
     "range": {
@@ -1366,15 +1366,15 @@
       {
         "index": "finesse",
         "name": "Finesse",
-        "url": "/api/weapon-properties/finesse"
+        "url": "/weapon-properties/finesse"
       },
       {
         "index": "reach",
         "name": "Reach",
-        "url": "/api/weapon-properties/reach"
+        "url": "/weapon-properties/reach"
       }
     ],
-    "url": "/api/equipment/whip"
+    "url": "/equipment/whip"
   },
   {
     "index": "blowgun",
@@ -1382,7 +1382,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Ranged",
@@ -1396,7 +1396,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -1408,15 +1408,15 @@
       {
         "index": "ammunition",
         "name": "Ammunition",
-        "url": "/api/weapon-properties/ammunition"
+        "url": "/weapon-properties/ammunition"
       },
       {
         "index": "loading",
         "name": "Loading",
-        "url": "/api/weapon-properties/loading"
+        "url": "/weapon-properties/loading"
       }
     ],
-    "url": "/api/equipment/blowgun"
+    "url": "/equipment/blowgun"
   },
   {
     "index": "crossbow-hand",
@@ -1424,7 +1424,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Ranged",
@@ -1438,7 +1438,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -1450,20 +1450,20 @@
       {
         "index": "ammunition",
         "name": "Ammunition",
-        "url": "/api/weapon-properties/ammunition"
+        "url": "/weapon-properties/ammunition"
       },
       {
         "index": "light",
         "name": "Light",
-        "url": "/api/weapon-properties/light"
+        "url": "/weapon-properties/light"
       },
       {
         "index": "loading",
         "name": "Loading",
-        "url": "/api/weapon-properties/loading"
+        "url": "/weapon-properties/loading"
       }
     ],
-    "url": "/api/equipment/crossbow-hand"
+    "url": "/equipment/crossbow-hand"
   },
   {
     "index": "crossbow-heavy",
@@ -1471,7 +1471,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Ranged",
@@ -1485,7 +1485,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -1497,25 +1497,25 @@
       {
         "index": "ammunition",
         "name": "Ammunition",
-        "url": "/api/weapon-properties/ammunition"
+        "url": "/weapon-properties/ammunition"
       },
       {
         "index": "heavy",
         "name": "Heavy",
-        "url": "/api/weapon-properties/heavy"
+        "url": "/weapon-properties/heavy"
       },
       {
         "index": "loading",
         "name": "Loading",
-        "url": "/api/weapon-properties/loading"
+        "url": "/weapon-properties/loading"
       },
       {
         "index": "two-handed",
         "name": "Two-Handed",
-        "url": "/api/weapon-properties/two-handed"
+        "url": "/weapon-properties/two-handed"
       }
     ],
-    "url": "/api/equipment/crossbow-heavy"
+    "url": "/equipment/crossbow-heavy"
   },
   {
     "index": "longbow",
@@ -1523,7 +1523,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Ranged",
@@ -1537,7 +1537,7 @@
       "damage_type": {
         "index": "piercing",
         "name": "Piercing",
-        "url": "/api/damage-types/piercing"
+        "url": "/damage-types/piercing"
       }
     },
     "range": {
@@ -1549,20 +1549,20 @@
       {
         "index": "ammunition",
         "name": "Ammunition",
-        "url": "/api/weapon-properties/ammunition"
+        "url": "/weapon-properties/ammunition"
       },
       {
         "index": "heavy",
         "name": "Heavy",
-        "url": "/api/weapon-properties/heavy"
+        "url": "/weapon-properties/heavy"
       },
       {
         "index": "two-handed",
         "name": "Two-Handed",
-        "url": "/api/weapon-properties/two-handed"
+        "url": "/weapon-properties/two-handed"
       }
     ],
-    "url": "/api/equipment/longbow"
+    "url": "/equipment/longbow"
   },
   {
     "index": "net",
@@ -1570,7 +1570,7 @@
     "equipment_category": {
       "index": "weapon",
       "name": "Weapon",
-      "url": "/api/equipment-categories/weapon"
+      "url": "/equipment-categories/weapon"
     },
     "weapon_category": "Martial",
     "weapon_range": "Ranged",
@@ -1588,12 +1588,12 @@
       {
         "index": "thrown",
         "name": "Thrown",
-        "url": "/api/weapon-properties/thrown"
+        "url": "/weapon-properties/thrown"
       },
       {
         "index": "special",
         "name": "Special",
-        "url": "/api/weapon-properties/special"
+        "url": "/weapon-properties/special"
       }
     ],
     "special": [
@@ -1603,6 +1603,6 @@
       "normal": 5,
       "long": 15
     },
-    "url": "/api/equipment/net"
+    "url": "/equipment/net"
   }
 ]

@@ -63,10 +63,10 @@ Resources:
           FromPort: 443
           ToPort: 443
           CidrIp: 0.0.0.0/0
-  LoadBalancer:
+  BackendLoadBalancer:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
-      Name: !Ref StackName
+      Name: !Sub "${StackName}-backend"
       Subnets:
         - !Ref PublicSubnet1
         - !Ref PublicSubnet2
@@ -76,22 +76,86 @@ Resources:
       LoadBalancerAttributes:
         - Key: idle_timeout.timeout_seconds
           Value: "60"
-  Listener:
+  BackendCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Sub "api.${StackName}.${BaseDomainName}"
+      ValidationMethod: DNS
+      DomainValidationOptions:
+        - DomainName: !Sub "${StackName}.${BaseDomainName}"
+          HostedZoneId: !Ref HostedZoneId
+  BackendListner:
     Type: AWS::ElasticLoadBalancingV2::Listener
     Properties:
       DefaultActions:
         - Type: forward
-          TargetGroupArn: !Ref TargetGroup
-      LoadBalancerArn: !Ref LoadBalancer
+          TargetGroupArn: !Ref BackendTarget
+      LoadBalancerArn: !Ref BackendLoadBalancer
       Port: 443
       Protocol: HTTPS
       Certificates:
-        - CertificateArn: !Ref Certificate
-  TargetGroup:
+        - CertificateArn: !Ref BackendCertificate
+  BackendTarget:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
       HealthCheckIntervalSeconds: 30
-      HealthCheckPath: "/api/health"
+      HealthCheckPath: "/health"
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 2
+      UnhealthyThresholdCount: 2
+      Port: 80
+      TargetType: ip
+      Protocol: HTTP
+      VpcId: !ImportValue
+        Fn::Sub: "${StackName}-vpc-id"
+  BackendRoute:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: !Sub "${BaseDomainName}."
+      Name: !Sub "api.${StackName}.${BaseDomainName}"
+      Type: A
+      AliasTarget:
+        HostedZoneId: !GetAtt BackendLoadBalancer.CanonicalHostedZoneID
+        DNSName: !GetAtt BackendLoadBalancer.DNSName
+
+  FrontendCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Sub "${StackName}.${BaseDomainName}"
+      ValidationMethod: DNS
+      DomainValidationOptions:
+        - DomainName: !Sub "${StackName}.${BaseDomainName}"
+          HostedZoneId: !Ref HostedZoneId
+  FrontendLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: !Sub "${StackName}-frontend"
+      Subnets:
+        - !Ref PublicSubnet1
+        - !Ref PublicSubnet2
+      SecurityGroups:
+        - !Ref LoadBalancerSecurityGroup
+      Scheme: internet-facing
+      LoadBalancerAttributes:
+        - Key: idle_timeout.timeout_seconds
+          Value: "60"
+  FrontendListner:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref FrontendTarget
+      LoadBalancerArn: !Ref FrontendLoadBalancer
+      Port: 443
+      Protocol: HTTPS
+      Certificates:
+        - CertificateArn: !Ref FrontendCertificate
+  FrontendTarget:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckIntervalSeconds: 30
+      HealthCheckPath: "/"
       HealthCheckProtocol: HTTP
       HealthCheckTimeoutSeconds: 5
       HealthyThresholdCount: 2
@@ -102,29 +166,25 @@ Resources:
       VpcId: !ImportValue
         Fn::Sub: "${StackName}-vpc-id"
 
-  Certificate:
-    Type: AWS::CertificateManager::Certificate
-    Properties:
-      DomainName: !Sub "${StackName}.${BaseDomainName}"
-      ValidationMethod: DNS
-      DomainValidationOptions:
-        - DomainName: !Sub "${StackName}.${BaseDomainName}"
-          HostedZoneId: !Ref HostedZoneId
-  Route53Record:
+  FrontendRoute:
     Type: AWS::Route53::RecordSet
     Properties:
       HostedZoneName: !Sub "${BaseDomainName}."
       Name: !Sub "${StackName}.${BaseDomainName}"
       Type: A
       AliasTarget:
-        HostedZoneId: !GetAtt LoadBalancer.CanonicalHostedZoneID
-        DNSName: !GetAtt LoadBalancer.DNSName
+        HostedZoneId: !GetAtt FrontendLoadBalancer.CanonicalHostedZoneID
+        DNSName: !GetAtt FrontendLoadBalancer.DNSName
 
 Outputs:
-  TargetGroup:
-    Value: !Ref TargetGroup
+  BackendTargetGroup:
+    Value: !Ref BackendTarget
     Export:
-      Name: !Sub "${StackName}-alb-tg-arn"
+      Name: !Sub "${StackName}-backend-alb-tg-arn"
+  FrontendTargetGroup:
+    Value: !Ref FrontendTarget
+    Export:
+      Name: !Sub "${StackName}-frontend-alb-tg-arn"
   Endpoint:
     Value: !Sub "https://${StackName}.${BaseDomainName}"
     Export:

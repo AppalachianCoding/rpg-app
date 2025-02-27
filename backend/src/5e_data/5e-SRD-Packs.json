@@ -5,12 +5,12 @@
     "equipment_category": {
       "index": "adventuring-gear",
       "name": "Adventuring Gear",
-      "url": "/api/equipment-categories/adventuring-gear"
+      "url": "/equipment-categories/adventuring-gear"
     },
     "gear_category": {
       "index": "equipment-packs",
       "name": "Equipment Packs",
-      "url": "/api/equipment-categories/equipment-packs"
+      "url": "/equipment-categories/equipment-packs"
     },
     "cost": {
       "quantity": 16,
@@ -21,7 +21,7 @@
         "item": {
           "index": "backpack",
           "name": "Backpack",
-          "url": "/api/equipment/backpack"
+          "url": "/equipment/backpack"
         },
         "quantity": 1
       },
@@ -29,7 +29,7 @@
         "item": {
           "index": "ball-bearings-bag-of-1000",
           "name": "Ball bearings (bag of 1,000)",
-          "url": "/api/equipment/ball-bearings-bag-of-1000"
+          "url": "/equipment/ball-bearings-bag-of-1000"
         },
         "quantity": 1
       },
@@ -37,7 +37,7 @@
         "item": {
           "index": "string-10-feet",
           "name": "String (10 feet)",
-          "url": "/api/equipment/string-10-feet"
+          "url": "/equipment/string-10-feet"
         },
         "quantity": 1
       },
@@ -45,7 +45,7 @@
         "item": {
           "index": "bell",
           "name": "Bell",
-          "url": "/api/equipment/bell"
+          "url": "/equipment/bell"
         },
         "quantity": 1
       },
@@ -53,7 +53,7 @@
         "item": {
           "index": "candle",
           "name": "Candle",
-          "url": "/api/equipment/candle"
+          "url": "/equipment/candle"
         },
         "quantity": 5
       },
@@ -61,7 +61,7 @@
         "item": {
           "index": "crowbar",
           "name": "Crowbar",
-          "url": "/api/equipment/crowbar"
+          "url": "/equipment/crowbar"
         },
         "quantity": 1
       },
@@ -69,7 +69,7 @@
         "item": {
           "index": "hammer",
           "name": "Hammer",
-          "url": "/api/equipment/hammer"
+          "url": "/equipment/hammer"
         },
         "quantity": 1
       },
@@ -77,7 +77,7 @@
         "item": {
           "index": "piton",
           "name": "Piton",
-          "url": "/api/equipment/piton"
+          "url": "/equipment/piton"
         },
         "quantity": 10
       },
@@ -85,7 +85,7 @@
         "item": {
           "index": "lantern-hooded",
           "name": "Lantern, hooded",
-          "url": "/api/equipment/lantern-hooded"
+          "url": "/equipment/lantern-hooded"
         },
         "quantity": 1
       },
@@ -93,7 +93,7 @@
         "item": {
           "index": "oil-flask",
           "name": "Oil (flask)",
-          "url": "/api/equipment/oil-flask"
+          "url": "/equipment/oil-flask"
         },
         "quantity": 2
       },
@@ -101,7 +101,7 @@
         "item": {
           "index": "rations-1-day",
           "name": "Rations (1 day)",
-          "url": "/api/equipment/rations-1-day"
+          "url": "/equipment/rations-1-day"
         },
         "quantity": 5
       },
@@ -109,7 +109,7 @@
         "item": {
           "index": "tinderbox",
           "name": "Tinderbox",
-          "url": "/api/equipment/tinderbox"
+          "url": "/equipment/tinderbox"
         },
         "quantity": 1
       },
@@ -117,7 +117,7 @@
         "item": {
           "index": "waterskin",
           "name": "Waterskin",
-          "url": "/api/equipment/waterskin"
+          "url": "/equipment/waterskin"
         },
         "quantity": 1
       },
@@ -125,12 +125,12 @@
         "item": {
           "index": "rope-hempen-50-feet",
           "name": "Rope, hempen (50 feet)",
-          "url": "/api/equipment/rope-hempen-50-feet"
+          "url": "/equipment/rope-hempen-50-feet"
         },
         "quantity": 1
       }
     ],
-    "url": "/api/equipment/burglars-pack"
+    "url": "/equipment/burglars-pack"
   },
   {
     "index": "diplomats-pack",
@@ -138,12 +138,12 @@
     "equipment_category": {
       "index": "adventuring-gear",
       "name": "Adventuring Gear",
-      "url": "/api/equipment-categories/adventuring-gear"
+      "url": "/equipment-categories/adventuring-gear"
     },
     "gear_category": {
       "index": "equipment-packs",
       "name": "Equipment Packs",
-      "url": "/api/equipment-categories/equipment-packs"
+      "url": "/equipment-categories/equipment-packs"
     },
     "cost": {
       "quantity": 39,
@@ -154,7 +154,7 @@
         "item": {
           "index": "chest",
           "name": "Chest",
-          "url": "/api/equipment/chest"
+          "url": "/equipment/chest"
         },
         "quantity": 1
       },
@@ -162,7 +162,7 @@
         "item": {
           "index": "case-map-or-scroll",
           "name": "Case, map or scroll",
-          "url": "/api/equipment/case-map-or-scroll"
+          "url": "/equipment/case-map-or-scroll"
         },
         "quantity": 2
       },
@@ -170,7 +170,7 @@
         "item": {
           "index": "clothes-fine",
           "name": "Clothes, fine",
-          "url": "/api/equipment/clothes-fine"
+          "url": "/equipment/clothes-fine"
         },
         "quantity": 1
       },
@@ -178,7 +178,7 @@
         "item": {
           "index": "ink-1-ounce-bottle",
           "name": "Ink (1 ounce bottle)",
-          "url": "/api/equipment/ink-1-ounce-bottle"
+          "url": "/equipment/ink-1-ounce-bottle"
         },
         "quantity": 1
       },
@@ -186,7 +186,7 @@
         "item": {
           "index": "ink-pen",
           "name": "Ink pen",
-          "url": "/api/equipment/ink-pen"
+          "url": "/equipment/ink-pen"
         },
         "quantity": 1
       },
@@ -194,7 +194,7 @@
         "item": {
           "index": "lamp",
           "name": "Lamp",
-          "url": "/api/equipment/lamp"
+          "url": "/equipment/lamp"
         },
         "quantity": 1
       },
@@ -202,7 +202,7 @@
         "item": {
           "index": "oil-flask",
           "name": "Oil (flask)",
-          "url": "/api/equipment/oil-flask"
+          "url": "/equipment/oil-flask"
         },
         "quantity": 2
       },
@@ -210,7 +210,7 @@
         "item": {
           "index": "paper-one-sheet",
           "name": "Paper (one sheet)",
-          "url": "/api/equipment/paper-one-sheet"
+          "url": "/equipment/paper-one-sheet"
         },
         "quantity": 5
       },
@@ -218,7 +218,7 @@
         "item": {
           "index": "perfume-vial",
           "name": "Perfume (vial)",
-          "url": "/api/equipment/perfume-vial"
+          "url": "/equipment/perfume-vial"
         },
         "quantity": 1
       },
@@ -226,7 +226,7 @@
         "item": {
           "index": "sealing-wax",
           "name": "Sealing wax",
-          "url": "/api/equipment/sealing-wax"
+          "url": "/equipment/sealing-wax"
         },
         "quantity": 1
       },
@@ -234,12 +234,12 @@
         "item": {
           "index": "soap",
           "name": "Soap",
-          "url": "/api/equipment/soap"
+          "url": "/equipment/soap"
         },
         "quantity": 1
       }
     ],
-    "url": "/api/equipment/diplomats-pack"
+    "url": "/equipment/diplomats-pack"
   },
   {
     "index": "dungeoneers-pack",
@@ -247,12 +247,12 @@
     "equipment_category": {
       "index": "adventuring-gear",
       "name": "Adventuring Gear",
-      "url": "/api/equipment-categories/adventuring-gear"
+      "url": "/equipment-categories/adventuring-gear"
     },
     "gear_category": {
       "index": "equipment-packs",
       "name": "Equipment Packs",
-      "url": "/api/equipment-categories/equipment-packs"
+      "url": "/equipment-categories/equipment-packs"
     },
     "cost": {
       "quantity": 12,
@@ -263,7 +263,7 @@
         "item": {
           "index": "backpack",
           "name": "Backpack",
-          "url": "/api/equipment/backpack"
+          "url": "/equipment/backpack"
         },
         "quantity": 1
       },
@@ -271,7 +271,7 @@
         "item": {
           "index": "crowbar",
           "name": "Crowbar",
-          "url": "/api/equipment/crowbar"
+          "url": "/equipment/crowbar"
         },
         "quantity": 1
       },
@@ -279,7 +279,7 @@
         "item": {
           "index": "hammer",
           "name": "Hammer",
-          "url": "/api/equipment/hammer"
+          "url": "/equipment/hammer"
         },
         "quantity": 1
       },
@@ -287,7 +287,7 @@
         "item": {
           "index": "piton",
           "name": "Piton",
-          "url": "/api/equipment/piton"
+          "url": "/equipment/piton"
         },
         "quantity": 10
       },
@@ -295,7 +295,7 @@
         "item": {
           "index": "torch",
           "name": "Torch",
-          "url": "/api/equipment/torch"
+          "url": "/equipment/torch"
         },
         "quantity": 10
       },
@@ -303,7 +303,7 @@
         "item": {
           "index": "tinderbox",
           "name": "Tinderbox",
-          "url": "/api/equipment/tinderbox"
+          "url": "/equipment/tinderbox"
         },
         "quantity": 1
       },
@@ -311,7 +311,7 @@
         "item": {
           "index": "rations-1-day",
           "name": "Rations (1 day)",
-          "url": "/api/equipment/rations-1-day"
+          "url": "/equipment/rations-1-day"
         },
         "quantity": 10
       },
@@ -319,7 +319,7 @@
         "item": {
           "index": "waterskin",
           "name": "Waterskin",
-          "url": "/api/equipment/waterskin"
+          "url": "/equipment/waterskin"
         },
         "quantity": 1
       },
@@ -327,12 +327,12 @@
         "item": {
           "index": "rope-hempen-50-feet",
           "name": "Rope, hempen (50 feet)",
-          "url": "/api/equipment/rope-hempen-50-feet"
+          "url": "/equipment/rope-hempen-50-feet"
         },
         "quantity": 1
       }
     ],
-    "url": "/api/equipment/dungeoneers-pack"
+    "url": "/equipment/dungeoneers-pack"
   },
   {
     "index": "entertainers-pack",
@@ -340,12 +340,12 @@
     "equipment_category": {
       "index": "adventuring-gear",
       "name": "Adventuring Gear",
-      "url": "/api/equipment-categories/adventuring-gear"
+      "url": "/equipment-categories/adventuring-gear"
     },
     "gear_category": {
       "index": "equipment-packs",
       "name": "Equipment Packs",
-      "url": "/api/equipment-categories/equipment-packs"
+      "url": "/equipment-categories/equipment-packs"
     },
     "cost": {
       "quantity": 40,
@@ -356,7 +356,7 @@
         "item": {
           "index": "backpack",
           "name": "Backpack",
-          "url": "/api/equipment/backpack"
+          "url": "/equipment/backpack"
         },
         "quantity": 1
       },
@@ -364,7 +364,7 @@
         "item": {
           "index": "bedroll",
           "name": "Bedroll",
-          "url": "/api/equipment/bedroll"
+          "url": "/equipment/bedroll"
         },
         "quantity": 1
       },
@@ -372,7 +372,7 @@
         "item": {
           "index": "clothes-costume",
           "name": "Clothes, costume",
-          "url": "/api/equipment/clothes-costume"
+          "url": "/equipment/clothes-costume"
         },
         "quantity": 2
       },
@@ -380,7 +380,7 @@
         "item": {
           "index": "candle",
           "name": "Candle",
-          "url": "/api/equipment/candle"
+          "url": "/equipment/candle"
         },
         "quantity": 5
       },
@@ -388,7 +388,7 @@
         "item": {
           "index": "rations-1-day",
           "name": "Rations (1 day)",
-          "url": "/api/equipment/rations-1-day"
+          "url": "/equipment/rations-1-day"
         },
         "quantity": 5
       },
@@ -396,7 +396,7 @@
         "item": {
           "index": "waterskin",
           "name": "Waterskin",
-          "url": "/api/equipment/waterskin"
+          "url": "/equipment/waterskin"
         },
         "quantity": 1
       },
@@ -404,12 +404,12 @@
         "item": {
           "index": "disguise-kit",
           "name": "Disguise Kit",
-          "url": "/api/equipment/disguise-kit"
+          "url": "/equipment/disguise-kit"
         },
         "quantity": 1
       }
     ],
-    "url": "/api/equipment/entertainers-pack"
+    "url": "/equipment/entertainers-pack"
   },
   {
     "index": "explorers-pack",
@@ -417,12 +417,12 @@
     "equipment_category": {
       "index": "adventuring-gear",
       "name": "Adventuring Gear",
-      "url": "/api/equipment-categories/adventuring-gear"
+      "url": "/equipment-categories/adventuring-gear"
     },
     "gear_category": {
       "index": "equipment-packs",
       "name": "Equipment Packs",
-      "url": "/api/equipment-categories/equipment-packs"
+      "url": "/equipment-categories/equipment-packs"
     },
     "cost": {
       "quantity": 10,
@@ -433,7 +433,7 @@
         "item": {
           "index": "backpack",
           "name": "Backpack",
-          "url": "/api/equipment/backpack"
+          "url": "/equipment/backpack"
         },
         "quantity": 1
       },
@@ -441,7 +441,7 @@
         "item": {
           "index": "bedroll",
           "name": "Bedroll",
-          "url": "/api/equipment/bedroll"
+          "url": "/equipment/bedroll"
         },
         "quantity": 1
       },
@@ -449,7 +449,7 @@
         "item": {
           "index": "mess-kit",
           "name": "Mess Kit",
-          "url": "/api/equipment/mess-kit"
+          "url": "/equipment/mess-kit"
         },
         "quantity": 1
       },
@@ -457,7 +457,7 @@
         "item": {
           "index": "tinderbox",
           "name": "Tinderbox",
-          "url": "/api/equipment/tinderbox"
+          "url": "/equipment/tinderbox"
         },
         "quantity": 1
       },
@@ -465,7 +465,7 @@
         "item": {
           "index": "torch",
           "name": "Torch",
-          "url": "/api/equipment/torch"
+          "url": "/equipment/torch"
         },
         "quantity": 10
       },
@@ -473,7 +473,7 @@
         "item": {
           "index": "rations-1-day",
           "name": "Rations (1 day)",
-          "url": "/api/equipment/rations-1-day"
+          "url": "/equipment/rations-1-day"
         },
         "quantity": 10
       },
@@ -481,7 +481,7 @@
         "item": {
           "index": "waterskin",
           "name": "Waterskin",
-          "url": "/api/equipment/waterskin"
+          "url": "/equipment/waterskin"
         },
         "quantity": 1
       },
@@ -489,12 +489,12 @@
         "item": {
           "index": "rope-hempen-50-feet",
           "name": "Rope, hempen (50 feet)",
-          "url": "/api/equipment/rope-hempen-50-feet"
+          "url": "/equipment/rope-hempen-50-feet"
         },
         "quantity": 1
       }
     ],
-    "url": "/api/equipment/explorers-pack"
+    "url": "/equipment/explorers-pack"
   },
   {
     "index": "priests-pack",
@@ -502,12 +502,12 @@
     "equipment_category": {
       "index": "adventuring-gear",
       "name": "Adventuring Gear",
-      "url": "/api/equipment-categories/adventuring-gear"
+      "url": "/equipment-categories/adventuring-gear"
     },
     "gear_category": {
       "index": "equipment-packs",
       "name": "Equipment Packs",
-      "url": "/api/equipment-categories/equipment-packs"
+      "url": "/equipment-categories/equipment-packs"
     },
     "cost": {
       "quantity": 19,
@@ -518,7 +518,7 @@
         "item": {
           "index": "backpack",
           "name": "Backpack",
-          "url": "/api/equipment/backpack"
+          "url": "/equipment/backpack"
         },
         "quantity": 1
       },
@@ -526,7 +526,7 @@
         "item": {
           "index": "blanket",
           "name": "Blanket",
-          "url": "/api/equipment/blanket"
+          "url": "/equipment/blanket"
         },
         "quantity": 1
       },
@@ -534,7 +534,7 @@
         "item": {
           "index": "candle",
           "name": "Candle",
-          "url": "/api/equipment/candle"
+          "url": "/equipment/candle"
         },
         "quantity": 10
       },
@@ -542,7 +542,7 @@
         "item": {
           "index": "tinderbox",
           "name": "Tinderbox",
-          "url": "/api/equipment/tinderbox"
+          "url": "/equipment/tinderbox"
         },
         "quantity": 1
       },
@@ -550,7 +550,7 @@
         "item": {
           "index": "rations-1-day",
           "name": "Rations (1 day)",
-          "url": "/api/equipment/rations-1-day"
+          "url": "/equipment/rations-1-day"
         },
         "quantity": 2
       },
@@ -558,7 +558,7 @@
         "item": {
           "index": "waterskin",
           "name": "Waterskin",
-          "url": "/api/equipment/waterskin"
+          "url": "/equipment/waterskin"
         },
         "quantity": 1
       },
@@ -566,7 +566,7 @@
         "item": {
           "index": "alms-box",
           "name": "Alms box",
-          "url": "/api/equipment/alms-box"
+          "url": "/equipment/alms-box"
         },
         "quantity": 1
       },
@@ -574,7 +574,7 @@
         "item": {
           "index": "block-of-incense",
           "name": "Block of incense",
-          "url": "/api/equipment/block-of-incense"
+          "url": "/equipment/block-of-incense"
         },
         "quantity": 2
       },
@@ -582,7 +582,7 @@
         "item": {
           "index": "censer",
           "name": "Censer",
-          "url": "/api/equipment/censer"
+          "url": "/equipment/censer"
         },
         "quantity": 1
       },
@@ -590,12 +590,12 @@
         "item": {
           "index": "vestments",
           "name": "Vestments",
-          "url": "/api/equipment/vestments"
+          "url": "/equipment/vestments"
         },
         "quantity": 1
       }
     ],
-    "url": "/api/equipment/priests-pack"
+    "url": "/equipment/priests-pack"
   },
   {
     "index": "scholars-pack",
@@ -603,12 +603,12 @@
     "equipment_category": {
       "index": "adventuring-gear",
       "name": "Adventuring Gear",
-      "url": "/api/equipment-categories/adventuring-gear"
+      "url": "/equipment-categories/adventuring-gear"
     },
     "gear_category": {
       "index": "equipment-packs",
       "name": "Equipment Packs",
-      "url": "/api/equipment-categories/equipment-packs"
+      "url": "/equipment-categories/equipment-packs"
     },
     "cost": {
       "quantity": 40,
@@ -619,7 +619,7 @@
         "item": {
           "index": "backpack",
           "name": "Backpack",
-          "url": "/api/equipment/backpack"
+          "url": "/equipment/backpack"
         },
         "quantity": 1
       },
@@ -627,7 +627,7 @@
         "item": {
           "index": "book",
           "name": "Book",
-          "url": "/api/equipment/book"
+          "url": "/equipment/book"
         },
         "quantity": 1
       },
@@ -635,7 +635,7 @@
         "item": {
           "index": "ink-1-ounce-bottle",
           "name": "Ink (1 ounce bottle)",
-          "url": "/api/equipment/ink-1-ounce-bottle"
+          "url": "/equipment/ink-1-ounce-bottle"
         },
         "quantity": 1
       },
@@ -643,7 +643,7 @@
         "item": {
           "index": "ink-pen",
           "name": "Ink pen",
-          "url": "/api/equipment/ink-pen"
+          "url": "/equipment/ink-pen"
         },
         "quantity": 1
       },
@@ -651,7 +651,7 @@
         "item": {
           "index": "parchment-one-sheet",
           "name": "Parchment (one sheet)",
-          "url": "/api/equipment/parchment-one-sheet"
+          "url": "/equipment/parchment-one-sheet"
         },
         "quantity": 10
       },
@@ -659,7 +659,7 @@
         "item": {
           "index": "little-bag-of-sand",
           "name": "Little bag of sand",
-          "url": "/api/equipment/little-bag-of-sand"
+          "url": "/equipment/little-bag-of-sand"
         },
         "quantity": 1
       },
@@ -667,11 +667,11 @@
         "item": {
           "index": "small-knife",
           "name": "Small knife",
-          "url": "/api/equipment/small-knife"
+          "url": "/equipment/small-knife"
         },
         "quantity": 1
       }
     ],
-    "url": "/api/equipment/scholars-pack"
+    "url": "/equipment/scholars-pack"
   },
 ]

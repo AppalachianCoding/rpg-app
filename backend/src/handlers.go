@@ -219,29 +219,29 @@ func capabilitiesHandler(w http.ResponseWriter, r *http.Request) {
 	}).Info("Received request for capabilities")
 	capabilities := []APICapability{
 		{
-			Path:    "/api/{table}/{name}",
+			Path:    "/{table}/{name}",
 			Methods: []string{"POST"},
 			Description: "Handles API requests for a specific table and name. " +
 				"Used to insert or update data.",
 		},
 		{
-			Path:        "/api/{table}",
+			Path:        "/{table}",
 			Methods:     []string{"GET"},
 			Description: "Retrieves all names for all records in a specified table.",
 		},
 		{
-			Path:        "/api/all/{table}",
+			Path:        "/all/{table}",
 			Methods:     []string{"GET"},
 			Description: "Retrieves all records from a specified table.",
 		},
 		{
-			Path:    "/api/capabilities",
+			Path:    "/capabilities",
 			Methods: []string{"GET"},
 			Description: "Returns a list of all available API endpoints and their " +
 				"methods and descriptions.",
 		},
 		{
-			Path:        "/api/capabilities/{table}",
+			Path:        "/capabilities/{table}",
 			Methods:     []string{"GET"},
 			Description: "Returns the feilds of a table",
 		},

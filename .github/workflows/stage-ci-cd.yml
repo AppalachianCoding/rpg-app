@@ -16,26 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version-file: backend/src/go.mod
-          cache-dependency-path: backend/src/go.sum
-
-      - name: Cache Go modules
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cache/go-build
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('backend/src/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-
-      - name: Download dependencies
-        working-directory: backend/src
-        run: go mod download
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -44,10 +24,10 @@ jobs:
 
       - name: Run Deploy Script
         run: |
-          chmod +x ./backend/deploy/deploy.sh
-          ./backend/deploy/deploy.sh dnd-unsecured-stage
+          chmod +x ./deploy/deploy.sh
+          ./deploy/deploy.sh dnd-unsecured-stage
 
       - name: Check Deployment Health
         run: |
           sleep 10
-          curl --fail https://dnd-unsecured-stage.appalachiancoding.org/api/health
+          curl --fail https://api.dnd-unsecured-stage.appalachiancoding.org/health

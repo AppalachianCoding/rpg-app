@@ -8,9 +8,9 @@
     "ability_score": {
       "index": "dex",
       "name": "DEX",
-      "url": "/api/ability-scores/dex"
+      "url": "/ability-scores/dex"
     },
-    "url": "/api/skills/acrobatics"
+    "url": "/skills/acrobatics"
   },
   {
     "index": "animal-handling",
@@ -21,9 +21,9 @@
     "ability_score": {
       "index": "wis",
       "name": "WIS",
-      "url": "/api/ability-scores/wis"
+      "url": "/ability-scores/wis"
     },
-    "url": "/api/skills/animal-handling"
+    "url": "/skills/animal-handling"
   },
   {
     "index": "arcana",
@@ -34,9 +34,9 @@
     "ability_score": {
       "index": "int",
       "name": "INT",
-      "url": "/api/ability-scores/int"
+      "url": "/ability-scores/int"
     },
-    "url": "/api/skills/arcana"
+    "url": "/skills/arcana"
   },
   {
     "index": "athletics",
@@ -47,9 +47,9 @@
     "ability_score": {
       "index": "str",
       "name": "STR",
-      "url": "/api/ability-scores/str"
+      "url": "/ability-scores/str"
     },
-    "url": "/api/skills/athletics"
+    "url": "/skills/athletics"
   },
   {
     "index": "deception",
@@ -60,9 +60,9 @@
     "ability_score": {
       "index": "cha",
       "name": "CHA",
-      "url": "/api/ability-scores/cha"
+      "url": "/ability-scores/cha"
     },
-    "url": "/api/skills/deception"
+    "url": "/skills/deception"
   },
   {
     "index": "history",
@@ -73,9 +73,9 @@
     "ability_score": {
       "index": "int",
       "name": "INT",
-      "url": "/api/ability-scores/int"
+      "url": "/ability-scores/int"
     },
-    "url": "/api/skills/history"
+    "url": "/skills/history"
   },
   {
     "index": "insight",
@@ -86,9 +86,9 @@
     "ability_score": {
       "index": "wis",
       "name": "WIS",
-      "url": "/api/ability-scores/wis"
+      "url": "/ability-scores/wis"
     },
-    "url": "/api/skills/insight"
+    "url": "/skills/insight"
   },
   {
     "index": "intimidation",
@@ -99,9 +99,9 @@
     "ability_score": {
       "index": "cha",
       "name": "CHA",
-      "url": "/api/ability-scores/cha"
+      "url": "/ability-scores/cha"
     },
-    "url": "/api/skills/intimidation"
+    "url": "/skills/intimidation"
   },
   {
     "index": "investigation",
@@ -112,9 +112,9 @@
     "ability_score": {
       "index": "int",
       "name": "INT",
-      "url": "/api/ability-scores/int"
+      "url": "/ability-scores/int"
     },
-    "url": "/api/skills/investigation"
+    "url": "/skills/investigation"
   },
   {
     "index": "medicine",
@@ -125,9 +125,9 @@
     "ability_score": {
       "index": "wis",
       "name": "WIS",
-      "url": "/api/ability-scores/wis"
+      "url": "/ability-scores/wis"
     },
-    "url": "/api/skills/medicine"
+    "url": "/skills/medicine"
   },
   {
     "index": "nature",
@@ -138,9 +138,9 @@
     "ability_score": {
       "index": "int",
       "name": "INT",
-      "url": "/api/ability-scores/int"
+      "url": "/ability-scores/int"
     },
-    "url": "/api/skills/nature"
+    "url": "/skills/nature"
   },
   {
     "index": "perception",
@@ -151,9 +151,9 @@
     "ability_score": {
       "index": "wis",
       "name": "WIS",
-      "url": "/api/ability-scores/wis"
+      "url": "/ability-scores/wis"
     },
-    "url": "/api/skills/perception"
+    "url": "/skills/perception"
   },
   {
     "index": "performance",
@@ -164,9 +164,9 @@
     "ability_score": {
       "index": "cha",
       "name": "CHA",
-      "url": "/api/ability-scores/cha"
+      "url": "/ability-scores/cha"
     },
-    "url": "/api/skills/performance"
+    "url": "/skills/performance"
   },
   {
     "index": "persuasion",
@@ -177,9 +177,9 @@
     "ability_score": {
       "index": "cha",
       "name": "CHA",
-      "url": "/api/ability-scores/cha"
+      "url": "/ability-scores/cha"
     },
-    "url": "/api/skills/persuasion"
+    "url": "/skills/persuasion"
   },
   {
     "index": "religion",
@@ -190,9 +190,9 @@
     "ability_score": {
       "index": "int",
       "name": "INT",
-      "url": "/api/ability-scores/int"
+      "url": "/ability-scores/int"
     },
-    "url": "/api/skills/religion"
+    "url": "/skills/religion"
   },
   {
     "index": "sleight-of-hand",
@@ -203,9 +203,9 @@
     "ability_score": {
       "index": "dex",
       "name": "DEX",
-      "url": "/api/ability-scores/dex"
+      "url": "/ability-scores/dex"
     },
-    "url": "/api/skills/sleight-of-hand"
+    "url": "/skills/sleight-of-hand"
   },
   {
     "index": "stealth",
@@ -216,9 +216,9 @@
     "ability_score": {
       "index": "dex",
       "name": "DEX",
-      "url": "/api/ability-scores/dex"
+      "url": "/ability-scores/dex"
     },
-    "url": "/api/skills/stealth"
+    "url": "/skills/stealth"
   },
   {
     "index": "survival",
@@ -229,8 +229,8 @@
     "ability_score": {
       "index": "wis",
       "name": "WIS",
-      "url": "/api/ability-scores/wis"
+      "url": "/ability-scores/wis"
     },
-    "url": "/api/skills/survival"
+    "url": "/skills/survival"
   }
 ]

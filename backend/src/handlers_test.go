@@ -32,7 +32,7 @@ func TestApiHandler(t *testing.T) {
 
 	for _, table := range TABLES {
 		log = log.WithField("table", table.Name)
-		namesRes, err := http.Get(fmt.Sprintf("http://localhost:8082/api/%s",
+		namesRes, err := http.Get(fmt.Sprintf("http://localhost:8082/%s",
 			url.PathEscape(table.Name)))
 		if err != nil {
 			log.Errorf("Failed to make request: %v", err)
@@ -55,7 +55,7 @@ func TestApiHandler(t *testing.T) {
 			log = log.WithField("name", name)
 			name = convertKey(name)
 			log.Debugf("Getting data for %s/%s", url.PathEscape(table.Name), url.PathEscape(name))
-			res, err := http.Post(fmt.Sprintf("http://localhost:8082/api/%s/%s",
+			res, err := http.Post(fmt.Sprintf("http://localhost:8082/%s/%s",
 				url.PathEscape(table.Name),
 				url.PathEscape(name),
 			), "application/json", nil)
@@ -121,7 +121,7 @@ func TestAllHandler(t *testing.T) {
 	srv := startServer(dbClient, ":8081")
 
 	for table := range TABLES {
-		url := fmt.Sprintf("http://localhost:8081/api/all/%s", table)
+		url := fmt.Sprintf("http://localhost:8081/all/%s", table)
 		res, err := http.Get(url)
 		if err != nil {
 			t.Fatalf("Failed to make request: %v", err)

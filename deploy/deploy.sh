@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 filedir="$(dirname "$0")"
 ACCT_ID="$(aws sts get-caller-identity --query Account --output text)"
@@ -7,9 +8,42 @@ if [[ -z "$AWS_REGION" ]]; then
 fi
 CF_BUCKET="$ACCT_ID-$AWS_REGION-cfbucket"
 STACK_NAME="$1"
-DOCKER_IMAGE="$STACK_NAME:latest"
+BACKEND_IMAGE="$STACK_NAME-backend:latest"
+FRONTEND_IMAGE="$STACK_NAME-frontend:latest"
 DOCKER_ENDPOINT="$ACCT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
-DOCKER_REPO="$DOCKER_ENDPOINT/$STACK_NAME"
+BACKEND_REPO="$DOCKER_ENDPOINT/$STACK_NAME-backend"
+FRONTEND_REPO="$DOCKER_ENDPOINT/$STACK_NAME-frontend"
+BACKENDIR="$filedir/../backend"
+FRONTENDIR="$filedir/../frontend"
+
+
+deploy_to_ecr() {
+  aws ecr get-login-password |
+    docker login --username AWS --password-stdin "$DOCKER_ENDPOINT"
+
+  docker build -t "$BACKEND_IMAGE" "$BACKENDIR"
+  docker tag "$BACKEND_IMAGE" "$BACKEND_REPO"
+
+  docker build -t "$FRONTEND_IMAGE" "$FRONTENDIR"
+  docker tag "$FRONTEND_IMAGE" "$FRONTEND_REPO"
+
+  echo "Waiting for ECR repository to be created..."
+  until aws ecr describe-repositories --repository-names "$STACK_NAME-backend" \
+    --query "repositories[0].repositoryArn" --output text 2>/dev/null
+  do
+    sleep 5
+    echo -n "."
+  done
+  docker push "$BACKEND_REPO"
+
+  until aws ecr describe-repositories --repository-names "$STACK_NAME-frontend" \
+    --query "repositories[0].repositoryArn" --output text 2>/dev/null
+  do
+    sleep 5
+    echo -n "."
+  done
+  docker push "$FRONTEND_REPO"
+}
 
 FAIL=false
 for envvar in ACCT_ID AWS_REGION STACK_NAME; do
@@ -34,12 +68,6 @@ for file in "$filedir"/*.yml; do
   aws s3 cp "$file" "s3://$CF_BUCKET/$STACK_NAME/$(basename "$file")"
 done
 
-aws ecr get-login-password |
-  docker login --username AWS --password-stdin "$DOCKER_ENDPOINT"
-docker build -t "$STACK_NAME" "$filedir"/..
-docker tag "$DOCKER_IMAGE" "$DOCKER_REPO"
-docker push "$DOCKER_REPO"
-
 if aws cloudformation describe-stacks \
   --stack-name "$STACK_NAME"
 then
@@ -52,7 +80,7 @@ then
     --tags \
       Key=Project,Value="$STACK_NAME" 2>&1
 
-  aws cloudformation wait stack-update-complete --stack-name "$STACK_NAME" 
+  deploy_to_ecr
 
   ECS_STACK_NAME=$(aws cloudformation describe-stack-resources --stack-name "$STACK_NAME" \
     --logical-resource-id Ecs \
@@ -75,35 +103,17 @@ then
     exit 1
   fi
 
-  TASK_ARNS=$(aws ecs list-tasks \
-    --cluster "$ECS_CLUSTER" \
-    --service-name "$ECS_SERVICE" \
-    --desired-status RUNNING \
-    --query 'taskArns[0]' \
-    --output text)
-
-  if [[ -z "$TASK_ARNS" ]]; then
-    echo "No running tasks found in cluster ${CLUSTER_NAME} for service ${SERVICE_NAME}."
-    exit 1
-  fi
-
-  NEW_IMAGE_DIGEST=$(docker build --quiet "$filedir"/..)
-  for TASK_ARN in $TASK_ARNS; do
-    ECS_IMAGE_DIGEST=$(aws ecs describe-tasks \
-      --cluster "${ECS_CLUSTER}" \
-      --tasks "${TASK_ARN}" \
-      --query 'tasks[0].containers[0].imageDigest' \
-      --output text)
-
-    if [[ "${NEW_IMAGE_DIGEST}" != "${ECS_IMAGE_DIGEST}" ]]; then
-      echo "Updating ECS service ${ECS_SERVICE} in cluster ${ECS_CLUSTER}..."
-      aws ecs update-service \
-        --cluster "$ECS_CLUSTER" \
-        --service "$ECS_SERVICE" \
-        --force-new-deployment
-      echo "Waiting for ECS service to stabilize..."
-      aws ecs wait services-stable --cluster "$ECS_CLUSTER" --services "$ECS_SERVICE"
-    fi
+  echo "Updating ECS service ${ECS_SERVICE} in cluster ${ECS_CLUSTER}..."
+  for service in $ECS_SERVICE; do
+    aws ecs update-service \
+      --cluster "$ECS_CLUSTER" \
+      --service "$service" \
+      --force-new-deployment
+  done
+  echo "Waiting for ECS service to stabilize..."
+  for service in $ECS_SERVICE; do
+    aws ecs wait services-stable --cluster "$ECS_CLUSTER" --services "$service"
+    echo "Service $service is stable."
   done
 
   echo "Waiting for stack update to complete..."
@@ -119,13 +129,7 @@ else
     --tags \
     Key=Project,Value="$STACK_NAME" 2>&1
 
-  echo "Waiting for ECR repository to be created..."
-  until aws ecr describe-repositories --repository-names "$STACK_NAME" \
-    --query "repositories[0].repositoryArn" --output text 2>/dev/null
-  do
-    sleep 5
-    echo -n "."
-  done
+  deploy_to_ecr
 
   aws cloudformation wait stack-create-complete --stack-name "$STACK_NAME"
 fi
