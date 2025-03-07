@@ -15,9 +15,10 @@ func TestApiHandler(t *testing.T) {
 	logrus.SetLevel(logrus.InfoLevel)
 	log := logrus.WithField("test", "TestApiHandler")
 
+	ctx := t.Context()
+
 	db, pg, err := getTestDb()
 	if err != nil {
-		log.Errorf("Failed to get test database: %v", err)
 		t.Fatalf("Failed to get test database: %v", err)
 	}
 	defer pg.Stop()
@@ -28,18 +29,16 @@ func TestApiHandler(t *testing.T) {
 	dbClient := DbClient{db}
 	defer dbClient.Close()
 
-	srv := startServer(dbClient, ":8082")
+	srv := startServer(ctx, dbClient, ":8082")
 
 	for _, table := range TABLES {
 		log = log.WithField("table", table.Name)
 		namesRes, err := http.Get(fmt.Sprintf("http://localhost:8082/%s",
 			url.PathEscape(table.Name)))
 		if err != nil {
-			log.Errorf("Failed to make request: %v", err)
 			t.Fatalf("Failed to make request: %v", err)
 		}
 		if namesRes.StatusCode != http.StatusOK {
-			log.Errorf("Expected status 200, got %d", namesRes.StatusCode)
 			t.Fatalf("Expected status 200, got %d", namesRes.StatusCode)
 		}
 
@@ -55,24 +54,21 @@ func TestApiHandler(t *testing.T) {
 			log = log.WithField("name", name)
 			name = convertKey(name)
 			log.Debugf("Getting data for %s/%s", url.PathEscape(table.Name), url.PathEscape(name))
-			res, err := http.Post(fmt.Sprintf("http://localhost:8082/%s/%s",
+			res, err := http.Get(fmt.Sprintf("http://localhost:8082/%s/%s",
 				url.PathEscape(table.Name),
 				url.PathEscape(name),
-			), "application/json", nil)
+			))
 			if err != nil {
-				log.Errorf("Failed to make request: %v", err)
 				t.Fatalf("Failed to make request: %v", err)
 			}
 
 			if res.StatusCode != http.StatusOK {
-				log.Errorf("Expected status 200, got %d", res.StatusCode)
 				t.Fatalf("Expected status 200, got %d", res.StatusCode)
 			}
 
 			dec := json.NewDecoder(res.Body)
 			var body map[string]interface{}
 			if err := dec.Decode(&body); err != nil {
-				log.Errorf("Failed to decode response body: %v", err)
 				t.Fatalf("Failed to decode response body: %v", err)
 			}
 
@@ -105,6 +101,7 @@ func TestApiHandler(t *testing.T) {
 
 func TestAllHandler(t *testing.T) {
 	logrus.SetLevel(logrus.InfoLevel)
+	ctx := t.Context()
 
 	db, pg, err := getTestDb()
 	if err != nil {
@@ -118,7 +115,7 @@ func TestAllHandler(t *testing.T) {
 	dbClient := DbClient{db}
 	defer dbClient.Close()
 
-	srv := startServer(dbClient, ":8081")
+	srv := startServer(ctx, dbClient, ":8081")
 
 	for table := range TABLES {
 		url := fmt.Sprintf("http://localhost:8081/all/%s", table)

@@ -222,7 +222,7 @@ func capabilitiesHandler(w http.ResponseWriter, r *http.Request) {
 	capabilities := []APICapability{
 		{
 			Path:    "/{table}/{name}",
-			Methods: []string{"POST"},
+			Methods: []string{"GET"},
 			Description: "Handles API requests for a specific table and name. " +
 				"Used to insert or update data.",
 		},
