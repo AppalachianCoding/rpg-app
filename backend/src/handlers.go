@@ -52,7 +52,6 @@ func QueryDb(
 
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte("["))
 	enc := json.NewEncoder(w)
 
 	columns, err := rows.Columns()
@@ -114,7 +113,6 @@ func QueryDb(
 		w.Write([]byte("No results"))
 	}
 
-	w.Write([]byte("]"))
 	log.Info("Finished query")
 	return nil
 }
