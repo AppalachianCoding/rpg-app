@@ -34,13 +34,13 @@ func main() {
 	defer dbClient.DB.Close()
 	logrus.Info("DB client created")
 
-	srv := startServer(dbClient, ":80")
+	srv := startServer(ctx, dbClient, ":80")
 	defer srv.Shutdown(ctx)
 	logrus.Info("Server started")
 	select {}
 }
 
-func startServer(dbClient DbClient, port string) *http.Server {
+func startServer(ctx context.Context, dbClient DbClient, port string) *http.Server {
 	logrus.Info("Starting server...")
 
 	r := mux.NewRouter()
@@ -54,7 +54,7 @@ func startServer(dbClient DbClient, port string) *http.Server {
 	r.HandleFunc("/capabilities/{table}", describeTable).Methods("GET")
 
 	r.HandleFunc("/", healthCheckHandler).Methods("GET")
-	r.HandleFunc("/{table}/{name}", dbClient.apiHandler).Methods("POST")
+	r.HandleFunc("/{table}/{name}", dbClient.apiHandler).Methods("GET")
 	r.HandleFunc("/{table}", dbClient.getAllNamesHandler).Methods("GET")
 
 	srv := &http.Server{
@@ -77,7 +77,7 @@ func startServer(dbClient DbClient, port string) *http.Server {
 		<-quit
 
 		log.Println("Shutting down server...")
-		srv.Shutdown(nil)
+		srv.Shutdown(ctx)
 	}()
 
 	return srv
