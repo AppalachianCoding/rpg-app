@@ -47,7 +47,6 @@ func TestApiHandler(t *testing.T) {
 		for dec.More() {
 			var line map[string]string
 			if err := dec.Decode(&line); err != nil {
-				log.Errorf("Failed to decode response body: %v", err)
 				t.Fatalf("Failed to decode response body: %v", err)
 			}
 			name := line["name"]
