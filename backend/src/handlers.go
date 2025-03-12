@@ -10,7 +10,7 @@ import (
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 )
 
@@ -28,41 +28,38 @@ type DbClient struct {
 }
 
 func QueryDb(
-	w http.ResponseWriter,
-	r *http.Request,
+	c *gin.Context,
 	db *sql.DB,
 	log *logrus.Entry,
 	query string,
 	params ...interface{},
 ) error {
 	log = log.WithFields(logrus.Fields{
-		"method": r.Method,
-		"ip":     r.RemoteAddr,
+		"method": c.Request.Method,
+		"ip":     c.RemoteIP(),
 		"query":  query,
 		"params": params,
 	})
 	rows, err := db.Query(query, params...)
 	if err != nil {
 		log.WithError(err).Warn("Failed to query database")
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("Failed to query database"))
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to query database"})
 		return err
 	}
 	defer rows.Close()
 
-	w.WriteHeader(http.StatusOK)
-	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte("["))
-	enc := json.NewEncoder(w)
+	c.Header("Content-Type", "application/json")
+	enc := json.NewEncoder(c.Writer)
+	enc.SetIndent("", "")
+	enc.SetEscapeHTML(false)
 
 	columns, err := rows.Columns()
 	if err != nil {
 		log.WithError(err).Warn("Failed to get columns")
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("Failed to get columns"))
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to get columns"})
 		return err
 	}
-	log.Debugf("Columns: %v\n", columns)
+	log.Tracef("Columns: %v\n", columns)
 	values := make([]interface{}, len(columns))
 	valuePtrs := make([]interface{}, len(columns))
 	for i := range values {
@@ -75,8 +72,7 @@ func QueryDb(
 
 		if err := rows.Scan(valuePtrs...); err != nil {
 			log.WithError(err).Warn("Failed to scan row")
-			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte("Failed to scan row"))
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to scan row"})
 			return err
 		}
 
@@ -91,16 +87,14 @@ func QueryDb(
 		}
 
 		if len(result) == 0 {
-			log.Warn("No results")
-			w.WriteHeader(http.StatusNotFound)
-			w.Write([]byte("No results"))
+			log.Warn("No results in row")
+			c.JSON(http.StatusNotFound, gin.H{"error": "No results"})
 			continue
 		}
 
 		if err := enc.Encode(result); err != nil {
 			log.WithError(err).Warn("Failed to encode result")
-			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte("Failed to encode result"))
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to encode result"})
 			return err
 		}
 
@@ -109,13 +103,12 @@ func QueryDb(
 	}
 
 	if !anyResults {
-		log.Warn("No results")
-		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("No results"))
+		log.Error("No results")
+		c.JSON(http.StatusNoContent, gin.H{"error": "No results"})
 	}
 
-	w.Write([]byte("]"))
-	log.Info("Finished query")
+	c.Writer.Flush()
+	log.Debugf("Finished query")
 	return nil
 }
 
@@ -134,76 +127,78 @@ func newDbClient(ctx context.Context, cfg aws.Config, database string) (DbClient
 	return dbClient, nil
 }
 
-func (dbc DbClient) apiHandler(w http.ResponseWriter, r *http.Request) {
+func (dbc DbClient) apiHandler(c *gin.Context) {
+	c.Header("Content-Type", "application/json")
 	db := dbc.DB
-	vars := mux.Vars(r)
-	table, _ := url.PathUnescape(vars["table"])
-	name, _ := url.PathUnescape(vars["name"])
+
+	table := c.Param("table")
+	table, _ = url.PathUnescape(table)
+	name := c.Param("name")
+	name, _ = url.PathUnescape(name)
+
 	log := logrus.WithFields(logrus.Fields{
 		"table":  table,
 		"name":   name,
 		"method": "api",
-		"ip":     r.RemoteAddr,
+		"ip":     c.RemoteIP(),
 	})
 	log.Debugf("Received request for %s from %s\n", name, table)
 
 	if !verifyTable(table) {
 		log.Warnf("Invalid table %s\n", table)
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Invalid table"))
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid table"})
 	}
 
 	query := fmt.Sprintf("SELECT * FROM %s WHERE name = $1", table)
 	log = log.WithField("query", query)
-	if err := QueryDb(w, r, db, log, query, name); err != nil {
+	if err := QueryDb(c, db, log, query, name); err != nil {
 		log.WithError(err).Warn("Failed to get data")
 	}
 }
 
-func (dbc DbClient) allHandler(w http.ResponseWriter, r *http.Request) {
+func (dbc DbClient) allHandler(c *gin.Context) {
 	db := dbc.DB
-	vars := mux.Vars(r)
-	table, _ := url.PathUnescape(vars["table"])
+	table := c.Param("table")
+	table, _ = url.PathUnescape(table)
 	log := logrus.WithFields(logrus.Fields{
 		"table":  table,
 		"method": "all",
-		"ip":     r.RemoteAddr,
+		"ip":     c.RemoteIP(),
 	})
 	log.Debugf("Received request for all from %s\n", table)
 
 	if !verifyTable(table) {
 		log.Warnf("Invalid table %s\n", table)
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Invalid table"))
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid table"})
 	}
 
 	query := fmt.Sprintf("SELECT * FROM %s", table)
 
-	if err := QueryDb(w, r, db, log, query); err != nil {
+	if err := QueryDb(c, db, log, query); err != nil {
 		log.WithError(err).Warn("Failed to get all data")
 	}
 }
 
-func (dbc DbClient) getAllNamesHandler(w http.ResponseWriter, r *http.Request) {
+func (dbc DbClient) getAllNamesHandler(c *gin.Context) {
+	c.Header("Content-Type", "application/json")
 	db := dbc.DB
-	vars := mux.Vars(r)
-	table, _ := url.PathUnescape(vars["table"])
+	table := c.Param("table")
+	table, _ = url.PathUnescape(table)
 	log := logrus.WithFields(logrus.Fields{
 		"table":  table,
 		"method": "allNames",
-		"ip":     r.RemoteAddr,
+		"ip":     c.RemoteIP(),
 	})
 	log.Debugf("Received request for all names from %s\n", table)
 
 	if !verifyTable(table) {
 		log.Warnf("Invalid table %s\n", table)
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Invalid table"))
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid table"})
 	}
 
 	query := fmt.Sprintf("SELECT name FROM %s", table)
 
-	if err := QueryDb(w, r, db, log, query); err != nil {
+	if err := QueryDb(c, db, log, query); err != nil {
 		log.WithError(err).Warn("Failed to get all names")
 	}
 }
@@ -214,11 +209,12 @@ type APICapability struct {
 	Description string   `json:"description,omitempty"`
 }
 
-func capabilitiesHandler(w http.ResponseWriter, r *http.Request) {
+func capabilitiesHandler(c *gin.Context) {
+	c.Header("Content-Type", "application/json")
 	logrus.WithFields(logrus.Fields{
 		"method": "capabilities",
-		"ip":     r.RemoteAddr,
-	}).Info("Received request for capabilities")
+		"ip":     c.RemoteIP(),
+	}).Debugf("Received request for capabilities")
 	capabilities := []APICapability{
 		{
 			Path:    "/{table}/{name}",
@@ -249,42 +245,43 @@ func capabilitiesHandler(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(capabilities)
+	c.JSON(http.StatusOK, capabilities)
 }
 
-func tablesHandler(w http.ResponseWriter, r *http.Request) {
+func tablesHandler(c *gin.Context) {
+	c.Header("Content-Type", "application/json")
 	logrus.WithFields(logrus.Fields{
 		"method": "tables",
-		"ip":     r.RemoteAddr,
-	}).Info("Received request for tables")
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(TABLE_NAMES)
+		"ip":     c.RemoteIP(),
+	}).Debugf("Received request for tables")
+
+	c.JSON(http.StatusOK, TABLE_NAMES)
 }
 
-func describeTable(w http.ResponseWriter, r *http.Request) {
+func describeTable(c *gin.Context) {
+	c.Header("Content-Type", "application/json")
 	log := logrus.WithFields(logrus.Fields{
 		"method": "describe",
-		"ip":     r.RemoteAddr,
+		"ip":     c.RemoteIP(),
 	})
-	vars := mux.Vars(r)
-	t, _ := url.PathUnescape(vars["table"])
-	log = log.WithField("table", t)
-	log.Debugf("Received request for table %s", t)
 
-	w.Header().Set("Content-Type", "application/json")
-	table, ok := TABLES[t]
+	tablereq := c.Param("table")
+	log = log.WithField("table", tablereq)
+	log.Debugf("Received request for table %s", tablereq)
+
+	table, ok := TABLES[tablereq]
 	if !ok {
-		log.Warnf("Table %s not found", t)
-		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("Table not found"))
+		log.Warnf("Table %s not found", tablereq)
+		c.JSON(http.StatusNotFound, gin.H{"error": "Table not found"})
 		return
 	}
-	log.Debugf("Returning table %s", table)
-	json.NewEncoder(w).Encode(table)
+	log.Tracef("Returning table %s", table)
+
+	c.JSON(http.StatusOK, table)
 }
 
-func healthCheckHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("OK"))
+func healthCheckHandler(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"status": "ok",
+	})
 }

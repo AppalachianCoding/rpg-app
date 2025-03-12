@@ -3,14 +3,9 @@ package main
 import (
 	"context"
 	"log"
-	"net/http"
-	"os"
-	"os/signal"
-	"syscall"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/config"
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 )
@@ -34,51 +29,28 @@ func main() {
 	defer dbClient.DB.Close()
 	logrus.Info("DB client created")
 
-	srv := startServer(ctx, dbClient, ":80")
-	defer srv.Shutdown(ctx)
-	logrus.Info("Server started")
-	select {}
+	startServer(dbClient, "80")
 }
 
-func startServer(ctx context.Context, dbClient DbClient, port string) *http.Server {
-	logrus.Info("Starting server...")
+func startServer(dbClient DbClient, port string) {
+	logrus.WithFields(logrus.Fields{
+		"port": port,
+		"host": "0.0.0.0",
+	}).Info("Starting server")
 
-	r := mux.NewRouter()
-	r.UseEncodedPath()
+	r := gin.Default()
+	r.UseRawPath = true
 
-	r.HandleFunc("/health", healthCheckHandler).Methods("GET")
-	r.HandleFunc("/tables", tablesHandler).Methods("GET")
-	r.HandleFunc("/capabilities", capabilitiesHandler).Methods("GET")
+	r.GET("/health", healthCheckHandler)
+	r.GET("/tables", tablesHandler)
+	r.GET("/capabilities", capabilitiesHandler)
 
-	r.HandleFunc("/all/{table}", dbClient.allHandler).Methods("GET")
-	r.HandleFunc("/capabilities/{table}", describeTable).Methods("GET")
+	r.GET("/all/:table", dbClient.allHandler)
+	r.GET("/capabilities/:table", describeTable)
 
-	r.HandleFunc("/", healthCheckHandler).Methods("GET")
-	r.HandleFunc("/{table}/{name}", dbClient.apiHandler).Methods("GET")
-	r.HandleFunc("/{table}", dbClient.getAllNamesHandler).Methods("GET")
+	r.GET("/", healthCheckHandler)
+	r.GET("/:table/:name", dbClient.apiHandler)
+	r.GET("/:table", dbClient.getAllNamesHandler)
 
-	srv := &http.Server{
-		Addr:         port,
-		Handler:      r,
-		ReadTimeout:  5 * time.Second,
-		WriteTimeout: 10 * time.Second,
-	}
-
-	go func() {
-		log.Println("Starting server on", port)
-		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			logrus.Fatalf("Server failed: %s\n", err)
-		}
-	}()
-
-	go func() {
-		quit := make(chan os.Signal, 1)
-		signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
-		<-quit
-
-		log.Println("Shutting down server...")
-		srv.Shutdown(ctx)
-	}()
-
-	return srv
+	r.Run("0.0.0.0:" + port)
 }

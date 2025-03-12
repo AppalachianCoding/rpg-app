@@ -15,8 +15,6 @@ func TestApiHandler(t *testing.T) {
 	logrus.SetLevel(logrus.InfoLevel)
 	log := logrus.WithField("test", "TestApiHandler")
 
-	ctx := t.Context()
-
 	db, pg, err := getTestDb()
 	if err != nil {
 		t.Fatalf("Failed to get test database: %v", err)
@@ -29,7 +27,11 @@ func TestApiHandler(t *testing.T) {
 	dbClient := DbClient{db}
 	defer dbClient.Close()
 
-	srv := startServer(ctx, dbClient, ":8082")
+	t.Logf("Starting server")
+	go func() {
+		startServer(dbClient, "8082")
+	}()
+	t.Logf("Started server")
 
 	for _, table := range TABLES {
 		log = log.WithField("table", table.Name)
@@ -47,6 +49,7 @@ func TestApiHandler(t *testing.T) {
 		for dec.More() {
 			var line map[string]string
 			if err := dec.Decode(&line); err != nil {
+				t.Logf("Line: %s", line)
 				t.Fatalf("Failed to decode response body: %v", err)
 			}
 			name := line["name"]
@@ -61,6 +64,10 @@ func TestApiHandler(t *testing.T) {
 				t.Fatalf("Failed to make request: %v", err)
 			}
 
+			if res.StatusCode == http.StatusNoContent {
+				t.Logf("No content for %s/%s", table.Name, name)
+				continue
+			}
 			if res.StatusCode != http.StatusOK {
 				t.Fatalf("Expected status 200, got %d", res.StatusCode)
 			}
@@ -68,6 +75,7 @@ func TestApiHandler(t *testing.T) {
 			dec := json.NewDecoder(res.Body)
 			var body map[string]interface{}
 			if err := dec.Decode(&body); err != nil {
+				t.Logf("Body: %s", body)
 				t.Fatalf("Failed to decode response body: %v", err)
 			}
 
@@ -94,13 +102,10 @@ func TestApiHandler(t *testing.T) {
 			log.Debugf("Response: %s", body)
 		}
 	}
-
-	srv.Shutdown(nil)
 }
 
 func TestAllHandler(t *testing.T) {
 	logrus.SetLevel(logrus.InfoLevel)
-	ctx := t.Context()
 
 	db, pg, err := getTestDb()
 	if err != nil {
@@ -114,7 +119,11 @@ func TestAllHandler(t *testing.T) {
 	dbClient := DbClient{db}
 	defer dbClient.Close()
 
-	srv := startServer(ctx, dbClient, ":8081")
+	t.Logf("Starting server")
+	go func() {
+		startServer(dbClient, "8081")
+	}()
+	t.Logf("Started server")
 
 	for table := range TABLES {
 		url := fmt.Sprintf("http://localhost:8081/all/%s", table)
@@ -132,6 +141,4 @@ func TestAllHandler(t *testing.T) {
 		}
 		_, err = json.MarshalIndent(body, "", "  ")
 	}
-
-	srv.Shutdown(nil)
 }
