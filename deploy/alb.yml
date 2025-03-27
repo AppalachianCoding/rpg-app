@@ -79,7 +79,7 @@ Resources:
   Certificate:
     Type: AWS::CertificateManager::Certificate
     Properties:
-      DomainName: !Sub "api.${StackName}.${BaseDomainName}"
+      DomainName: !Sub "${StackName}.${BaseDomainName}"
       ValidationMethod: DNS
       DomainValidationOptions:
         - DomainName: !Sub "${StackName}.${BaseDomainName}"
