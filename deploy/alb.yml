@@ -76,14 +76,6 @@ Resources:
       LoadBalancerAttributes:
         - Key: idle_timeout.timeout_seconds
           Value: "60"
-  BackendCertificate:
-    Type: AWS::CertificateManager::Certificate
-    Properties:
-      DomainName: !Sub "api.${StackName}.${BaseDomainName}"
-      ValidationMethod: DNS
-      DomainValidationOptions:
-        - DomainName: !Sub "${StackName}.${BaseDomainName}"
-          HostedZoneId: !Ref HostedZoneId
   BackendListner:
     Type: AWS::ElasticLoadBalancingV2::Listener
     Properties:
@@ -119,7 +111,7 @@ Resources:
         HostedZoneId: !GetAtt BackendLoadBalancer.CanonicalHostedZoneID
         DNSName: !GetAtt BackendLoadBalancer.DNSName
 
-  FrontendCertificate:
+  Certificate:
     Type: AWS::CertificateManager::Certificate
     Properties:
       DomainName: !Sub "${StackName}.${BaseDomainName}"
@@ -150,7 +142,7 @@ Resources:
       Port: 443
       Protocol: HTTPS
       Certificates:
-        - CertificateArn: !Ref FrontendCertificate
+        - CertificateArn: !Ref Certificate
   FrontendTarget:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
