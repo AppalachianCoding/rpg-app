@@ -86,7 +86,7 @@ Resources:
       Port: 443
       Protocol: HTTPS
       Certificates:
-        - CertificateArn: !Ref BackendCertificate
+        - CertificateArn: !Ref Certificate
   BackendTarget:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
