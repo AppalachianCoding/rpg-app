@@ -8,15 +8,15 @@ Resources:
     Properties:
       DBSubnetGroupDescription: "Subnet group for the RDS instance in the VPC"
       SubnetIds:
-        - !ImportValue 
+        - !ImportValue
             Fn::Sub: ${StackName}-subnet-1
-        - !ImportValue 
+        - !ImportValue
             Fn::Sub: ${StackName}-subnet-2
   DBSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: "Security group for RDS DB instance"
-      VpcId: !ImportValue 
+      VpcId: !ImportValue
               Fn::Sub: "${StackName}-vpc-id"
       SecurityGroupIngress:
         - IpProtocol: tcp

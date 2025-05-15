@@ -76,14 +76,21 @@ Resources:
       LoadBalancerAttributes:
         - Key: idle_timeout.timeout_seconds
           Value: "60"
+
   Certificate:
     Type: AWS::CertificateManager::Certificate
     Properties:
       DomainName: !Sub "${StackName}.${BaseDomainName}"
       ValidationMethod: DNS
+      SubjectAlternativeNames:
+        - !Sub "${StackName}.${BaseDomainName}"
+        - !Sub "api.${StackName}.${BaseDomainName}"
       DomainValidationOptions:
         - DomainName: !Sub "${StackName}.${BaseDomainName}"
           HostedZoneId: !Ref HostedZoneId
+        - DomainName: !Sub "api.${StackName}.${BaseDomainName}"
+          HostedZoneId: !Ref HostedZoneId
+
 
   Listener:
     Type: AWS::ElasticLoadBalancingV2::Listener

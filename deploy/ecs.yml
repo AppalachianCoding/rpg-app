@@ -13,7 +13,7 @@ Resources:
   FrontendRepository:
     Type: AWS::ECR::Repository
     Properties:
-      RepositoryName: !Sub ${StackName}-frontend 
+      RepositoryName: !Sub ${StackName}-frontend
 
   ECSCluster:
     Type: AWS::ECS::Cluster

@@ -9,7 +9,7 @@ function Classes() {
     return(
         <div>
             <ul>
-               {classesList} 
+               {classesList}
             </ul>
         </div>
     );
