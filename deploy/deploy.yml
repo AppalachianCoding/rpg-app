@@ -27,7 +27,6 @@ Resources:
     Properties:
       TemplateURL: !Sub https://s3.amazonaws.com/${CloudformationBucket}/rds.yml
       Parameters:
-      Parameters:
         StackName: !Ref AWS::StackName
     DependsOn:
       - Networking

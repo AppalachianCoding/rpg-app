@@ -12,6 +12,7 @@ Resources:
             Fn::Sub: ${StackName}-subnet-1
         - !ImportValue 
             Fn::Sub: ${StackName}-subnet-2
+
   DBSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -23,6 +24,7 @@ Resources:
           FromPort: 5432
           ToPort: 5432
           CidrIp: 10.0.0.0/16
+
   DbInstance:
     Type: AWS::RDS::DBInstance
     Properties:

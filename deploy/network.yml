@@ -1,24 +1,15 @@
-AWSTemplateFormatVersion: "2010-09-09"
-Description: "ECS Fargate Auto Scaling Web Server with RDS"
-
 Parameters:
   StackName:
     Type: String
   CidrBlock:
     Type: String
     Default: 10.0.0.0/16
-  PrivateSubnet1Cidr:
+  PublicSubnet1Cidr:
     Type: String
     Default: 10.0.1.0/27
-  PrivateSubnet2Cidr:
+  PublicSubnet2Cidr:
     Type: String
     Default: 10.0.1.64/27
-  ECSSubnet1Cidr:
-    Type: String
-    Default: 10.0.2.0/27
-  ECSSubnet2Cidr:
-    Type: String
-    Default: 10.0.2.64/27
 
 Resources:
   Vpc:
@@ -27,8 +18,10 @@ Resources:
       CidrBlock: !Ref CidrBlock
       EnableDnsSupport: true
       EnableDnsHostnames: true
+
   InternetGateway:
     Type: AWS::EC2::InternetGateway
+
   VPCGatewayAttachment:
     Type: AWS::EC2::VPCGatewayAttachment
     Properties:
@@ -39,6 +32,7 @@ Resources:
     Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref Vpc
+
   PublicRoute:
     Type: AWS::EC2::Route
     DependsOn: VPCGatewayAttachment
@@ -46,13 +40,12 @@ Resources:
       RouteTableId: !Ref PublicRouteTable
       DestinationCidrBlock: 0.0.0.0/0
       GatewayId: !Ref InternetGateway
-    DependsOn: VPCGatewayAttachment
 
   Subnet1:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref Vpc
-      CidrBlock: !Ref PrivateSubnet1Cidr
+      CidrBlock: !Ref PublicSubnet1Cidr
       MapPublicIpOnLaunch: false
       AvailabilityZone: !Select [0, !GetAZs ""]
   Subnet1RTA:
@@ -60,11 +53,12 @@ Resources:
     Properties:
       SubnetId: !Ref Subnet1
       RouteTableId: !Ref PublicRouteTable
+
   Subnet2:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref Vpc
-      CidrBlock: !Ref PrivateSubnet2Cidr
+      CidrBlock: !Ref PublicSubnet2Cidr
       MapPublicIpOnLaunch: false
       AvailabilityZone: !Select [1, !GetAZs ""]
   Subnet2RTA:
