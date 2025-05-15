@@ -91,6 +91,7 @@ Resources:
         - DomainName: !Sub "api.${StackName}.${BaseDomainName}"
           HostedZoneId: !Ref HostedZoneId
 
+
   Listener:
     Type: AWS::ElasticLoadBalancingV2::Listener
     Properties:
