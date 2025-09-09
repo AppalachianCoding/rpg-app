@@ -68,6 +68,7 @@ Resources:
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0
+
   BackendTask:
     Type: AWS::ECS::TaskDefinition
     Properties:
